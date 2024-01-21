@@ -1,7 +1,7 @@
 /* styles.css */
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     margin: 0;
 }
 
@@ -28,8 +28,8 @@ body {
     display: none;
 }
 
-h1, h2 {
-    color: #333;
+h1, h2, p {
+    color: #000000;
 }
 
 /* Style for project squares */
