@@ -1,0 +1,38 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        },
+        {
+            "name": "cpprest/http_listener.h",
+            "includePath": [
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        },
+        {
+            "name": "cpprest/http_listener.h",
+            "includePath": [
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        }
+    ],
+    "version": 4
+}

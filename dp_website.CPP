@@ -2,6 +2,8 @@
 
 #include <cpprest/http_listener.h>
 #include <cpprest/json.h>
+#include <fstream>
+#include <streambuf>
 
 using namespace web;
 using namespace http;
@@ -48,11 +50,18 @@ public:
             response[U("message")] = web::json::value::string(U("GitHub Page"));
             request.reply(status_codes::OK, response);
         }
+        else if (path == U("/"))
+        {
+            // Serve the home page HTML content
+            std::ifstream t("dp_website.html");
+            std::string html_content((std::istreambuf_iterator<char>(t)), std::istreambuf_iterator<char>());
+            request.reply(status_codes::OK, html_content, "text/html");
+        }
         else
         {
-            // Handle home page or unknown path
+            // Handle unknown path
             web::json::value response = web::json::value::object();
-            response[U("message")] = web::json::value::string(U("Home Page"));
+            response[U("message")] = web::json::value::string(U("Unknown Path"));
             request.reply(status_codes::OK, response);
         }
     }
