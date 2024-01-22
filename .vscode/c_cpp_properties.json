@@ -32,7 +32,29 @@
                 "UNICODE",
                 "_UNICODE"
             ]
-        }
+        },
+        {
+            "name": "fstream",
+            "includePath": [
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        },
+        {
+            "name": "streambuf",
+            "includePath": [
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        },
     ],
     "version": 4
 }
