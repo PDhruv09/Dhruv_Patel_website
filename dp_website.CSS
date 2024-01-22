@@ -26,7 +26,7 @@ body {
 
 .page {
     background-color: #fff;
-    overflow: scroll;
+    overflow: -moz-hidden-unscrollable;
 }
 .page a {
     float: center;
