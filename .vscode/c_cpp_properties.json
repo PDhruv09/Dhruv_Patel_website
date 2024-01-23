@@ -3,7 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website"
             ],
             "defines": [
                 "_DEBUG",
@@ -14,7 +14,7 @@
         {
             "name": "cpprest/http_listener.h",
             "includePath": [
-                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website"
             ],
             "defines": [
                 "_DEBUG",
@@ -23,9 +23,20 @@
             ]
         },
         {
-            "name": "cpprest/http_listener.h",
+            "name": "cpprest/http_client.h",
             "includePath": [
-                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ]
+        },
+        {
+            "name": "cpprest/filestream.h",
+            "includePath": [
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website"
             ],
             "defines": [
                 "_DEBUG",
@@ -36,7 +47,7 @@
         {
             "name": "fstream",
             "includePath": [
-                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website"
             ],
             "defines": [
                 "_DEBUG",
@@ -47,7 +58,7 @@
         {
             "name": "streambuf",
             "includePath": [
-                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website\\.vscode"
+                "C:\\Users\\dhruv\\Documents\\Website\\Dhruv_Patel_website"
             ],
             "defines": [
                 "_DEBUG",
