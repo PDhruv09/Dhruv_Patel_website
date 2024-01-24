@@ -33,9 +33,18 @@ body {
 
 .page {
     background-color: #fff;
-    overflow: -moz-hidden-unscrollable;
+    overflow: scroll;
 }
 .page a {
+    float: center;
+    display: ruby-base;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.page a.right{
     float: center;
     display: ruby-base;
     color: #000000;
@@ -59,6 +68,6 @@ h1, h2, p {
 }
 
 .project-square a {
-    color: #333;
+    color: #000000;
     text-decoration: none;
 }
