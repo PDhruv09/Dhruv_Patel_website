@@ -71,3 +71,12 @@ h1, h2, p {
     color: #000000;
     text-decoration: none;
 }
+
+.home {
+    width: 100px;
+    height: 100px;
+    background-color: #ddd;
+    margin: 10px;
+    text-align: center;
+    line-height: 100px;
+}
