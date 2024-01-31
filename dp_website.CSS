@@ -7,7 +7,7 @@ body {
 
 .menu-container {
     display: inline-block;
-    float: left;
+    float: right;
     margin: 10px;
 }
 
