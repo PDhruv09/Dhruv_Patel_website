@@ -47,7 +47,7 @@
         
         <!-- About Me Section -->
         <section id="about">
-            <img src="C:/Users/dhruv/Documents/Website/Dhruv_Patel_website/Images/photos/.jpeg" width="200" height="200">
+            <img src="C:/Users/dhruv/Documents/Website/Dhruv_Patel_website/Images/photos/Dhruv_image.jpeg" width="200" height="200">
             <!--I have to create a folder called photos in Images and than copy th name ^ here-->
             <h2 class="right">About Me</h2>
             <p class="right">
@@ -125,24 +125,24 @@
     </div>
 
     <script>
-        // JavaScript to hide all pages except the home page initially
-        document.querySelectorAll('.page:not(#home)').forEach(page => page.style.display = 'none');
+        // // JavaScript to hide all pages except the home page initially
+        // document.querySelectorAll('.page:not(#home)').forEach(page => page.style.display = 'none');
 
-        // Add event listeners to each navigation link
-        document.querySelectorAll('.dropdown-content a').forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();  // Prevent the default link behavior
+        // // Add event listeners to each navigation link
+        // document.querySelectorAll('.dropdown-content a').forEach(link => {
+        //     link.addEventListener('click', function(event) {
+        //         event.preventDefault();  // Prevent the default link behavior
 
-                // Hide all pages
-                document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+        //         // Hide all pages
+        //         document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
 
-                // Get the target page ID from the link's href attribute
-                const targetPage = link.getAttribute('href').substring(1);
+        //         // Get the target page ID from the link's href attribute
+        //         const targetPage = link.getAttribute('href').substring(1);
 
-                // Show the target page
-                document.getElementById(targetPage).style.display = 'block';
-            });
-        });
+        //         // Show the target page
+        //         document.getElementById(targetPage).style.display = 'block';
+        //     });
+        // });
     </script>
     <script src="dp_website.JS"></script>
 
