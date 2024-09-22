@@ -116,7 +116,7 @@ h1, h2, p {
     text-decoration: none;
 }
 
-/* Mobile Navigation Toggle 
+/* Mobile Navigation Toggle */
 .bi-list.mobile-nav-toggle {
     display: none;
     font-size: 30px;
@@ -131,8 +131,16 @@ h1, h2, p {
         width: 100%;
         position: absolute;
         top: 60px;
-        left: -100%;
+        left: -100%; /* Hide menu initially */
         transition: left 0.3s ease;
+    }
+
+    #navbar ul.show {
+        left: 0; /* Show menu on toggle */
+    }
+
+    .bi-list.mobile-nav-toggle {
+        display: block; /* Show the hamburger icon */
     }
 
     #navbar ul li {
@@ -143,17 +151,4 @@ h1, h2, p {
     #navbar ul li a {
         padding: 15px 20px;
     }
-
-    #navbar ul.show {
-        left: 0;
-    }
-
-    .bi-list.mobile-nav-toggle {
-        display: block;
-    }
 }
-
-/* Hide dropdown icon when no dropdown 
-#navbar ul li a .bi-chevron-down {
-    display: none;
-}*/
