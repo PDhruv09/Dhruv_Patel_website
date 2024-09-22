@@ -131,12 +131,12 @@ h1, h2, p {
         width: 100%;
         position: absolute;
         top: 60px;
-        left: -100%; /* Hide menu initially */
+        left: -100%; /* Hide the menu initially */
         transition: left 0.3s ease;
     }
 
-    #navbar ul.show {
-        left: 0; /* Show menu on toggle */
+    #navbar ul.navbar-mobile {
+        left: 0; /* Show the menu on toggle */
     }
 
     .bi-list.mobile-nav-toggle {
