@@ -97,11 +97,15 @@ body {
 }
 
 .page {
-    background-color: #1c1c1c;
+    background-color: #ffffff;
     overflow: hidden; /* Prevent scrolling within each page */
     padding-left: 20px;
     padding-right: 20px;
     display: none; /* Hide all pages initially */
+}
+
+.content {
+    display: block; /* Ensure the home content is visible */
 }
 
 .page a {
