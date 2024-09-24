@@ -104,10 +104,6 @@ body {
     display: none; /* Hide all pages initially */
 }
 
-.content {
-    display: block; /* Ensure the home content is visible */
-}
-
 .page a {
     color: #f5f5f5;
     text-align: center;
