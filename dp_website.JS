@@ -1,4 +1,3 @@
-// JavaScript to toggle the navigation menu on mobile
 document.addEventListener("DOMContentLoaded", function() {
     const mobileNavToggle = document.querySelector('.bi-list.mobile-nav-toggle');
     const navbar = document.querySelector('#navbar ul');
@@ -19,5 +18,28 @@ document.addEventListener("DOMContentLoaded", function() {
             mobileNavToggle.classList.add('bi-list');
             mobileNavToggle.classList.remove('bi-x');
         }
+    });
+
+    // Initially hide all sections except 'About Me'
+    document.querySelectorAll('.page').forEach(page => {
+        if (page.id !== 'about') {
+            page.style.display = 'none';  // Hide all sections except 'About Me'
+        }
+    });
+
+    // Add event listeners to each navbar link to show the relevant section on click
+    document.querySelectorAll('#navbar a').forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();  // Prevent default link behavior (page reload)
+
+            // Hide all sections including 'About Me'
+            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+
+            // Get the target section from the link's href attribute (e.g., #resume, #projects)
+            const targetId = this.getAttribute('href').substring(1);
+
+            // Show the target section
+            document.getElementById(targetId).style.display = 'block';
+        });
     });
 });

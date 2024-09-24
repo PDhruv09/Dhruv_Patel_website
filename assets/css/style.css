@@ -82,12 +82,30 @@ body {
 }
 
 /* Other existing styles (dropdowns, mobile responsiveness, etc.) */
+.about-container {
+    display: flex;
+    align-items: center;
+}
+
+.about-image {
+    width: 150px; /* Adjust as needed */
+    margin-right: 20px;
+}
+
+.about-text {
+    flex: 1;
+}
 
 .page {
     background-color: #1c1c1c;
-    overflow: scroll;
+    overflow: hidden; /* Prevent scrolling within each page */
     padding-left: 20px;
     padding-right: 20px;
+    display: none; /* Hide all pages initially */
+}
+
+.content {
+    display: block; /* Ensure the home content is visible */
 }
 
 .page a {
@@ -131,13 +149,13 @@ h1, h2, p {
         width: 100%;
         position: absolute;
         top: 60px;
-        left: -100%; /* Hide the menu initially */
+        left: -100%; /* Hidden initially */
         transition: left 0.3s ease;
     }
-
     #navbar ul.navbar-mobile {
-        left: 0; /* Show the menu on toggle */
+        left: 0; /* Menu slides in */
     }
+
 
     .bi-list.mobile-nav-toggle {
         display: block; /* Show the hamburger icon */
@@ -151,4 +169,47 @@ h1, h2, p {
     #navbar ul li a {
         padding: 15px 20px;
     }
+}
+
+/* Footer (Common Contact Information) */
+#footer {
+    background-color: #333;
+    color: #f5f5f5;
+    padding: 5px 5px;
+    position: fixed; /* Keep the footer fixed at the bottom */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Full width of the page */
+    display: block; /* Ensure the sections stay block-level elements */
+}
+
+#footer .left {
+    float: left; /* Align contact info to the left */
+    width: 45%; /* Give it a percentage width */
+    text-align: left;
+    font-size: 12px; /* Reduce font size if needed to make it more compact */
+}
+
+#footer .right {
+    float: right; /* Align social media to the right */
+    width: 45%; /* Give it a percentage width */
+    text-align: right;
+    padding-right: 20px; /* Ensure there's space on the right side */
+    font-size: 12px; /* Reduce font size if needed to make it more compact */
+}
+
+#footer a {
+    color: #f5f5f5;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+/* Clear floats */
+#footer::after {
+    content: "";
+    display: table;
+    clear: both;
 }
