@@ -10,25 +10,27 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Initially hide all sections except 'Home'
+    // Initially hide all sections except 'home'
     document.querySelectorAll('.page').forEach(page => {
-        page.style.display = 'none';  // Hide all pages initially
+        page.style.display = 'none';  // Hide all sections initially
     });
-    document.getElementById('home').style.display = 'block';  // Show the home content
+    document.getElementById('home').style.display = 'block';  // Show the home section
 
-    // Add event listeners to each navbar link to show the relevant section on click
+    // Add event listeners to navbar links to show the relevant section on click
     document.querySelectorAll('#navbar a').forEach(link => {
         link.addEventListener('click', function(event) {
             event.preventDefault();  // Prevent default link behavior (page reload)
 
             // Hide all sections
-            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
+            document.querySelectorAll('.page').forEach(page => {
+                page.style.display = 'none';
+            });
 
             // Get the target section from the link's href attribute (e.g., #about, #resume)
-            const targetId = this.getAttribute('href').substring(1);
+            const targetId = this.getAttribute('href').substring(1);  // Remove the '#' from href
+            const targetSection = document.getElementById(targetId);
 
             // Show the target section
-            const targetSection = document.getElementById(targetId);
             if (targetSection) {
                 targetSection.style.display = 'block';
             }
