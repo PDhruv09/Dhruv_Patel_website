@@ -64,20 +64,23 @@
         </div>
     </section>
 
-    <!--<div></div>-->
-    <!-- Social Media Page -->
-    <section id="social" class="page">
-        <h1>Social Media Handles</h1>
-        <h4>LinkedIn</h4>
-        <a href="https://www.linkedin.com/in/dhruv-patel-40b923228">
-            <img src="Images/logo/LinkedIn_logo.jpeg" alt="LinkedIn Logo" width="200" height="200">
-        </a>
-    </section>
-
     <!-- Resume Page -->
     <section id="resume" class="page">
         <h1>Resume</h1>
-        <p>Here is my Resume.</p>
+        <!-- Embedded PDF viewer -->
+        <div class="pdf-container">
+            <iframe src="assets/Resume/Resume of Dhruv Patel.pdf" width="100%" height="600px">
+                Your browser does not support PDFs. Please download the PDF to view it: 
+                <a href="assets/Resume/Resume of Dhruv Patel.pdf">Download PDF</a>.
+            </iframe>
+        </div>
+        
+        <!-- Download button -->
+        <div class="download-button">
+            <a href="assets/Resume/Resume of Dhruv Patel.pdf" download="Dhruv_Patel_Resume.pdf">
+                <button>Download Resume</button>
+            </a>
+        </div>
     </section>
 
     <!-- Projects Page -->
@@ -85,12 +88,14 @@
         <h1>Projects</h1>
         <!-- Square buttons with hyperlinks for different projects -->
         <div class="project-square">
-            <a href="#project1">Project 1</a>
-            My first Project was for a class called DSC 80
+            <a href="https://pdhruv09.github.io/Urbanization_PowerOutage/">First Project: Does Urbanization effect Power Outage?</a>
+            <p>This is My First real Data Science Project. Does Urbanization effect Power Outage? is a project that was create for DSC 80 Practice and Application of data Science course at Univeristy of California San Diego (UCSD).</p>
         </div>
+        <!--
         <div class="project-square">
             <a href="#project2">Project 2</a>
         </div>
+        --->
         <!-- Add more project squares as needed -->
     </section>
 

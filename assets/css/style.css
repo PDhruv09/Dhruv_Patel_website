@@ -119,6 +119,30 @@ h1, h2, p {
     color: #f5f5f5;
 }
 
+/* Resume Page styles */
+.pdf-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.download-button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.download-button button {
+    background-color: #444; /* Dark button */
+    color: #f5f5f5; /* Off-white text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.download-button button:hover {
+    background-color: #555; /* Slightly lighter on hover */
+}
+
 /* Style for project squares */
 .project-square {
     width: 100px;
