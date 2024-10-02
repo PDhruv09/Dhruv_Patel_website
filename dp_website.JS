@@ -4,42 +4,32 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (mobileNavToggle && navbar) {
         mobileNavToggle.addEventListener('click', function() {
-            navbar.classList.toggle('navbar-mobile'); // Toggle class to show the menu
-            mobileNavToggle.classList.toggle('bi-list'); // Toggle between list and X icons
+            navbar.classList.toggle('navbar-mobile');
+            mobileNavToggle.classList.toggle('bi-list');
             mobileNavToggle.classList.toggle('bi-x');
         });
     }
 
-    // Close dropdown when clicking outside the menu
-    document.addEventListener('click', function(event) {
-        const isClickInside = navbar.contains(event.target) || mobileNavToggle.contains(event.target);
-        if (!isClickInside && navbar.classList.contains('navbar-mobile')) {
-            navbar.classList.remove('navbar-mobile');
-            mobileNavToggle.classList.add('bi-list');
-            mobileNavToggle.classList.remove('bi-x');
-        }
-    });
+    // Function to display the relevant section based on the URL hash
+    function showSectionFromHash() {
+        const hash = window.location.hash.substring(1) || 'about';  // Default to 'about' if no hash
+        document.querySelectorAll('.page').forEach(page => {
+            page.style.display = (page.id === hash) ? 'block' : 'none';  // Show the matching section
+        });
+    }
 
-    // Initially hide all sections except 'About Me'
-    document.querySelectorAll('.page').forEach(page => {
-        if (page.id !== 'about') {
-            page.style.display = 'none';  // Hide all sections except 'About Me'
-        }
-    });
+    // Show the correct section on initial page load based on URL hash
+    showSectionFromHash();
 
-    // Add event listeners to each navbar link to show the relevant section on click
+    // Show the correct section when the hash changes (e.g., when clicking navbar links)
+    window.addEventListener('hashchange', showSectionFromHash);
+
+    // Add event listeners to navbar links to show the correct section and update the URL
     document.querySelectorAll('#navbar a').forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault();  // Prevent default link behavior (page reload)
-
-            // Hide all sections including 'About Me'
-            document.querySelectorAll('.page').forEach(page => page.style.display = 'none');
-
-            // Get the target section from the link's href attribute (e.g., #resume, #projects)
+            event.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
-
-            // Show the target section
-            document.getElementById(targetId).style.display = 'block';
+            window.location.hash = targetId;  // Update URL hash
         });
     });
 });
