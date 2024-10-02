@@ -104,10 +104,6 @@ body {
     color: #f5f5f5;  /* Off-white text */
 }
 
-.content {
-    display: block; /* Ensure the home content is visible */
-}
-
 .page a {
     color: #f5f5f5;
     text-align: center;

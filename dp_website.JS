@@ -10,26 +10,41 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Function to display the relevant section based on the URL hash
+    // Close dropdown when clicking outside the menu
+    document.addEventListener('click', function(event) {
+        const isClickInside = navbar.contains(event.target) || mobileNavToggle.contains(event.target);
+        if (!isClickInside && navbar.classList.contains('navbar-mobile')) {
+            navbar.classList.remove('navbar-mobile');
+            mobileNavToggle.classList.add('bi-list');
+            mobileNavToggle.classList.remove('bi-x');
+        }
+    });
+
+    // Function to show the correct section based on the URL hash
     function showSectionFromHash() {
-        const hash = window.location.hash.substring(1) || 'about';  // Default to 'about' if no hash
+        const hash = window.location.hash || '#about'; // Default to 'about' if no hash
         document.querySelectorAll('.page').forEach(page => {
-            page.style.display = (page.id === hash) ? 'block' : 'none';  // Show the matching section
+            if ('#' + page.id === hash) {
+                page.style.display = 'block';  // Show the target section
+            } else {
+                page.style.display = 'none';  // Hide other sections
+            }
         });
     }
 
-    // Show the correct section on initial page load based on URL hash
+    // Initially show the correct section when the page loads
     showSectionFromHash();
 
-    // Show the correct section when the hash changes (e.g., when clicking navbar links)
-    window.addEventListener('hashchange', showSectionFromHash);
-
-    // Add event listeners to navbar links to show the correct section and update the URL
+    // Add event listeners to each navbar link to show the relevant section on click
     document.querySelectorAll('#navbar a').forEach(link => {
         link.addEventListener('click', function(event) {
-            event.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
-            window.location.hash = targetId;  // Update URL hash
+            event.preventDefault();  // Prevent default link behavior
+            const targetId = this.getAttribute('href');  // Get the href target (e.g., #resume)
+            window.location.hash = targetId;  // Update the URL hash
+            showSectionFromHash();  // Show the target section
         });
     });
+
+    // Also listen to hash changes (for direct access via URL)
+    window.addEventListener('hashchange', showSectionFromHash);
 });
