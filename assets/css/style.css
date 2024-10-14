@@ -97,7 +97,6 @@ body {
 }
 
 .page {
-    display: none;  /* Hide all sections by default */
     padding-left: 20px;
     padding-right: 20px;
     background-color: #1c1c1c;  /* Dark background */
