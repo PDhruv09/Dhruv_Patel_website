@@ -143,17 +143,26 @@ h1, h2, p {
 }
 
 /* Style for project squares */
+.projects-container{
+    display: flex;
+    align-items: center;
+}
+
+.project-text {
+    flex: 1;
+}
+
 .project-square {
-    width: 100px;
-    height: 100px;
-    background-color: #ddd;
+    width: 150px;
+    height: 150px;
+    background-color: #7acfee;
     margin: 10px;
     text-align: center;
-    line-height: 100px;
+    line-height: 150px;
 }
 
 .project-square a {
-    color: #f5f5f5;
+    color: #000000;
     text-decoration: none;
 }
 
