@@ -1,10 +1,36 @@
-/* styles.css */
-
+/* General Styles */
 body {
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
     background-color: #1c1c1c; /* Dark grey/black background */
     color: #f5f5f5; /* Off-white text */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full height of the viewport */
+    margin: 0;
+}
+
+.page {
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #1c1c1c;  /* Dark background */
+    color: #f5f5f5;  /* Off-white text */
+    flex-grow: 1; /* Allow the content to grow and push the footer down */
+}
+
+.content {
+    display: block; /* Ensure the home content is visible */
+}
+
+.page a {
+    color: #f5f5f5;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+h1, h2, p {
+    color: #f5f5f5;
 }
 
 /* Header styles */
@@ -32,13 +58,7 @@ body {
     font-size: 24px;
 }
 
-/* Content styles */
-.content {
-    margin-top: 80px; /* Prevent content from being hidden behind header */
-    padding-left: 20px;
-    padding-right: 20px;
-}
-
+/* Navbar styles */
 #navbar {
     display: flex;
     align-items: center;
@@ -68,20 +88,13 @@ body {
     border-radius: 5px;
 }
 
-#navbar ul li .dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    display: none;
-    background-color: #333;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Home Page */
+#home {
+    margin-top: 80px; /* Prevent content from being hidden behind header */
+    padding: 20px;
 }
 
-#navbar ul li:hover .dropdown {
-    display: block;
-}
-
-/* Other existing styles (dropdowns, mobile responsiveness, etc.) */
+/* About Me Section */
 .about-container {
     display: flex;
     align-items: center;
@@ -96,29 +109,7 @@ body {
     flex: 1;
 }
 
-.page {
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: #1c1c1c;  /* Dark background */
-    color: #f5f5f5;  /* Off-white text */
-}
-
-.content {
-    display: block; /* Ensure the home content is visible */
-}
-
-.page a {
-    color: #f5f5f5;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
-h1, h2, p {
-    color: #f5f5f5;
-}
-
-/* Resume Page styles */
+/* Resume Page */
 .pdf-container {
     margin-top: 20px;
     text-align: center;
@@ -142,14 +133,10 @@ h1, h2, p {
     background-color: #555; /* Slightly lighter on hover */
 }
 
-/* Style for project squares */
-.projects-container{
+/* Projects Page */
+.projects-container {
     display: flex;
     align-items: center;
-}
-
-.project-text {
-    flex: 1;
 }
 
 .project-square {
@@ -166,53 +153,21 @@ h1, h2, p {
     text-decoration: none;
 }
 
-/* Mobile Navigation Toggle */
-.bi-list.mobile-nav-toggle {
-    display: none;
-    font-size: 30px;
-    color: #f5f5f5;
-    cursor: pointer;
+.project-text {
+    flex: 1;
 }
 
-@media (max-width: 768px) {
-    #navbar ul {
-        flex-direction: column;
-        background-color: #333;
-        width: 100%;
-        position: absolute;
-        top: 60px;
-        left: -100%; /* Hidden initially */
-        transition: left 0.3s ease;
-    }
-    #navbar ul.navbar-mobile {
-        left: 0; /* Menu slides in */
-    }
-
-
-    .bi-list.mobile-nav-toggle {
-        display: block; /* Show the hamburger icon */
-    }
-
-    #navbar ul li {
-        width: 100%;
-        margin-left: 0;
-    }
-
-    #navbar ul li a {
-        padding: 15px 20px;
-    }
-}
-
-/* Footer (Common Contact Information) */
+/* Footer (Contact Information) */
 #footer {
     background-color: #333;
     color: #f5f5f5;
-    padding: 5px 5px;
-    position: fixed; /* Keep the footer fixed at the bottom */
+    padding: 10px 20px;
+    position: relative; /* Ensure footer is placed after the content */
     bottom: 0;
     left: 0;
     width: 100%; /* Full width of the page */
-    display: block; /* Ensure the sections stay block-level elements */
+    display: block; /* Keep footer block-level */
+    clear: both; /* Clear floats to prevent overlap */
 }
 
 #footer .left {
@@ -244,4 +199,40 @@ h1, h2, p {
     content: "";
     display: table;
     clear: both;
+}
+
+/* Mobile Navigation Toggle */
+.bi-list.mobile-nav-toggle {
+    font-size: 30px;
+    color: #f5f5f5;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    #navbar ul {
+        flex-direction: column;
+        background-color: #333;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: -100%; /* Hidden initially */
+        transition: left 0.3s ease;
+    }
+
+    #navbar ul.navbar-mobile {
+        left: 0; /* Menu slides in */
+    }
+
+    .bi-list.mobile-nav-toggle {
+        display: block; /* Show the hamburger icon */
+    }
+
+    #navbar ul li {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    #navbar ul li a {
+        padding: 15px 20px;
+    }
 }
