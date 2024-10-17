@@ -127,5 +127,24 @@
             <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
         </section>
     </footer>
+
+    <!-- Audio element -->
+    <audio id="background-music" autoplay muted>
+        <source src="Songs\Welcome_(Welcome)_128_Kbps.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- JavaScript to stop music after 15 seconds -->
+    <script>
+        // Get the audio element
+        const backgroundMusic = document.getElementById('background-music');
+        // Unmute the music (if you want it to be audible)
+        backgroundMusic.muted = false;
+
+        // Set a timer to stop the music after 15 seconds
+        setTimeout(() => {
+            backgroundMusic.pause();
+        }, 15000); // 15000 milliseconds = 15 seconds
+    </script>
 </body>
 </html>
