@@ -1,14 +1,25 @@
 /* General Styles */
 body {
+    background: linear-gradient(135deg, #1c1c1c 0%, #121212 100%);
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
-    background-color: #1c1c1c; /* Dark grey/black background */
-    color: #f5f5f5; /* Off-white text */
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure full height of the viewport */
-    margin: 0;
 }
+
+h1, h2, p {
+    color: #e0e0e0; /* Softer white for a less harsh look */
+}
+
+a {
+    color: #7acfee;
+}
+
+a:hover {
+    color: #53a8cf; /* Slightly darker shade on hover */
+}
+
 
 .page {
     padding-left: 20px;
@@ -28,11 +39,6 @@ body {
     padding: 14px 16px;
     text-decoration: none;
 }
-
-h1, h2, p {
-    color: #f5f5f5;
-}
-
 /* Header styles */
 #header {
     background-color: #333; /* Dark background */
@@ -79,12 +85,14 @@ h1, h2, p {
 #navbar ul li a {
     color: #f5f5f5;
     padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
     text-decoration: none;
     display: block;
 }
 
 #navbar ul li a:hover {
-    background-color: #444; /* Slightly lighter on hover */
+    background-color: #444;
+    color: #7acfee; /* Accent color on hover */
     border-radius: 5px;
 }
 
@@ -121,18 +129,20 @@ h1, h2, p {
 }
 
 .download-button button {
-    background-color: #444; /* Dark button */
-    color: #f5f5f5; /* Off-white text */
+    background-color: #7acfee;
+    color: #1c1c1c;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .download-button button:hover {
-    background-color: #555; /* Slightly lighter on hover */
+    background-color: #53a8cf;
+    transform: scale(1.05);
 }
-
 /* Projects Page */
 .projects-container {
     display: flex;
@@ -159,22 +169,23 @@ h1, h2, p {
 
 /* Footer (Contact Information) */
 #footer {
-    background-color: #333;
-    color: #f5f5f5;
-    padding: 10px 20px;
+    background-color: #111;
+    color: #e0e0e0;
+    padding: 10px 10px;
     position: relative; /* Ensure footer is placed after the content */
     bottom: 0;
     left: 0;
     width: 100%; /* Full width of the page */
     display: block; /* Keep footer block-level */
     clear: both; /* Clear floats to prevent overlap */
+    text-align: center;
 }
 
 #footer .left {
     float: left; /* Align contact info to the left */
     width: 45%; /* Give it a percentage width */
     text-align: left;
-    font-size: 12px; /* Reduce font size if needed to make it more compact */
+    font-size: 15px; /* Reduce font size if needed to make it more compact */
 }
 
 #footer .right {
@@ -182,7 +193,7 @@ h1, h2, p {
     width: 45%; /* Give it a percentage width */
     text-align: right;
     padding-right: 20px; /* Ensure there's space on the right side */
-    font-size: 12px; /* Reduce font size if needed to make it more compact */
+    font-size: 15px; /* Reduce font size if needed to make it more compact */
 }
 
 #footer a {
@@ -236,3 +247,4 @@ h1, h2, p {
         padding: 15px 20px;
     }
 }
+
