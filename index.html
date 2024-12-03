@@ -30,13 +30,12 @@
     
 
     <!-- Home Page -->
-    <div id="home" class="home content">
-    </div>
+    <div id="home" class="home content"></div>
 
     <!-- About Me Section -->
     <section id="about" class="page">
         <!--I have to create a folder called photos in Images and than copy th name ^ here-->
-        <h2 class="right">About Me</h2>
+        <h2 class="right">Bio</h2>
         <div class="about-container">
             <img src="Images/photo/Dhruv_image.jpg" class="about-image" alt="Dhruv's Image">
             <div class="about-text">
@@ -84,24 +83,21 @@
     <!-- Projects Page -->
     <section id="projects" class="page">
         <h1>Projects</h1>
-        <!-- Square buttons with hyperlinks for different projects -->
-        <div class="projects-container">
-            <div class="project-square">
-                <a href="https://pdhruv09.github.io/Urbanization_PowerOutage/">First Project:</a>
-            </div>
-            <div class="project-text">
-                <h2>Title</h2>
-                <h3> Does Urbanization effect Power Outage?</h3>
-                <h2>Discription</h2>
-                <p>"Does Urbanization Affect Power Outages?" is an analytical project designed for the DSC 80 course at UCSD. 
-                    The study examines major power outages in the United States from January 2000 to July 2016, utilizing data 
-                    from Purdue University's Laboratory for Advancing Sustainable Critical Infrastructure. The analysis investigates 
-                    whether the duration of power outages differs significantly between states with high urbanization levels and 
-                    states with low urbanization levels. Using data columns like OUTAGE.DURATION and POPPCT_URBAN (percentage of urban 
-                    population), the project employs a permutation test with 10,000 simulations to test the hypothesis. By uncovering 
-                    patterns in outage duration relative to urbanization, the findings aim to provide insights for policymakers, 
-                    utility companies, and the public to improve infrastructure planning and disaster preparedness.
-                </p>
+        <div class="project-square">
+            <a href="https://pdhruv09.github.io/Urbanization_PowerOutage/"></a>
+            <div class="project-card">
+                <div class="project-info" style="padding: 1rem;">
+                    <h3> Does Urbanization effect Power Outage?</h3>
+                    <p>"Does Urbanization Affect Power Outages?" is an analytical project designed for the DSC 80 course at UCSD. 
+                        The study examines major power outages in the United States from January 2000 to July 2016, utilizing data 
+                        from Purdue University's Laboratory for Advancing Sustainable Critical Infrastructure. The analysis investigates 
+                        whether the duration of power outages differs significantly between states with high urbanization levels and 
+                        states with low urbanization levels. Using data columns like OUTAGE.DURATION and POPPCT_URBAN (percentage of urban 
+                        population), the project employs a permutation test with 10,000 simulations to test the hypothesis. By uncovering 
+                        patterns in outage duration relative to urbanization, the findings aim to provide insights for policymakers, 
+                        utility companies, and the public to improve infrastructure planning and disaster preparedness.
+                    </p>
+                </div>
             </div>
         </div>
         <!--
@@ -127,9 +123,11 @@
             <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
             <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
         </section>
+
     </footer>
 
-    <!-- Audio element -->
+
+    <!-- Audio element-->
     <audio id="background-music" autoplay muted>
         <source src="Songs\Welcome_(Welcome)_128_Kbps.mp3" type="audio/mp3">
         Your browser does not support the audio element.
@@ -146,7 +144,25 @@
         setTimeout(() => {
             backgroundMusic.pause();
         }, 15000); // 15000 milliseconds = 15 seconds
+
+        async function sendMessage() {
+            const message = document.getElementById('chatMessage').value;
+            if (message.trim() === '') return;
+
+            const response = await fetch('https://shfxtnkmr8.execute-api.us-west-1.amazonaws.com', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+
+            if (response.ok) {
+                alert('Message sent successfully!');
+                document.getElementById('chatMessage').value = '';
+            } else {
+                alert('Failed to send the message.');
+            }
+        }
+
     </script>
 </body>
 </html>
- bi03rjgvjbwmijhbpojqou  g5poj90fhgl gl[iiiuwrjkgdu oijhuwtvojbflmib bhhnj[ou 4jv l,nuog njv ih4uog wvnk lur kh obrudv j jb ohou hl,wuirw ihbuhzbbcauhbfywbwefuwrg97ngenvby8ioyib8yghh
