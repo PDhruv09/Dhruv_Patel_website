@@ -25,5 +25,24 @@
             window.location.href = 'home.html';
         }
     </script>
+
+    <!-- Audio element-->
+    <audio id="background-music" autoplay muted>
+        <source src="Songs\Welcome_(Welcome)_128_Kbps.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- JavaScript to stop music after 15 seconds -->
+    <script>
+        // Get the audio element
+        const backgroundMusic = document.getElementById('background-music');
+        // Unmute the music (if you want it to be audible)
+        backgroundMusic.muted = false;
+
+        // Set a timer to stop the music after 15 seconds
+        setTimeout(() => {
+            backgroundMusic.pause();
+        }, 8000); // 8000 milliseconds = 8 seconds
+    </script>
 </body>
 </html>

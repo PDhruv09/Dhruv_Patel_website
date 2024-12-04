@@ -270,10 +270,10 @@ a:hover {
 }
 
 @keyframes rotateBackground {
-    0% { background: url('Images/nature1.jpg') no-repeat center center/cover; }
-    33% { background: url('Images/nature2.jpg') no-repeat center center/cover; }
-    66% { background: url('Images/nature3.jpg') no-repeat center center/cover; }
-    100% { background: url('Images/nature1.jpg') no-repeat center center/cover; }
+    0% { background: url('Images/photo/nature1.jpg') no-repeat center center/cover; }
+    33% { background: url('Images/photo/nature2.jpg') no-repeat center center/cover; }
+    66% { background: url('Images/photo/nature3.jpg') no-repeat center center/cover; }
+    100% { background: url('Images/photo/nature4.jpg') no-repeat center center/cover; }
 }
 
 .center-content {
