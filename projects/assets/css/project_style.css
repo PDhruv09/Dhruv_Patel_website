@@ -133,3 +133,48 @@ a:hover {
 .project-text {
     flex: 1;
 }
+
+/* Footer (Contact Information) */
+#footer {
+    background-color: #111;
+    color: #e0e0e0;
+    padding: 10px 10px;
+    position: relative; /* Ensure footer is placed after the content */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Full width of the page */
+    display: block; /* Keep footer block-level */
+    clear: both; /* Clear floats to prevent overlap */
+    text-align: center;
+}
+
+#footer .left {
+    float: left; /* Align contact info to the left */
+    width: 45%; /* Give it a percentage width */
+    text-align: left;
+    font-size: 15px; /* Reduce font size if needed to make it more compact */
+}
+
+#footer .right {
+    float: right; /* Align social media to the right */
+    width: 45%; /* Give it a percentage width */
+    text-align: right;
+    padding-right: 20px; /* Ensure there's space on the right side */
+    font-size: 15px; /* Reduce font size if needed to make it more compact */
+}
+
+#footer a {
+    color: #f5f5f5;
+    text-decoration: none;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+/* Clear floats */
+#footer::after {
+    content: "";
+    display: table;
+    clear: both;
+}
