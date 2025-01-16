@@ -18,8 +18,8 @@
                     <li><a hred="index.html"><span>Home</span></a></li>
                     <li><a href="#about"><span>About Me</span></a></li>
                     <li><a href="#resume"><span>Resume</span></a></li>
-                    <li><a href="#projects"><span>Projects</span></a></li>
-                    <li><a href="Contact.html"><span>Contact</span></a></li>
+                    <li><a href="projects/index.html"><span>Projects</span></a></li>
+                    <li><a href="Contact/index.html"><span>Contact</span></a></li>
                     <li><a href="https://github.com/PDhruv09"><span>GitHub</span></a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -27,12 +27,12 @@
         </div>
     </header>
 
-    <form action="mailto:dhruv.patel.imp@gmail.com" method="POST" enctype="text/plain">
+    <form action="mailto:dhruv.patel.imp@gmail.com" method="POST" enctype="text/plain" autocomplete="on" name="contactForm" novalidate>>
         <label for="email">Your Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
     
         <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" placeholder="Enter the subject" required>
+        <input type="text" id="subject" name="subject" placeholder="Enter the subject" required autocomplete="on">
     
         <label for="message">Message:</label>
         <textarea id="message" name="body" rows="5" placeholder="Enter your message" required></textarea>
