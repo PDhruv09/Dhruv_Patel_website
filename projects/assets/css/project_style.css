@@ -28,7 +28,7 @@ a:hover {
     padding-left: 20px;
     padding-right: 20px;
     background-color: #1c1c1c;  /* Dark background */
-    color: #f5f5f5;  /* Off-white text */
+    color: #d42020;  /* Off-white text */
     flex-grow: 1; /* Allow the content to grow and push the footer down */
 }
 
@@ -123,7 +123,7 @@ a:hover {
     display: flex;
     align-items: center;
     margin: 1rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 14px 18px rgba(236, 239, 0, 0.5);
 }
 
 .project-square .project-info {

@@ -146,39 +146,7 @@ a:hover {
     background-color: #53a8cf;
     transform: scale(1.05);
 }
-/* Projects Page */
-.projects-container {
-    display: flex;
-    align-items: center;
-}
 
-.project-square {
-    width: 600px;
-    height: 400px;
-    margin: 10px;
-    text-align: left;
-    line-height: 15px;
-}
-
-.project-square a {
-    color: #f5f5f5;
-    text-decoration: none;
-}
-
-.project-square .project-card {
-    display: flex;
-    align-items: center;
-    margin: 1rem;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.project-square .project-info {
-    padding: 1rem;
-}
-
-.project-text {
-    flex: 1;
-}
 
 /* Footer (Contact Information) */
 #footer {
