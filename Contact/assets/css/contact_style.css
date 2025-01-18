@@ -106,7 +106,7 @@ form {
     flex-direction: column;
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
-    margin: 102400;
+    margin: auto;
     padding: 20px;
     width: 80%; /* Adjust as needed for the desired width */
     max-width: 600px; /* Limit the maximum width */
@@ -126,6 +126,9 @@ form label {
 
 form input, form textarea {
     margin-bottom: 20px;
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
     padding: 10px;
     font-size: 16px;
     border: none;
@@ -139,6 +142,7 @@ form input, form textarea {
 /* Button Styling */
 form button {
     padding: 10px 20px;
+    font: inherit;
     font-size: 16px;
     background-color: #7acfee;
     color: #121212;
