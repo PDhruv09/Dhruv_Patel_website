@@ -107,6 +107,8 @@ form {
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
     margin: auto;
+    border: 20px;
+    padding-top: 25px;
     padding: 20px;
     width: 80%; /* Adjust as needed for the desired width */
     max-width: 600px; /* Limit the maximum width */
