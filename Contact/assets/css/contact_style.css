@@ -106,7 +106,7 @@ form {
     flex-direction: column;
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
-    margin: auto;
+    margin: 102400;
     padding: 20px;
     width: 80%; /* Adjust as needed for the desired width */
     max-width: 600px; /* Limit the maximum width */
