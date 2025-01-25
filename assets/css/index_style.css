@@ -1,18 +1,14 @@
 html {
     scroll-behavior: smooth;
+    color-scheme: light dark;
 }
 /* General Styles */
 body {
-    background: linear-gradient(135deg, #1c1c1c 0%, #121212 100%);
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure full height of the viewport */
-}
-
-h1, h2, p {
-    color: #e0e0e0; /* Softer white for a less harsh look */
 }
 
 a {
@@ -44,7 +40,6 @@ a:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: white;
 }
 
 .center-logo {

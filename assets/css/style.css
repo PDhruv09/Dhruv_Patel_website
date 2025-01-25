@@ -1,18 +1,14 @@
 html {
     scroll-behavior: smooth;
+    color-scheme: light dark;
 }
 /* General Styles */
 body {
-    background: linear-gradient(135deg, #1c1c1c 0%, #121212 100%);
     font-family: 'Times New Roman', Times, serif;
     margin: 0;
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure full height of the viewport */
-}
-
-h1, h2, p {
-    color: #e0e0e0; /* Softer white for a less harsh look */
 }
 
 a {
@@ -23,12 +19,9 @@ a:hover {
     color: #53a8cf; /* Slightly darker shade on hover */
 }
 
-
 .page {
     padding-left: 20px;
     padding-right: 20px;
-    background-color: #1c1c1c;  /* Dark background */
-    color: #f5f5f5;  /* Off-white text */
     flex-grow: 1; /* Allow the content to grow and push the footer down */
 }
 
@@ -37,14 +30,12 @@ a:hover {
 }
 
 .page a {
-    color: #f5f5f5;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
 }
 /* Header styles */
 #header {
-    background-color: #333; /* Dark background */
     padding: 10px 20px;
     position: fixed;
     top: 0;
@@ -62,41 +53,34 @@ a:hover {
 }
 
 #header .logo h1 a {
-    color: #f5f5f5; /* Off-white text */
     text-decoration: none;
     font-size: 24px;
 }
 
-/* Navbar styles */
+/* Navigation Menu Styling */
 #navbar {
     display: flex;
-    align-items: center;
-}
-
-#navbar ul {
-    display: flex;
+    justify-content: flex-end; /* Align navigation to the right */
+    gap: 20px; /* Add spacing between links */
+    margin-right: 20px; /* Space from the right edge */
     list-style: none;
-    padding: 0;
-    margin: 0;
 }
 
-#navbar ul li {
-    position: relative;
-    margin-left: 20px;
-}
-
-#navbar ul li a {
-    color: #f5f5f5;
-    padding: 10px 20px;
-    transition: background-color 0.3s, color 0.3s;
+#navbar a {
     text-decoration: none;
-    display: block;
+    padding: 10px 15px; /* Add padding around links */
+    transition: background-color 0.3s, color 0.3s; /* Smooth hover effects */
 }
 
-#navbar ul li a:hover {
-    background-color: #444;
+#navbar a:hover {
+    background-color: #444; /* Slightly darker background on hover */
     color: #7acfee; /* Accent color on hover */
     border-radius: 5px;
+}
+
+#navbar a.current {
+    font-weight: bold;
+    color: #7acfee; /* Highlight the current page link */
 }
 
 /* Home Page */
@@ -150,8 +134,6 @@ a:hover {
 
 /* Footer (Contact Information) */
 #footer {
-    background-color: #111;
-    color: #e0e0e0;
     padding: 10px 10px;
     position: relative; /* Ensure footer is placed after the content */
     bottom: 0;
@@ -178,7 +160,6 @@ a:hover {
 }
 
 #footer a {
-    color: #f5f5f5;
     text-decoration: none;
 }
 
