@@ -7,27 +7,25 @@ function $$(selector, context = document) {
 
 // Generate Navigation Menu
 document.addEventListener("DOMContentLoaded", () => {
+    const rootPath = "/Dhruv_Patel_website/"; // Root directory of your project
     const pages = [
         { url: "index.html", title: "Home" },
         { url: "home.html#about", title: "About Me" },
         { url: "home.html#resume", title: "Resume" },
         { url: "projects/index.html", title: "Projects" },
-        { url: "contact/index.html", title: "Contact" },
+        { url: "Contact/index.html", title: "Contact" },
         { url: "https://github.com/PDhruv09", title: "GitHub" },
     ];
 
     const nav = document.createElement("nav");
     nav.id = "navbar";
 
-    // GitHub Pages project repository base
-    const baseURL = "/Dhruv_Patel_website/";
-
     pages.forEach((page) => {
         let url = page.url;
 
-        // Prepend the repository name to internal links
+        // Add the root path to relative URLs
         if (!url.startsWith("http")) {
-            url = baseURL + url;
+            url = rootPath + url;
         }
 
         const a = document.createElement("a");
@@ -35,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
         a.textContent = page.title;
 
         // Highlight the current page
-        const currentPath = location.pathname.replace(baseURL, ""); // Adjust for base URL
-        if (a.href.includes(currentPath)) {
+        const fullURL = new URL(a.href, location.origin).href; // Resolve absolute URL
+        if (fullURL === location.href) {
             a.classList.add("current");
         }
 
