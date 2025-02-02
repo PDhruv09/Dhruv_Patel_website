@@ -16,6 +16,59 @@
       "year": "2024",
       "image": "Images/projects/lol_analysis.jpg",
       "description": "Analyzes win rates by region using data from Oracle’s Elixir. Uses statistical analysis and hypothesis testing to evaluate competitive balance."
+    },
+    {
+      "title": "Financial Planning Model",
+      "year": "2023",
+      "image": "Images/projects/financial_model.jpg",
+      "description": "A long-term financial planning model incorporating 401K investment strategies, bonds, and savings to optimize financial growth."
+    },
+    {
+      "title": "Sign Language LLM for Accessibility",
+      "year": "2025",
+      "image": "Images/projects/sign_language_ai.jpg",
+      "description": "A machine learning model aimed at converting sign language into text and speech, enabling better accessibility for the deaf community."
+    },
+    {
+      "title": "Food Critic Website for UCSD Dining Halls",
+      "year": "2025",
+      "image": "Images/projects/ucsd_dining_review.jpg",
+      "description": "An interactive food review website allowing students to rate and review meals at different dining halls on campus."
+    },
+    {
+      "title": "Music Analysis: Comparative Study",
+      "year": "2023",
+      "image": "Images/projects/music_analysis.jpg",
+      "description": "A comparative analysis of musical compositions using theoretical and historical perspectives."
+    },
+    {
+      "title": "GitHub API Data Fetching",
+      "year": "2024",
+      "image": "Images/projects/github_api.jpg",
+      "description": "Uses GitHub’s public API to dynamically fetch and display profile statistics such as repositories, followers, and contributions."
+    },
+    {
+      "title": "Chinook Database SQL Analysis",
+      "year": "2022",
+      "image": "Images/projects/chinook_sql.jpg",
+      "description": "An SQL project analyzing the Chinook database to retrieve insights on sales, artists, and music trends."
+    },
+    {
+      "title": "Machine Learning for Predicting League of Legends Match Outcomes",
+      "year": "2024",
+      "image": "Images/projects/lol_ml.jpg",
+      "description": "Implements machine learning techniques to predict match outcomes based on champion picks, player stats, and in-game objectives."
+    },
+    {
+      "title": "Historical Data Visualization for Power Outages",
+      "year": "2023",
+      "image": "Images/projects/power_outage_viz.jpg",
+      "description": "An interactive visualization tool mapping major power outages across the U.S. over time."
+    },
+    {
+      "title": "Web Conference Sign Language Translator",
+      "year": "2025",
+      "image": "Images/projects/web_conf_sign_language.jpg",
+      "description": "A web conferencing tool integrating sign language translation into real-time virtual meetings to improve accessibility."
     }
 ]
-  
