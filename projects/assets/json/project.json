@@ -1,0 +1,21 @@
+[
+    {
+      "title": "Does Urbanization Affect Power Outages?",
+      "year": "2024",
+      "image": "Images/projects/urbanization_power_outage.jpg",
+      "description": "An analytical project for DSC 80 at UCSD analyzing major power outages in the U.S. from January 2000 to July 2016. Uses data from Purdue University's infrastructure lab."
+    },
+    {
+      "title": "Interactive General Knowledge Quiz",
+      "year": "2024",
+      "image": "Images/projects/interactive_quiz.jpg",
+      "description": "A project using a double linked list to store and traverse quiz questions, options, and answers. Demonstrates expertise in data structures and interactive applications."
+    },
+    {
+      "title": "League of Legends Win Rate Analysis",
+      "year": "2024",
+      "image": "Images/projects/lol_analysis.jpg",
+      "description": "Analyzes win rates by region using data from Oracle’s Elixir. Uses statistical analysis and hypothesis testing to evaluate competitive balance."
+    }
+]
+  

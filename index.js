@@ -1,3 +1,8 @@
+// Helper function to select multiple elements
+function $$(selector, context = document) {
+    return Array.from(context.querySelectorAll(selector));
+}
+
 // Step 4: Dark Mode Toggle Across All Pages
 document.addEventListener("DOMContentLoaded", () => {
     // Add the dark mode switcher to the top of the page
