@@ -2,7 +2,6 @@ html {
     scroll-behavior: smooth;
     color-scheme: light dark;
 }
-
 /* General Styles */
 body {
     background-color: canvas;
@@ -10,7 +9,7 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Ensure full height of the viewport */
 }
 
 a {
@@ -18,18 +17,18 @@ a {
 }
 
 a:hover {
-    color: #53a8cf;
+    color: #53a8cf; /* Slightly darker shade on hover */
 }
 
-/* Page Layout */
+
 .page {
     padding-left: 20px;
     padding-right: 20px;
-    flex-grow: 1;
+    flex-grow: 1; /* Allow the content to grow and push the footer down */
 }
 
 .content {
-    display: block;
+    display: block; /* Ensure the home content is visible */
 }
 
 .page a {
@@ -38,57 +37,57 @@ a:hover {
     text-decoration: none;
 }
 
-/* Header Styles */
+/* Header styles */
 #header {
     padding: 10px 20px;
     position: fixed;
     top: 0;
-    width: calc(100% - 20px);
+    width: calc(100% - 20px); /* 20px margin on right */
     height: 60px;
     z-index: 999;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 #header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 20px; /* Add right margin */
 }
 
 #header .logo h1 a {
-    color: #f5f5f5;
+    color: #f5f5f5; /* Off-white text */
     text-decoration: none;
     font-size: 24px;
 }
 
-/* Navigation Menu */
+/* Navigation Menu Styling */
 #navbar {
     display: flex;
-    justify-content: flex-end;
-    gap: 20px;
-    margin-right: 20px;
+    justify-content: flex-end; /* Align navigation to the right */
+    gap: 20px; /* Add spacing between links */
+    margin-right: 20px; /* Space from the right edge */
     list-style: none;
 }
 
 #navbar a {
     text-decoration: none;
-    padding: 10px 15px;
-    transition: background-color 0.3s, color 0.3s;
+    padding: 10px 15px; /* Add padding around links */
+    transition: background-color 0.3s, color 0.3s; /* Smooth hover effects */
 }
 
 #navbar a:hover {
-    background-color: #444;
-    color: #7acfee;
+    background-color: #444; /* Slightly darker background on hover */
+    color: #7acfee; /* Accent color on hover */
     border-radius: 5px;
 }
 
 #navbar a.current {
     font-weight: bold;
-    color: #7acfee;
+    color: #7acfee; /* Highlight the current page link */
 }
 
-/* Projects Section */
+/* Projects Page */
 .projects-container {
     display: flex;
     align-items: center;
@@ -189,14 +188,45 @@ svg {
     }
 }
 
-/* Footer */
+
+/* Footer (Contact Information) */
 #footer {
     padding: 10px 10px;
-    position: relative;
+    position: relative; /* Ensure footer is placed after the content */
     bottom: 0;
     left: 0;
-    width: 100%;
-    display: block;
-    clear: both;
+    width: 100%; /* Full width of the page */
+    display: block; /* Keep footer block-level */
+    clear: both; /* Clear floats to prevent overlap */
     text-align: center;
+}
+
+#footer .left {
+    float: left; /* Align contact info to the left */
+    width: 45%; /* Give it a percentage width */
+    text-align: left;
+    font-size: 15px; /* Reduce font size if needed to make it more compact */
+}
+
+#footer .right {
+    float: right; /* Align social media to the right */
+    width: 45%; /* Give it a percentage width */
+    text-align: right;
+    padding-right: 20px; /* Ensure there's space on the right side */
+    font-size: 15px; /* Reduce font size if needed to make it more compact */
+}
+
+#footer a {
+    text-decoration: none;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+/* Clear floats */
+#footer::after {
+    content: "";
+    display: table;
+    clear: both;
 }
