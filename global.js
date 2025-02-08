@@ -87,21 +87,36 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Function to fetch JSON data
-export async function fetchJSON(url) {
+// Cache for project data
+let projectData = [];
+
+// Function to fetch and cache project data
+async function loadProjectData() {
     try {
         const response = await fetch("./projects/assets/json/project.json");
         if (!response.ok) {
             throw new Error(`Failed to fetch projects: ${response.statusText}`);
         }
-        return await response.json();
+        projectData = await response.json();
     } catch (error) {
         console.error("Error fetching or parsing JSON data:", error);
     }
 }
 
+// Function to get the latest 3 projects sorted by year (without modifying the original data)
+function getLatestProjects() {
+    if (!projectData || projectData.length === 0) {
+        console.error("Project data is empty or not loaded.");
+        return [];
+    }
+
+    return [...projectData] // Clone the array to avoid modifying cached data
+        .sort((a, b) => parseInt(b.year) - parseInt(a.year)) // Sort by year (descending)
+        .slice(0, 3); // Get latest 3 projects
+}
+
 // Function to render projects dynamically
-export function renderProjects(projects, containerElement, headingLevel = 'h2') {
+function renderProjects(projects, containerElement, headingLevel = 'h2') {
     if (!containerElement) {
         console.error("Invalid container element for projects.");
         return;
@@ -120,34 +135,29 @@ export function renderProjects(projects, containerElement, headingLevel = 'h2') 
     });
 }
 
-// Function to fetch GitHub Data
-export async function fetchGitHubData(username) {
-    try {
-        console.log(`Fetching GitHub Data for: ${username}`); // Debugging
-        const response = await fetch(`https://api.github.com/users/${username}`);
-        if (!response.ok) {
-            throw new Error(`GitHub API error: ${response.statusText}`);
-        }
-        const data = await response.json();
-        console.log("GitHub Data:", data); // Debugging
-        return data;
-    } catch (error) {
-        console.error("Error fetching GitHub data:", error);
+// Function to load and display latest projects
+async function displayLatestProjects() {
+    await loadProjectData(); // Fetch data once before proceeding
+
+    const latestProjects = getLatestProjects(); // Get latest 3 projects
+    const projectsContainer = document.querySelector('.projects'); // Get container
+
+    if (latestProjects.length === 0) {
+        projectsContainer.innerHTML = "<p>No projects available.</p>";
+        return;
     }
+
+    renderProjects(latestProjects, projectsContainer, 'h2'); // Render projects
 }
+
+// Ensure projects are displayed only when the DOM is ready
+document.addEventListener("DOMContentLoaded", () => {
+    displayLatestProjects();
+});
 
 // Load projects and GitHub data on home page
 document.addEventListener("DOMContentLoaded", async () => {
     if (window.location.pathname.includes("home.html")) {
-        // Render latest projects
-        const projectsContainer = document.querySelector(".latest-projects");
-        if (projectsContainer) {
-            const projects = await fetchJSON("./projects/assets/json/project.json");
-            if (projects) {
-                const latestProjects = projects.slice(0, 3);
-                renderProjects(latestProjects, projectsContainer, "h2");
-            }
-        }
 
         // Fetch and display GitHub data
         const profileStats = document.querySelector("#profile-stats");
