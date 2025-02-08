@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Load project data
     async function fetchProjectData() {
         try {
-            const response = await fetch("assets/json/projects.json");
+            const response = await fetch("assets/json/project.json");
             if (!response.ok) throw new Error("Failed to fetch projects");
             return await response.json();
         } catch (error) {

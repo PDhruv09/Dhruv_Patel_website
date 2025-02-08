@@ -107,7 +107,7 @@ let projectData = [];
 // Function to fetch and cache project data
 async function loadProjectData() {
     try {
-        const response = await fetch("projects/assets/json/projects.json"); // Corrected Path
+        const response = await fetch("projects/assets/json/project.json"); // Corrected Path
         if (!response.ok) {
             throw new Error(`Failed to fetch projects: ${response.statusText}`);
         }
