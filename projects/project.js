@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Load project data
     async function fetchProjectData() {
         try {
-            const response = await fetch("assets/json/project.json");
+            const response = await fetch("../json/project.json");
             if (!response.ok) throw new Error("Failed to fetch projects");
             return await response.json();
         } catch (error) {
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const projectElement = document.createElement("article");
             projectElement.innerHTML = `
                 <h2>${project.title}</h2>
-                <p><strong>Year:</strong> ${project.year}</p>
+                <p>${project.year}</p>
                 <p>${project.description}</p>
             `;
             projectsContainer.appendChild(projectElement);
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (data.length === 0) return;  // Prevent errors on empty search
 
         // Pie chart layout
-        let width = 250, height = 250, radius = Math.min(width, height) / 2;
+        let width = 200, height = 200, radius = Math.min(width, height) / 2;
         let pie = d3.pie().value(d => d.value);
         let arc = d3.arc().innerRadius(0).outerRadius(radius);
         let color = d3.scaleOrdinal(d3.schemeTableau10);
@@ -66,10 +66,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             .attr("stroke", "#fff")
             .attr("stroke-width", 2)
             .on("click", (_, i) => {
-                if (data[i]) {
-                    selectedIndex = selectedIndex === i ? -1 : i;
-                    renderProjects(selectedIndex === -1 ? filteredProjects : filteredProjects.filter(p => p.year === data[i].label));
-                }
+                selectedIndex = selectedIndex === i ? -1 : i;
+                renderProjects(selectedIndex === -1 ? filteredProjects : filteredProjects.filter(p => p.year === data[i].label));
             });
 
         // Create legend
@@ -79,10 +77,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             .append("li")
             .style("--color", (_, i) => color(i))
             .on("click", (_, i) => {
-                if (data[i]) {
-                    selectedIndex = selectedIndex === i ? -1 : i;
-                    renderProjects(selectedIndex === -1 ? filteredProjects : filteredProjects.filter(p => p.year === data[i].label));
-                }
+                selectedIndex = selectedIndex === i ? -1 : i;
+                renderProjects(selectedIndex === -1 ? filteredProjects : filteredProjects.filter(p => p.year === data[i].label));
             });
 
         legendItems.append("span").attr("class", "swatch");
