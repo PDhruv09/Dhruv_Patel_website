@@ -87,13 +87,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Cache for project data
+// ✅ NEW FUNCTION: Fetch GitHub Data (Fixing Undefined Error)
+async function fetchGitHubData(username) {
+    try {
+        const response = await fetch(`https://api.github.com/users/${username}`);
+        if (!response.ok) {
+            throw new Error(`GitHub API error: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error("Error fetching GitHub data:", error);
+        return null;
+    }
+}
+
+// ✅ UPDATED: Correcting projects.json Fetch Path
 let projectData = [];
 
 // Function to fetch and cache project data
 async function loadProjectData() {
     try {
-        const response = await fetch("./projects/assets/json/project.json");
+        const response = await fetch("projects/assets/json/projects.json"); // Corrected Path
         if (!response.ok) {
             throw new Error(`Failed to fetch projects: ${response.statusText}`);
         }
@@ -140,7 +154,12 @@ async function displayLatestProjects() {
     await loadProjectData(); // Fetch data once before proceeding
 
     const latestProjects = getLatestProjects(); // Get latest 3 projects
-    const projectsContainer = document.querySelector('.projects'); // Get container
+    const projectsContainer = document.querySelector('.latest-projects'); // Ensure this class exists
+
+    if (!projectsContainer) {
+        console.error("Invalid container element for latest projects.");
+        return;
+    }
 
     if (latestProjects.length === 0) {
         projectsContainer.innerHTML = "<p>No projects available.</p>";
@@ -155,11 +174,9 @@ document.addEventListener("DOMContentLoaded", () => {
     displayLatestProjects();
 });
 
-// Load projects and GitHub data on home page
+// ✅ UPDATED: Ensure GitHub Data is Loaded
 document.addEventListener("DOMContentLoaded", async () => {
     if (window.location.pathname.includes("home.html")) {
-
-        // Fetch and display GitHub data
         const profileStats = document.querySelector("#profile-stats");
         if (profileStats) {
             const githubData = await fetchGitHubData("PDhruv09");
