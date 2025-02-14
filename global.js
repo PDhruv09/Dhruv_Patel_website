@@ -5,10 +5,11 @@ function $$(selector, context = document) {
     return Array.from(context.querySelectorAll(selector));
 }
 
-// ✅ Fix: Ensure script runs only after DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
+// ✅ Ensure scripts run only after the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", async () => {
     generateNavigation();
     displayLatestProjects().catch(error => console.error("Error loading latest projects:", error));
+    displayGitHubStats().catch(error => console.error("Error loading GitHub stats:", error)); // ✅ Load GitHub Stats
 });
 
 // ✅ Function to generate the navigation bar
@@ -46,7 +47,7 @@ function generateNavigation() {
 // ✅ Fix: Ensure JSON fetch works
 async function fetchGitHubData(username) {
     try {
-        const response = await fetch(`https://api.github.com/users/${pdhruv09}`);
+        const response = await fetchJSON(`https://api.github.com/users/${username}`);
         if (!response.ok) throw new Error(`GitHub API error: ${response.statusText}`);
         return await response.json();
     } catch (error) {
@@ -54,6 +55,31 @@ async function fetchGitHubData(username) {
         return null;
     }
 }
+
+// ✅ Display GitHub Stats on the Home Page
+async function displayGitHubStats() {
+    const profileStats = document.querySelector("#profile-stats");
+    if (!profileStats) {
+        console.warn("GitHub stats container not found.");
+        return;
+    }
+
+    const githubData = await fetchGitHubData("PDhruv09"); // ✅ Use correct GitHub username
+
+    if (githubData) {
+        profileStats.innerHTML = `
+            <dl>
+                <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
+                <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
+                <dt>Followers:</dt><dd>${githubData.followers}</dd>
+                <dt>Following:</dt><dd>${githubData.following}</dd>
+            </dl>
+        `;
+    } else {
+        profileStats.innerHTML = `<p>Error loading GitHub data. Please try again later.</p>`;
+    }
+}
+
 
 async function loadProjectData(retries = 3, delay = 2000) {
     for (let attempt = 0; attempt < retries; attempt++) {
@@ -109,7 +135,8 @@ async function displayLatestProjects() {
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         await displayLatestProjects();
+        await displayGitHubStats(); // ✅ Ensure GitHub stats load correctly
     } catch (error) {
-        console.error("Error loading latest projects:", error);
+        console.error("Error loading content:", error);
     }
 });
