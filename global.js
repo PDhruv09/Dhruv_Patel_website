@@ -55,19 +55,21 @@ async function fetchGitHubData(username) {
     }
 }
 
-// ✅ Fix: Load project data correctly
-async function loadProjectData() {
-    try {
-        const response = await fetch("/projects/assets/json/project.json"); // Fixed path
-        if (!response.ok) throw new Error(`Failed to fetch projects: ${response.statusText}`);
-        return await response.json();
-    } catch (error) {
-        console.error("Error fetching or parsing JSON data:", error);
-        return [];
+async function loadProjectData(retries = 3, delay = 2000) {
+    for (let attempt = 0; attempt < retries; attempt++) {
+        try {
+            const response = await fetch("/Dhruv_Patel_website/projects/assets/json/project.json");
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            return await response.json();
+        } catch (error) {
+            console.error(`Attempt ${attempt + 1} failed: ${error.message}`);
+            await new Promise(res => setTimeout(res, delay));
+        }
     }
+    console.error("Failed to fetch projects after multiple attempts.");
+    return [];
 }
 
-// ✅ Fix: Ensure projects are displayed correctly
 async function displayLatestProjects() {
     const projectsContainer = document.querySelector(".latest-projects");
     if (!projectsContainer) {
@@ -81,7 +83,6 @@ async function displayLatestProjects() {
         return;
     }
 
-    // ✅ Function to get latest 3 projects
     function getLatestProjects() {
         return [...projectData]
             .sort((a, b) => parseInt(b.year) - parseInt(a.year))
@@ -103,3 +104,12 @@ async function displayLatestProjects() {
 
     renderProjects(getLatestProjects());
 }
+
+// ✅ Run after DOM loads
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        await displayLatestProjects();
+    } catch (error) {
+        console.error("Error loading latest projects:", error);
+    }
+});

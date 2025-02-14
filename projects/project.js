@@ -5,10 +5,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const searchInput = document.querySelector(".searchBar");
     const svg = d3.select("svg");
     const legend = d3.select(".legend");
-    let selectedIndex = -1;  // Tracks selected pie slice
+    let selectedIndex = -1;
     let query = "";
 
-    // ✅ Fix: Check if searchInput exists before adding event listener
     if (searchInput) {
         searchInput.addEventListener("input", (event) => {
             query = event.target.value.toLowerCase();
@@ -22,26 +21,28 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.warn("Search input not found on this page.");
     }
 
-    // ✅ Fix: Fetch project data using absolute path
-    async function fetchProjectData() {
-        try {
-            const response = await fetch("/assets/json/project.json"); // Fixed path
-            if (!response.ok) throw new Error("Failed to fetch projects");
-            return await response.json();
-        } catch (error) {
-            console.error("Error fetching projects:", error);
-            return [];
+    async function fetchProjectData(retries = 3, delay = 2000) {
+        for (let attempt = 0; attempt < retries; attempt++) {
+            try {
+                const response = await fetch("/Dhruv_Patel_website/projects/assets/json/project.json");
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return await response.json();
+            } catch (error) {
+                console.error(`Attempt ${attempt + 1} failed: ${error.message}`);
+                await new Promise(res => setTimeout(res, delay));
+            }
         }
+        console.error("Failed to fetch projects after multiple attempts.");
+        return [];
     }
 
-    // ✅ Fix: Check if .projects container exists before rendering
     function renderProjects(projects) {
         if (!projectsContainer) {
             console.error("Projects container not found! Ensure .projects exists in projects/index.html.");
             return;
         }
 
-        projectsContainer.innerHTML = ""; // Clear existing content
+        projectsContainer.innerHTML = "";
         projects.forEach(project => {
             const projectElement = document.createElement("article");
             projectElement.innerHTML = `
@@ -53,22 +54,18 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // ✅ Fix: Check if data is empty before rendering pie chart
     function renderPieChart(filteredProjects) {
         if (!filteredProjects.length) {
             console.warn("No projects to display in pie chart.");
             return;
         }
 
-        // Clear previous chart & legend
         svg.selectAll("*").remove();
         legend.selectAll("*").remove();
 
-        // Count projects per year
         let yearCounts = d3.rollups(filteredProjects, v => v.length, d => d.year);
         let data = yearCounts.map(([year, count]) => ({ label: year, value: count }));
 
-        // Pie chart layout
         let width = 200, height = 200, radius = Math.min(width, height) / 2;
         let pie = d3.pie().value(d => d.value);
         let arc = d3.arc().innerRadius(0).outerRadius(radius);
@@ -104,7 +101,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         legendItems.append("span").text(d => `${d.label} (${d.value})`);
     }
 
-    // ✅ Load and display projects
     let projectData = await fetchProjectData();
     if (!projectData.length) {
         console.error("No project data found. Check if project.json is correctly loaded.");
