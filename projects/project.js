@@ -8,10 +8,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     let selectedIndex = -1;  // Tracks selected pie slice
     let query = "";
 
-    // Load project data
+    // ✅ Fix: Check if searchInput exists before adding event listener
+    if (searchInput) {
+        searchInput.addEventListener("input", (event) => {
+            query = event.target.value.toLowerCase();
+            let filteredProjects = projectData.filter(p => 
+                Object.values(p).join(" ").toLowerCase().includes(query)
+            );
+            renderProjects(filteredProjects);
+            renderPieChart(filteredProjects);
+        });
+    } else {
+        console.warn("Search input not found on this page.");
+    }
+
+    // ✅ Fix: Fetch project data using absolute path
     async function fetchProjectData() {
         try {
-            const response = await fetch("assets/json/project.json");
+            const response = await fetch("/assets/json/project.json"); // Fixed path
             if (!response.ok) throw new Error("Failed to fetch projects");
             return await response.json();
         } catch (error) {
@@ -20,8 +34,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // Function to render projects
+    // ✅ Fix: Check if .projects container exists before rendering
     function renderProjects(projects) {
+        if (!projectsContainer) {
+            console.error("Projects container not found! Ensure .projects exists in projects/index.html.");
+            return;
+        }
+
         projectsContainer.innerHTML = ""; // Clear existing content
         projects.forEach(project => {
             const projectElement = document.createElement("article");
@@ -34,8 +53,13 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // Function to render pie chart
+    // ✅ Fix: Check if data is empty before rendering pie chart
     function renderPieChart(filteredProjects) {
+        if (!filteredProjects.length) {
+            console.warn("No projects to display in pie chart.");
+            return;
+        }
+
         // Clear previous chart & legend
         svg.selectAll("*").remove();
         legend.selectAll("*").remove();
@@ -44,19 +68,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         let yearCounts = d3.rollups(filteredProjects, v => v.length, d => d.year);
         let data = yearCounts.map(([year, count]) => ({ label: year, value: count }));
 
-        if (data.length === 0) return;  // Prevent errors on empty search
-
         // Pie chart layout
         let width = 200, height = 200, radius = Math.min(width, height) / 2;
         let pie = d3.pie().value(d => d.value);
         let arc = d3.arc().innerRadius(0).outerRadius(radius);
         let color = d3.scaleOrdinal(d3.schemeTableau10);
 
-        // Append pie chart
         let chart = svg.append("g").attr("transform", `translate(${width / 2},${height / 2})`);
         let arcs = pie(data);
 
-        // Draw pie slices
         chart.selectAll("path")
             .data(arcs)
             .enter()
@@ -70,7 +90,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 renderProjects(selectedIndex === -1 ? filteredProjects : filteredProjects.filter(p => p.year === data[i].label));
             });
 
-        // Create legend
         let legendItems = legend.selectAll("li")
             .data(data)
             .enter()
@@ -85,16 +104,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         legendItems.append("span").text(d => `${d.label} (${d.value})`);
     }
 
-    // Event listener for search bar
-    searchInput.addEventListener("input", (event) => {
-        query = event.target.value.toLowerCase();
-        let filteredProjects = projectData.filter(p => Object.values(p).join(" ").toLowerCase().includes(query));
-        renderProjects(filteredProjects);
-        renderPieChart(filteredProjects);
-    });
-
-    // Load and display data
+    // ✅ Load and display projects
     let projectData = await fetchProjectData();
-    renderProjects(projectData);
-    renderPieChart(projectData);
+    if (!projectData.length) {
+        console.error("No project data found. Check if project.json is correctly loaded.");
+    } else {
+        renderProjects(projectData);
+        renderPieChart(projectData);
+    }
 });
