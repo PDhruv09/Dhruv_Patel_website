@@ -47,7 +47,7 @@ function generateNavigation() {
 // ✅ Fix: Ensure JSON fetch works
 async function fetchGitHubData(username) {
     try {
-        const response = await fetchJSON(`https://api.github.com/users/${username}`);
+        const response = await fetchJSON(`https://api.github.com/users/PDhruv09`);
         if (!response.ok) throw new Error(`GitHub API error: ${response.statusText}`);
         return await response.json();
     } catch (error) {
