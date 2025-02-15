@@ -44,12 +44,12 @@ function generateNavigation() {
     document.body.prepend(nav);
 }
 
-// ✅ Fix: Ensure JSON fetch works
+// ✅ Fix: Ensure GitHub API Fetch Works
 async function fetchGitHubData(username) {
     try {
-        const response = await fetchJSON(`https://api.github.com/users/PDhruv09`);
+        const response = await fetch(`https://api.github.com/users/${username}`);
         if (!response.ok) throw new Error(`GitHub API error: ${response.statusText}`);
-        return await response.json();
+        return await response.json(); // ✅ Fix: Convert response to JSON correctly
     } catch (error) {
         console.error("Error fetching GitHub data:", error);
         return null;
@@ -80,7 +80,7 @@ async function displayGitHubStats() {
     }
 }
 
-
+// ✅ Fetch & Load Project Data
 async function loadProjectData(retries = 3, delay = 2000) {
     for (let attempt = 0; attempt < retries; attempt++) {
         try {
@@ -96,6 +96,7 @@ async function loadProjectData(retries = 3, delay = 2000) {
     return [];
 }
 
+// ✅ Display Latest Projects
 async function displayLatestProjects() {
     const projectsContainer = document.querySelector(".latest-projects");
     if (!projectsContainer) {
