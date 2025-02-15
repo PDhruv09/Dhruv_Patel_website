@@ -1,0 +1,25 @@
+/* meta/index.html */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link  href="assets/css/project_style.css" rel="stylesheet">
+    <script type="module" src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Meta Analysis</title>
+</head>
+<body>
+    <h1>Codebase Analysis</h1>
+    <div id="stats"></div>
+    <h2>Commnits by time of day</h2>
+    <div id="chart"></div>
+    <dl id="commit-tooltip" class="info tooltip" hidden>
+        <dt>Commit</dt>
+        <dd><a hred="" id="commit-link" target="_blank"></a></dd>
+        <dt>Date</dt>
+        <dd id="commit-data"></dd>
+    </dl>
+    <script type="module" src="../global.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
