@@ -4,21 +4,104 @@ let commits = [];
 let brushSelection = null;
 
 async function loadData() {
-    data = await d3.csv('meta/loc.csv', (row) => ({
-        ...row,
-        line: +row.line,
-        depth: +row.depth,
-        length: +row.length,
-        date: new Date(row.date + 'T00:00' + row.timezone),
-        datetime: new Date(row.datetime)
-    }));
+    console.log("Loading data...");
+
+    data = await d3.csv('meta/loc.csv', (row) => {
+        return {
+            file: row.file,
+            line: +row.line,
+            type: row.type,
+            commit: row.commit,
+            author: row.author,
+            date: new Date(row.date + 'T00:00:00' + row.timezone),
+            datetime: new Date(row.datetime),
+            depth: +row.depth,
+            length: +row.length
+        };
+    });
+
+    console.log("Loaded Data:", data);
+
+    if (data.length === 0) {
+        console.error("Error: No data loaded from loc.csv!");
+        return;
+    }
 
     processCommits();
     displayStats();
     createScatterplot();
 }
 
-document.addEventListener('DOMContentLoaded', loadData);
+document.addEventListener('DOMContentLoaded', () => {
+    loadData();
+    generateNavigation();  // ✅ Added navigation function
+});
+
+// ✅ Function to generate the navigation bar
+function generateNavigation() {
+    const rootPath = "/Dhruv_Patel_website/";
+    const pages = [
+        { url: "index.html", title: "Home" },
+        { url: "home.html#about", title: "About Me" },
+        { url: "home.html#resume", title: "Resume" },
+        { url: "projects/index.html", title: "Projects" },
+        { url: "meta/index.html", title: "Meta Analysis" },
+        { url: "Contact/index.html", title: "Contact" },
+        { url: "https://github.com/PDhruv09", title: "GitHub" }
+    ];
+    
+    const nav = document.createElement("nav");
+    nav.id = "navbar";
+
+    pages.forEach((page) => {
+        let url = page.url.startsWith("http") ? page.url : rootPath + page.url;
+        const a = document.createElement("a");
+        a.href = url;
+        a.textContent = page.title;
+        if (new URL(a.href, location.origin).href === location.href) {
+            a.classList.add("current");
+        }
+        if (a.host !== location.host) {
+            a.target = "_blank";
+        }
+        nav.appendChild(a);
+    });
+
+    document.body.prepend(nav);
+}
+
+// ✅ Dark Mode Toggle Implementation
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.insertAdjacentHTML(
+        "afterbegin",
+        `
+        <label class="color-scheme" style="position: absolute; top: 10px; right: 10px;">
+            Theme:
+            <select id="theme-switcher">
+                <option value="light dark">Automatic</option>
+                <option value="light">Light</option>
+                <option value="dark">Dark</option>
+            </select>
+        </label>
+    `);
+
+    const select = document.getElementById("theme-switcher");
+
+    if ("colorScheme" in localStorage) {
+        setColorScheme(localStorage.colorScheme);
+        select.value = localStorage.colorScheme;
+    }
+
+    select.addEventListener("input", (event) => {
+        const colorScheme = event.target.value;
+        setColorScheme(colorScheme);
+        localStorage.colorScheme = colorScheme;
+    });
+
+    function setColorScheme(colorScheme) {
+        document.documentElement.style.setProperty("color-scheme", colorScheme);
+    }
+});
 
 function processCommits() {
     commits = d3.groups(data, d => d.commit).map(([commit, lines]) => {
@@ -31,9 +114,11 @@ function processCommits() {
             datetime: first.datetime,
             hourFrac: first.datetime.getHours() + first.datetime.getMinutes() / 60,
             totalLines: lines.length,
-            file: first.file
+            lines: lines // Store all lines for language breakdown
         };
     });
+
+    console.log("Processed Commits:", commits);
 }
 
 function displayStats() {
@@ -50,12 +135,14 @@ function displayStats() {
 
     dl.append('dt').text('Max File Length');
     dl.append('dd').text(d3.max(data, d => d.length));
-
-    dl.append('dt').text('Average File Length');
-    dl.append('dd').text(d3.mean(data, d => d.length).toFixed(2));
 }
 
 function createScatterplot() {
+    if (commits.length === 0) {
+        console.error("Error: No commits available for scatterplot!");
+        return;
+    }
+
     const width = 1000, height = 600;
     const margin = { top: 10, right: 10, bottom: 40, left: 50 };
     const svg = d3.select('#chart').append('svg')
@@ -105,13 +192,15 @@ function createScatterplot() {
 }
 
 function setupBrushing(svg, xScale, yScale) {
-    const brush = d3.brush().on('brush end', brushed);
-    svg.append('g').call(brush);
+    const brush = d3.brush()
+        .on('brush end', brushed);
 
-    function brushed(event) {
-        brushSelection = event.selection;
-        updateSelection();
-    }
+    svg.append('g').call(brush);
+}
+
+function brushed(event) {
+    brushSelection = event.selection;
+    updateSelection();
 }
 
 function isCommitSelected(commit) {
@@ -148,20 +237,4 @@ function updateLanguageBreakdown() {
         const formatted = d3.format('.1~%')(proportion);
         container.innerHTML += `<dt>${language}</dt><dd>${count} lines (${formatted})</dd>`;
     }
-}
-
-function updateTooltipContent(commit) {
-    document.getElementById('commit-link').href = commit.url;
-    document.getElementById('commit-link').textContent = commit.id;
-    document.getElementById('commit-date').textContent = commit.datetime.toLocaleString('en', { dateStyle: 'full' });
-}
-
-function updateTooltipVisibility(isVisible) {
-    document.getElementById('commit-tooltip').hidden = !isVisible;
-}
-
-function updateTooltipPosition(event) {
-    const tooltip = document.getElementById('commit-tooltip');
-    tooltip.style.left = `${event.clientX}px`;
-    tooltip.style.top = `${event.clientY}px`;
 }
