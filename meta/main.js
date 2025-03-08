@@ -4,7 +4,7 @@ let commits = [];
 let filteredCommits = [];
 let brushSelection = null;
 let selectedCommits = [];
-let xScale, yScale, rScale;
+let xScale, yScale, rScale, timeScale;
 
 async function loadData() {
     console.log("Loading data...");
@@ -30,9 +30,11 @@ async function loadData() {
     }
     
     processCommits();
+    setupScales();
     displayStats();
     createUI();
     updateFilteredCommits();
+    createScatterplot();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -53,6 +55,12 @@ function processCommits() {
             lines: lines
         };
     });
+}
+
+function setupScales() {
+    timeScale = d3.scaleTime()
+        .domain(d3.extent(commits, d => d.datetime))
+        .range([0, 100]);
 }
 
 function displayStats() {
@@ -86,23 +94,47 @@ function updateFilteredCommits() {
     updateFileVisualization();
 }
 
-function updateScatterplot() {
-    d3.select("svg").remove();
+function createScatterplot() {
+    if (commits.length === 0) {
+        console.error("Error: No commits available for scatterplot!");
+        return;
+    }
+    
     const width = 1000, height = 600;
-    const svg = d3.select("#chart").append("svg").attr("width", width).attr("height", height);
+    const margin = { top: 10, right: 10, bottom: 40, left: 50 };
+    const svg = d3.select("#chart").append("svg")
+        .attr("width", width)
+        .attr("height", height);
     
-    xScale = d3.scaleTime().domain(d3.extent(filteredCommits, d => d.datetime)).range([50, width - 50]);
-    yScale = d3.scaleLinear().domain([0, 24]).range([height - 50, 50]);
-    rScale = d3.scaleSqrt().domain(d3.extent(filteredCommits, d => d.totalLines)).range([3, 20]);
+    xScale = d3.scaleTime().domain(d3.extent(commits, d => d.datetime)).range([margin.left, width - margin.right]);
+    yScale = d3.scaleLinear().domain([0, 24]).range([height - margin.bottom, margin.top]);
+    rScale = d3.scaleSqrt().domain(d3.extent(commits, d => d.totalLines)).range([3, 20]);
     
-    svg.selectAll("circle").data(filteredCommits).enter().append("circle")
+    svg.append("g")
+        .attr("transform", `translate(0, ${height - margin.bottom})`)
+        .call(d3.axisBottom(xScale));
+    
+    svg.append("g")
+        .attr("transform", `translate(${margin.left}, 0)`)
+        .call(d3.axisLeft(yScale).tickFormat(d => `${String(d % 24).padStart(2, '0')}:00`));
+    
+    updateScatterplot();
+}
+
+function updateScatterplot() {
+    d3.select("svg g.dots").remove();
+    
+    const svg = d3.select("#chart svg");
+    const dots = svg.append("g").attr("class", "dots");
+    
+    dots.selectAll("circle").data(filteredCommits).enter().append("circle")
         .attr("cx", d => xScale(d.datetime))
-        .attr("cy", () => Math.random() * height)
+        .attr("cy", d => yScale(d.hourFrac))
         .attr("r", d => rScale(d.totalLines))
-        .style("fill", "steelblue")
-        .style("opacity", 0.7)
+        .attr("fill", "steelblue")
+        .attr("fill-opacity", 0.7)
         .transition().duration(500)
-        .style("opacity", 1);
+        .attr("fill-opacity", 1);
 }
 
 function updateFileVisualization() {
@@ -117,25 +149,4 @@ function updateFileVisualization() {
     filesContainer.append("dd").selectAll("div").data(d => d.lines).enter().append("div")
         .attr("class", "line")
         .style("background", d => fileTypeColors(d.type));
-}
-
-function setupScrollytelling() {
-    const scrollContainer = d3.select("#scroll-container");
-    scrollContainer.on("scroll", () => {
-        let scrollTop = scrollContainer.property("scrollTop");
-        let startIndex = Math.floor(scrollTop / 30);
-        startIndex = Math.max(0, Math.min(startIndex, commits.length - 10));
-        renderScrollyItems(startIndex);
-    });
-}
-
-function renderScrollyItems(startIndex) {
-    let itemsContainer = d3.select("#items-container");
-    itemsContainer.selectAll("div").remove();
-    let newCommitSlice = commits.slice(startIndex, startIndex + 10);
-    
-    itemsContainer.selectAll("div").data(newCommitSlice).enter().append("div")
-        .html(d => `<p>Commit at ${d.datetime.toLocaleString()} with ${d.totalLines} lines.</p>`)
-        .style("position", "absolute")
-        .style("top", (_, idx) => `${idx * 30}px`);
 }
