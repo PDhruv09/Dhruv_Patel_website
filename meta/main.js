@@ -3,10 +3,13 @@ let data = [];
 let commits = [];
 let brushSelection = null;
 
+// ✅ Move xScale and yScale to global scope
+let xScale, yScale; 
+
 async function loadData() {
     console.log("Loading data...");
 
-    data = await d3.csv('loc.csv', (row) => {
+    data = await d3.csv('meta/loc.csv', (row) => {
         return {
             file: row.file,
             line: +row.line,
@@ -41,7 +44,7 @@ function processCommits() {
         let first = lines[0];
         return {
             id: commit,
-            url: `https://github.com/YOUR_REPO/commit/${commit}`,
+            url: `https://github.com/PDhruv09/Dhruv_Patel_website/commit/${commit}`,
             author: first.author,
             date: first.date,
             datetime: first.datetime,
@@ -82,12 +85,15 @@ function createScatterplot() {
         .attr('viewBox', `0 0 ${width} ${height}`)
         .style('overflow', 'visible');
 
-    const xScale = d3.scaleTime()
+    // ✅ Define global xScale and yScale
+    xScale = d3.scaleTime()
         .domain(d3.extent(commits, d => d.datetime))
         .range([margin.left, width - margin.right])
         .nice();
 
-    const yScale = d3.scaleLinear().domain([0, 24]).range([height - margin.bottom, margin.top]);
+    yScale = d3.scaleLinear()
+        .domain([0, 24])
+        .range([height - margin.bottom, margin.top]);
 
     const [minLines, maxLines] = d3.extent(commits, d => d.totalLines);
     const rScale = d3.scaleSqrt().domain([minLines, maxLines]).range([2, 30]);
@@ -121,10 +127,10 @@ function createScatterplot() {
             d3.select(this).attr('fill-opacity', 0.7);
         });
 
-    setupBrushing(svg, xScale, yScale);
+    setupBrushing(svg);
 }
 
-function setupBrushing(svg, xScale, yScale) {
+function setupBrushing(svg) {
     const brush = d3.brush()
         .on('brush end', brushed);
 
