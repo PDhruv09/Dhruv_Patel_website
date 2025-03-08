@@ -6,7 +6,7 @@ let brushSelection = null;
 async function loadData() {
     console.log("Loading data...");
 
-    data = await d3.csv('meta/loc.csv', (row) => {
+    data = await d3.csv('loc.csv', (row) => {
         return {
             file: row.file,
             line: +row.line,
