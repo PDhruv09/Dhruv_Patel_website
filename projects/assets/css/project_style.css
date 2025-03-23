@@ -87,10 +87,45 @@ a:hover {
     color: #7acfee; /* Highlight the current page link */
 }
 
-/* Projects Page */
-.projects-container {
-    display: flex;
-    align-items: center;
+#projects .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+#projects-pie-chart {
+  width: 300px;
+  height: 300px;
+}
+
+.year-buttons button {
+  margin: 5px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.project-card {
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+  background-color: white;
 }
 
 .project-square {
@@ -104,13 +139,6 @@ a:hover {
 .project-square a {
     color: #f5f5f5;
     text-decoration: none;
-}
-
-.project-square .project-card {
-    display: flex;
-    align-items: center;
-    margin: 1rem;
-    box-shadow: 10px 14px 18px rgba(236, 239, 0, 0.5);
 }
 
 .project-square .project-info {
@@ -140,14 +168,10 @@ svg {
 
 /* Legend */
 .legend {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 0;
-    margin-top: 10px;
-    gap: 10px;
+  list-style: none;
+  padding: 0;
 }
+
 
 .legend li {
     display: flex;
@@ -180,6 +204,59 @@ svg {
     gap: 20px;
     flex-wrap: wrap;
 }
+/* Flip card container */
+.flip-card {
+  background-color: transparent;
+  width: 250px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+/* Inner wrapper */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Flip on hover */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front and back sides */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  backface-visibility: hidden;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Front (image) */
+.flip-card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Back (text info) */
+.flip-card-back {
+  background-color: white;
+  color: black;
+  text-align: center;
+  padding: 1rem;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 
 /* Responsive */
 @media (max-width: 600px) {

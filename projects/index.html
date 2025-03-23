@@ -33,7 +33,7 @@
     <section id="projects" class="page">
         <h1>Projects</h1>
         <div class="container">
-            <!-- Pie Chart -->
+            <!-- Pie Chart <canvas id="projects-pie-canvas" width="300" height="300"></canvas> -->
             <svg id="projects-pie-chart" viewBox="-50 -50 100 100"></svg>
 
             <!-- Legend -->
@@ -63,5 +63,9 @@
     </footer>
     <script type="module" src="../global.js"></script>
     <script type="module" src="project.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Chart.js (for pie chart) <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <!-- Chart.js plugin for 3D-style effect <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-doughnutlabel"></script> --> 
+
 </body>
 </html>
