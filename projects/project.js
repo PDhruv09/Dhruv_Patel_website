@@ -222,7 +222,8 @@ function renderProjects() {
 
   if (selectedYear) {
     filtered = projectData.filter(p => p.year === selectedYear);
-  } else {
+  } 
+  else {
     const byYear = d3.groups(projectData, d => d.year);
     byYear.forEach(([_, projects]) => {
       const latest = projects.sort((a, b) => b.title.localeCompare(a.title))[0];
@@ -231,15 +232,21 @@ function renderProjects() {
   }
 
   filtered.forEach(project => {
-    const flipCard = projectContainer.append("div").attr("class", "flip-card");
+    // Create anchor wrapper
+    const flipCard = projectContainer.append("a")
+      .attr("href", project.link)
+      .attr("target", "_blank")
+      .attr("rel", "noopener noreferrer")
+      .attr("class", "flip-card");
+  
     const inner = flipCard.append("div").attr("class", "flip-card-inner");
-
+  
     // Front
     const front = inner.append("div").attr("class", "flip-card-front");
     front.append("img")
       .attr("src", project.image)
       .attr("alt", project.title);
-
+  
     // Back
     const back = inner.append("div").attr("class", "flip-card-back");
     back.append("h3").text(project.title);

@@ -2,73 +2,36 @@
     {
       "title": "Does Urbanization Affect Power Outages?",
       "year": "2024",
-      "image": "Images/projects/urbanization_power_outage.jpg",
+      "image": "../Images/projects/urbanization_power_outage.jpg",
+      "link": "https://pdhruv09.github.io/Urbanization_PowerOutage/",
       "description": "An analytical project for DSC 80 at UCSD analyzing major power outages in the U.S. from January 2000 to July 2016. Uses data from Purdue University's infrastructure lab."
     },
     {
       "title": "Interactive General Knowledge Quiz",
       "year": "2024",
-      "image": "Images/projects/interactive_quiz.jpg",
+      "image": "../Images/projects/interactive_quiz.jpg",
+      "link": "https://pdhruv09.github.io/Interactive_Quiz/",
       "description": "A project using a double linked list to store and traverse quiz questions, options, and answers. Demonstrates expertise in data structures and interactive applications."
     },
     {
       "title": "League of Legends Win Rate Analysis",
-      "year": "2024",
-      "image": "Images/projects/lol_analysis.jpg",
+      "year": "2025",
+      "image": "../Images/projects/lol_analysis.jpg",
+      "link": "https://pdhruv09.github.io/lol-esports-explorable/",
       "description": "Analyzes win rates by region using data from Oracle’s Elixir. Uses statistical analysis and hypothesis testing to evaluate competitive balance."
     },
     {
-      "title": "Financial Planning Model",
-      "year": "2023",
-      "image": "Images/projects/financial_model.jpg",
-      "description": "A long-term financial planning model incorporating 401K investment strategies, bonds, and savings to optimize financial growth."
-    },
-    {
-      "title": "Sign Language LLM for Accessibility",
+      "title": "Mapping Boston Cycling Routes",
       "year": "2025",
-      "image": "Images/projects/sign_language_ai.jpg",
-      "description": "A machine learning model aimed at converting sign language into text and speech, enabling better accessibility for the deaf community."
+      "image": "../Images/projects/mapping.jpg",
+      "link": "https://pdhruv09.github.io/Maping/",
+      "description": "A Map that plots the bike routes of Boston and Cambridge City, it also shows the trips taken by each bike stand over a day time."
     },
     {
-      "title": "Food Critic Website for UCSD Dining Halls",
+      "title": "Mouse Activity and Temperature Analysis",
       "year": "2025",
-      "image": "Images/projects/ucsd_dining_review.jpg",
-      "description": "An interactive food review website allowing students to rate and review meals at different dining halls on campus."
-    },
-    {
-      "title": "Music Analysis: Comparative Study",
-      "year": "2023",
-      "image": "Images/projects/music_analysis.jpg",
-      "description": "A comparative analysis of musical compositions using theoretical and historical perspectives."
-    },
-    {
-      "title": "GitHub API Data Fetching",
-      "year": "2024",
-      "image": "Images/projects/github_api.jpg",
-      "description": "Uses GitHub’s public API to dynamically fetch and display profile statistics such as repositories, followers, and contributions."
-    },
-    {
-      "title": "Chinook Database SQL Analysis",
-      "year": "2022",
-      "image": "Images/projects/chinook_sql.jpg",
-      "description": "An SQL project analyzing the Chinook database to retrieve insights on sales, artists, and music trends."
-    },
-    {
-      "title": "Machine Learning for Predicting League of Legends Match Outcomes",
-      "year": "2024",
-      "image": "Images/projects/lol_ml.jpg",
-      "description": "Implements machine learning techniques to predict match outcomes based on champion picks, player stats, and in-game objectives."
-    },
-    {
-      "title": "Historical Data Visualization for Power Outages",
-      "year": "2023",
-      "image": "Images/projects/power_outage_viz.jpg",
-      "description": "An interactive visualization tool mapping major power outages across the U.S. over time."
-    },
-    {
-      "title": "Web Conference Sign Language Translator",
-      "year": "2025",
-      "image": "Images/projects/web_conf_sign_language.jpg",
-      "description": "A web conferencing tool integrating sign language translation into real-time virtual meetings to improve accessibility."
+      "image": "../Images/projects/mouxe_analysis.jpg",
+      "link": "https://pdhruv09.github.io/Mouse-Activity-Explorable/",
+      "description": "This project presents interactive visualizations that explore minute-level fluctuations in core body temperature and activity levels of mice over a 14-day period. The dataset captures daily rhythms, gender differences, and estrus cycle variations, providing a detailed view of biological and behavioral patterns."
     }
 ]
