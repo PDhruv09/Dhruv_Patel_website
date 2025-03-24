@@ -102,14 +102,27 @@ async function displayGitHubStats() {
     const githubData = await fetchGitHubData("PDhruv09"); // ✅ Use correct GitHub username
 
     if (githubData) {
-        profileStats.innerHTML = `
-            <dl>
-                <dt>Public Repos:</dt><dd>${githubData.public_repos}</dd>
-                <dt>Public Gists:</dt><dd>${githubData.public_gists}</dd>
-                <dt>Followers:</dt><dd>${githubData.followers}</dd>
-                <dt>Following:</dt><dd>${githubData.following}</dd>
-            </dl>
-        `;
+        profileStats.style.display = "flex";
+        profileStats.style.justifyContent = "center";
+        profileStats.style.flexWrap = "wrap";
+        profileStats.style.gap = "1rem";
+    
+        const stats = [
+            { label: "Public Repos", value: githubData.public_repos },
+            { label: "Public Gists", value: githubData.public_gists },
+            { label: "Followers", value: githubData.followers },
+            { label: "Following", value: githubData.following }
+        ];
+    
+        stats.forEach(stat => {
+            const card = document.createElement("div");
+            card.className = "github-stat-card";
+            card.innerHTML = `
+                <h4>${stat.label}</h4>
+                <p>${stat.value}</p>
+            `;
+            profileStats.appendChild(card);
+        });
     } else {
         profileStats.innerHTML = `<p>Error loading GitHub data. Please try again later.</p>`;
     }
@@ -119,7 +132,7 @@ async function displayGitHubStats() {
 async function loadProjectData(retries = 3, delay = 2000) {
     for (let attempt = 0; attempt < retries; attempt++) {
         try {
-            const response = await fetch("/Dhruv_Patel_website/projects/assets/json/project.json");
+            const response = await fetch("/projects/assets/json/project.json");
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return await response.json();
         } catch (error) {
@@ -153,17 +166,37 @@ async function displayLatestProjects() {
 
     function renderProjects(projects) {
         projectsContainer.innerHTML = "";
+
+        projectsContainer.style.display = "flex";
+        projectsContainer.style.flexWrap = "wrap";
+        projectsContainer.style.justifyContent = "center";
+        projectsContainer.style.gap = "1rem";
+
         projects.forEach(project => {
-            const article = document.createElement("article");
-            article.innerHTML = `
-                <h2>${project.title}</h2>
-                <img src="${project.image}" alt="${project.title}">
-                <p>${project.description}</p>
+            // Outer anchor
+            const link = document.createElement("a");
+            link.href = project.link;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            link.className = "flip-card";
+
+            // Inner flip container
+            link.innerHTML = `
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="${project.image}" alt="${project.title}">
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>${project.title}</h3>
+                        <p><strong>${project.year}</strong></p>
+                        <p>${project.description}</p>
+                    </div>
+                </div>
             `;
-            projectsContainer.appendChild(article);
+
+            projectsContainer.appendChild(link);
         });
     }
-
     renderProjects(getLatestProjects());
 }
 
