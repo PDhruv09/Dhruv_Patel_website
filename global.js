@@ -132,7 +132,7 @@ async function displayGitHubStats() {
 async function loadProjectData(retries = 3, delay = 2000) {
     for (let attempt = 0; attempt < retries; attempt++) {
         try {
-            const response = await fetch("/projects/assets/json/project.json");
+            const response = await fetch("/Dhruv_Patel_website/projects/assets/json/project.json");
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             return await response.json();
         } catch (error) {
