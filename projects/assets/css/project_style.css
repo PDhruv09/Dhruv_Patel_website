@@ -87,6 +87,7 @@ a:hover {
     color: #7acfee; /* Highlight the current page link */
 }
 
+/*Project dislpay*/
 #projects .container {
   display: flex;
   justify-content: space-between;

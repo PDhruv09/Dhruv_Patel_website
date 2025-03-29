@@ -132,6 +132,7 @@ a:hover {
     transform: scale(1.05);
 }
 
+/* Resume Page */
 .flip-card {
   background-color: transparent;
   width: 250px;
@@ -171,8 +172,6 @@ a:hover {
 }
 
 .flip-card-back {
-  background-color: white;
-  color: black;
   text-align: center;
   padding: 1rem;
   transform: rotateY(180deg);
@@ -185,14 +184,12 @@ a:hover {
 
 /* GitHub stat card style */
 .github-stat-card {
-  background-color: white;
   border: 1px solid #ccc;
   border-radius: 10px;
   padding: 1rem;
   width: 150px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  color: black;
 }
 
 .github-stat-card h4 {
