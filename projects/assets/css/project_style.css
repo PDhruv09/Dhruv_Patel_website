@@ -10,6 +10,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Ensure full height of the viewport */
+    padding-top: 30px;
 }
 
 a {
