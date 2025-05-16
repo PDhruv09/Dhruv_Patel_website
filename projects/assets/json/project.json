@@ -30,7 +30,7 @@
     {
       "title": "Mouse Activity and Temperature Analysis",
       "year": "2025",
-      "image": "../Images/projects/mouxe_analysis.jpg",
+      "image": "../Images/projects/mouse_analysis.jpg",
       "link": "https://pdhruv09.github.io/Mouse-Activity-Explorable/",
       "description": "This project presents interactive visualizations that explore minute-level fluctuations in core body temperature and activity levels of mice over a 14-day period. The dataset captures daily rhythms, gender differences, and estrus cycle variations, providing a detailed view of biological and behavioral patterns."
     }

@@ -61,7 +61,7 @@ a:hover {
 /* Navigation Menu Styling */
 #navbar {
     display: flex;
-    justify-content: flex-end; /* Align navigation to the right */
+    justify-content: center; /* Align navigation to the right */
     gap: 20px; /* Add spacing between links */
     margin-right: 20px; /* Space from the right edge */
     list-style: none;
