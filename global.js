@@ -181,10 +181,11 @@ async function displayLatestProjects() {
             link.className = "flip-card";
 
             // Inner flip container
+            //IF THE IMAGE REPLACE LINK DOES NOT WORK THEN replace the code with <img src="${project.image}" alt="${project.title}">
             link.innerHTML = `
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <img src="${project.image}" alt="${project.title}">
+                        <img src="${project.image.replace(/^(\.\.\/)+/, '')}" alt="${project.title}">
                     </div>
                     <div class="flip-card-back">
                         <h3>${project.title}</h3>
