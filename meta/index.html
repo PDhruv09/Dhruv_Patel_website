@@ -3,24 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../projects/assets/css/project_style.css">
+    <link rel="stylesheet" href="assets/css/meta_style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <title>Meta Analysis</title>
 </head>
 <body>
     <h1>Codebase Analysis</h1>
+    <h2>Summary:</h2>
     <div id="stats"></div>
+
     <h2>Commits by Time of Day</h2>
+    <h3>Filter commits by date:</h3>
+    <input type="range" id="time-slider" min="0" max="100" value="100">
+    <p id="selected-time"></p>
+
     <div id="chart"></div>
-    <p id="selection-count"></p>
-    <dl id="language-breakdown" class="stats"></dl>    
+
+    <p id="selection-count">No commits selected</p>
+    <dl id="language-breakdown" class="stats"></dl>
 
     <dl id="commit-tooltip" class="info tooltip" hidden>
-        <dt>Commit</dt>
-        <dd><a href="" id="commit-link" target="_blank"></a></dd>
-        <dt>Date</dt>
-        <dd id="commit-date"></dd>
-    </dl>
+    <dt>Commit</dt>
+    <dd><a href="" id="commit-link" target="_blank"></a></dd>
+    <dt>Date</dt>
+    <dd id="commit-date"></dd>
+    <dt>Author</dt>
+    <dd id="commit-author"></dd>
+    <dt>Lines Edited</dt>
+    <dd id="commit-lines"></dd>
+    </dl> 
 
     <script src="main.js"></script>
     <script src="../global.js"></script>
