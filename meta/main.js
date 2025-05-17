@@ -1,3 +1,4 @@
+/* meta/main.js */
 let data = [];
 let commits = [];
 let filteredCommits = [];
@@ -22,10 +23,6 @@ async function loadData() {
 
     if (data.length === 0) {
         console.error("CSV is empty!");
-        return;
-    }
-    if (!timeExtent[0] || !timeExtent[1]) {
-        console.error("Time extent not computed correctly.");
         return;
     }
 
@@ -62,15 +59,15 @@ function setupScales() {
 }
 
 function displayStats() {
-    const dl = d3.select('#stats').append('dl').attr('class', 'stats');
-    dl.append('dt').text('Total LOC');
-    dl.append('dd').text(data.length);
-    dl.append('dt').text('Total Commits');
-    dl.append('dd').text(commits.length);
-    dl.append('dt').text('Number of Files');
-    dl.append('dd').text(new Set(data.map(d => d.file)).size);
-    dl.append('dt').text('Max File Length');
-    dl.append('dd').text(d3.max(data, d => d.length));
+    const dl = d3.select('#stats').append('dl').attr('class', 'stats')
+        .append('dt').text('Total LOC')
+        .append('dd').text(data.length)
+        .append('dt').text('Total Commits')
+        .append('dd').text(commits.length)
+        .append('dt').text('Number of Files')
+        .append('dd').text(new Set(data.map(d => d.file)).size)
+        .append('dt').text('Max File Length')
+        .append('dd').text(d3.max(data, d => d.length));
 }
 
 function setupSlider() {
@@ -86,17 +83,13 @@ function setupSlider() {
 
 function filterBySlider() {
     const percent = +document.getElementById('time-slider').value / 100;
-    const threshold = new Date(timeExtent[0].getTime() + percent * (timeExtent[1].getTime() - timeExtent[0].getTime()));
+    const threshold = new Date(timeExtent[0].getTime() + percent * (timeExtent[1] - timeExtent[0]));
     document.getElementById('selected-time').textContent = `Showing commits before: ${threshold.toLocaleDateString()}`;
     filteredCommits = commits.filter(d => d.datetime <= threshold);
     updateScatterplot();
 }
 
 function createScatterplot() {
-    if (!filteredCommits.length) {
-        console.warn("No commits to plot.");
-        return;
-    }
     const width = 1000;
     const height = 600;
     const margin = { top: 10, right: 10, bottom: 40, left: 60 };
@@ -176,8 +169,6 @@ function setupBrush() {
         const [[x0, y0], [x1, y1]] = selection;
 
         const selected = filteredCommits.filter(d => {
-            console.log("Threshold datetime:", threshold.toISOString());
-            console.log("Filtered commits count:", filteredCommits.length);
             const x = xScale(d.datetime);
             const y = yScale(d.hourFrac);
             return x0 <= x && x <= x1 && y0 <= y && y <= y1;
