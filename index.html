@@ -11,40 +11,16 @@
     <!-- Rotating Background Section -->
     <div class="rotating-background">
         <div class="center-content">
-            <h1>Dhruv Patel</h1>
-            <img src="Images/logo/Website_Logo.png" alt="Dhruv Patel Logo" class="center-logo">
-            <button onclick="enterSite()">Enter Site</button>
+            <h1 class="name">Dhruv Patel</h1>
+            <div class="logo-circle">
+                <img src="Images/logo/Website_Logo.png" alt="Logo" class="center-logo">
+            </div>
+            <h2 class="subtitle">Data Scientist | AI & Cybersecurity Enthusiast</h2>
+            <button id="enter-button">
+                Enter Site <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
     </div>
-
-    <script>
-        // Redirect to home.html
-        function enterSite() {
-            window.location.href = 'home.html';
-        }
-
-        // JavaScript for Rotating Background
-        const images = [
-            'Images/photo/nature1.jpg',
-            'Images/photo/nature2.jpg',
-            'Images/photo/nature3.jpg',
-            'Images/photo/nature4.jpg'
-        ];
-
-        let currentIndex = 0;
-        const rotatingBackground = document.querySelector('.rotating-background');
-
-        function changeBackground() {
-            rotatingBackground.style.background = `url('${images[currentIndex]}') no-repeat center center/cover`;
-            currentIndex = (currentIndex + 1) % images.length; // Cycle through images
-        }
-
-        // Change background every 5 seconds
-        setInterval(changeBackground, 5000);
-
-        // Set the initial background
-        changeBackground();
-    </script>
 
     <!-- Audio element -->
     <audio id="background-music" autoplay muted>
@@ -52,12 +28,7 @@
         Your browser does not support the audio element.
     </audio>
 
-    <!-- JavaScript to stop music after 15 seconds -->
-    <script>
-        const backgroundMusic = document.getElementById('background-music');
-        backgroundMusic.muted = false;
-        setTimeout(() => backgroundMusic.pause(), 8000); // Stop music after 8 seconds
-    </script>
+    <!-- External JavaScript -->
     <script type="module" src="index.js"></script>
 </body>
 </html>

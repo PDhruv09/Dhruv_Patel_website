@@ -1,11 +1,13 @@
+console.log("IT'S ALIVE!");
+
 // Helper function to select multiple elements
 function $$(selector, context = document) {
     return Array.from(context.querySelectorAll(selector));
 }
 
-// Step 4: Dark Mode Toggle Across All Pages
+// Dark Mode Toggle Across All Pages
 document.addEventListener("DOMContentLoaded", () => {
-    // Add the dark mode switcher to the top of the page
+    // Add the dark mode switcher
     document.body.insertAdjacentHTML(
         "afterbegin",
         `
@@ -17,25 +19,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 <option value="dark">Dark</option>
             </select>
         </label>
-    `);
+    `
+    );
 
     const select = document.getElementById("theme-switcher");
 
-    // Apply saved theme preference on page load
+    // Apply saved preference
     if ("colorScheme" in localStorage) {
         setColorScheme(localStorage.colorScheme);
         select.value = localStorage.colorScheme;
     }
 
-    // Change the theme when the user selects a new option
+    // On theme change
     select.addEventListener("input", (event) => {
         const colorScheme = event.target.value;
         setColorScheme(colorScheme);
-        localStorage.colorScheme = colorScheme; // Save the preference
+        localStorage.colorScheme = colorScheme;
     });
 
-    // Function to apply the theme
     function setColorScheme(colorScheme) {
         document.documentElement.style.setProperty("color-scheme", colorScheme);
     }
+
+    // Background music
+    const backgroundMusic = document.getElementById('background-music');
+    if (backgroundMusic) {
+        backgroundMusic.muted = false;
+        setTimeout(() => backgroundMusic.pause(), 8000); // Stop after 8 seconds
+    }
+
+    // Enter button functionality
+    const enterButton = document.getElementById("enter-button");
+    if (enterButton) {
+        enterButton.addEventListener("click", enterSite);
+    }
 });
+
+// Redirect to home.html
+function enterSite() {
+    window.location.href = 'home.html';
+}
