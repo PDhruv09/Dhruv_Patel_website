@@ -19,9 +19,9 @@ function generateNavigation() {
         { url: "index.html", title: "Home" },
         { url: "home.html#about", title: "About Me" },
         { url: "home.html#resume", title: "Resume" },
-        { url: "projects/index.html", title: "Projects" },
-        { url: "meta/index.html", title: "Meta Analysis" },
-        { url: "Contact/index.html", title: "Contact" },
+        { url: "projects/", title: "Projects" },
+        { url: "meta/", title: "Meta Analysis" },
+        { url: "Contact/", title: "Contact" },
         { url: "https://github.com/PDhruv09", title: "GitHub" }
     ];
     
