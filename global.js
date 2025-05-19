@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 function generateNavigation() {
     const rootPath = "/Dhruv_Patel_website/";
     const pages = [
-        { url: "index.html", title: "Home" },
+        { url: "", title: "Home" },
         { url: "home.html#about", title: "About Me" },
         { url: "home.html#resume", title: "Resume" },
         { url: "projects/", title: "Projects" },
