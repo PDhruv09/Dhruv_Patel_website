@@ -9,76 +9,63 @@
     <title>Dhruv Patel</title>
 </head>
 <body>
-    <!--
-    <header id="header">
-        <div class="container d-flex align-items-center">
-            <div class="logo me-auto">
-                <h1><a href="index.html"><img src="Images/logo/Website_Logo.png" alt="Dhruv Patel" class="img-fluid"></a></h1>
-            </div>
-    
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    <li><a href="index.html"><span>Home</span></a></li>
-                    <li><a href="#about"><span>About Me</span></a></li>
-                    <li><a href="#resume"><span>Resume</span></a></li>
-                    <li><a href="projects/index.html"><span>Projects</span></a></li>
-                    <li><a href="Contact/index.html"><span>Contact</span></a></li>
-                    <li><a href="https://github.com/PDhruv09"><span>GitHub</span></a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-text">
+        <h1>Hi, I'm <span class="highlight">Dhruv Patel</span></h1>
+        <h2>Aspiring Data Scientist @ UCSD</h2>
+        <p>
+            I build intelligent, secure, and scalable systems at the intersection of data science,
+            AI, and cybersecurity.
+        </p>
+        <div class="hero-buttons">
+            <a href="#resume"><button class="primary-btn">View Resume</button></a>
+            <a href="#projects"><button class="secondary-btn">My Work</button></a>
         </div>
-    </header>
-    -->
-
-    <!-- Home Page -->
-    <div id="home" class="home content"></div>
-
-    <!-- About Me Section -->
-    <section id="about" class="page">
-        <!--I have to create a folder called photos in Images and than copy th name ^ here-->
-        <h2 class="right">Bio</h2>
-        <div class="about-container">
-            <img src="Images/photo/Dhruv_image.JPG" class="about-image" alt="Dhruv's Image">
-            <div class="about-text">
-                <p>
-                    Hello! I'm Dhruv Patel, an aspiring data scientist with a keen interest in artificial intelligence and cybersecurity.
-                    Currently pursuing my Bachelor of Science in Data Science at the University of California, San Diego (UCSD), I am
-                    dedicated to exploring the fascinating intersections of data and technology.
-                </p>
-                <p>
-                    As the only child in my family, I've learned to be independent and self-motivated. Being part of the dynamic UCSD
-                    community, I am immersed in a rigorous program that combines theoretical knowledge with hands-on experience in
-                    cutting-edge technologies.
-                </p>
-                <p>
-                    Specializing in AI, I am passionate about leveraging the power of machine learning and data analysis to solve
-                    complex problems. Beyond my academic pursuits, my curiosity extends to the realm of cybersecurity, where I am
-                    fascinated by the challenges and solutions that contribute to a secure digital landscape.
-                </p>
-                <p>
-                    Whether I'm delving into the intricacies of data science or exploring the latest trends in cybersecurity, I am
-                    driven by a desire to make meaningful contributions to the ever-evolving field of technology.
-                </p>
-            </div>
+        </div>
+        <div class="hero-image">
+        <div class="profile-circle">
+            <img src="Images/photo/Dhruv_image.JPG" alt="Dhruv's Image">
+        </div>
         </div>
     </section>
 
-    <!-- Resume Page -->
-    <section id="resume" class="page">
-        <h1>Resume</h1>
-        <!-- Embedded PDF viewer -->
-        <div class="pdf-container">
-            <iframe src="assets/Resume/Resume of Dhruv Patel.pdf#zoom=150" width="75%" height="400px">
-                Your browser does not support PDFs. Please download the PDF to view it:
-            </iframe>
+    <!-- About Me Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-grid">
+        <div class="about-text">
+            <p>Hello! I'm Dhruv Patel, an aspiring data scientist with a keen interest in artificial intelligence and cybersecurity. Currently pursuing my Bachelor of Science in Data Science at the University of California, San Diego (UCSD), I am dedicated to exploring the fascinating intersections of data and technology.</p>
+            <p>As the only child in my family, I've learned to be independent and self-motivated. Being part of the dynamic UCSD community, I am immersed in a rigorous program that combines theoretical knowledge with hands-on experience in cutting-edge technologies.</p>
+            <p>Specializing in AI, I am passionate about leveraging the power of machine learning and data analysis to solve complex problems. Beyond my academic pursuits, my curiosity extends to the realm of cybersecurity, where I am fascinated by the challenges and solutions that contribute to a secure digital landscape.</p>
+            <p>Whether I'm delving into the intricacies of data science or exploring the latest trends in cybersecurity, I am driven by a desire to make meaningful contributions to the ever-evolving field of technology.</p>
         </div>
-        
-        <!-- Download button -->
+        <div class="about-cards">
+            <div class="info-card">
+            <h3>Education</h3>
+            <p><strong>Bachelor of Science in Data Science</strong><br>University of California, San Diego<br>2022–Present</p>
+            </div>
+            <div class="info-card">
+            <h3>Experience</h3>
+            <p><strong>Web Developer Intern</strong><br>Company Name<br>Summer 2024</p>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume">
+        <h2>Resume</h2>
+        <div class="pdf-container">
+        <iframe src="assets/Resume/Resume of Dhruv Patel.pdf#zoom=150" width="75%" height="400px">
+            Your browser does not support PDFs. Please download the PDF to view it.
+        </iframe>
+        </div>
         <div class="download-button">
-            <a href="assets/Resume/Resume of Dhruv Patel.pdf" download="Dhruv_Patel_Resume.pdf">
-                <button>Download Resume</button>
-            </a>
+        <a href="assets/Resume/Resume of Dhruv Patel.pdf" download="Dhruv_Patel_Resume.pdf">
+            <button>Download Resume</button>
+        </a>
         </div>
     </section>
 
@@ -88,10 +75,29 @@
         <div class="latest-projects"></div>
     </section>
 
-    <!-- GitHub Profile Stats -->
+    <!-- GitHub Stats Section -->
     <section id="github-stats">
         <h2>GitHub Stats</h2>
         <div id="profile-stats"></div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>My Skills</h2>
+        <div class="skills-grid">
+        <span>JavaScript</span>
+        <span>Python</span>
+        <span>HTML/CSS</span>
+        <span>React</span>
+        <span>Node.js</span>
+        <span>Tailwind CSS</span>
+        <span>MongoDB</span>
+        <span>PostgreSQL</span>
+        <span>Git</span>
+        <span>AWS</span>
+        <span>CI/CD</span>
+        <span>REST APIs</span>
+        </div>
     </section>
 
     <!-- Footer (Common Contact Information) -->
