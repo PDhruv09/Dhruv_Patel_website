@@ -4,19 +4,19 @@ html {
 }
 /* Reset & Base */
 body {
-  margin: 0;
-  padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  scroll-behavior: smooth;
+  background-color: canvas;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure full height of the viewport */
+  padding-top: 30px;
 }
 
 h1, h2, h3 {
   margin: 0 0 1rem;
 }
 
-section {
-  padding: 4rem 2rem;
-}
 a {
     color: #7acfee;
 }
@@ -48,6 +48,7 @@ a:hover {
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
+  padding:4rem 2rem;
 }
 
 .hero-text {
@@ -99,7 +100,7 @@ a:hover {
 .hero-image {
   flex: 1 1 300px;
   display: flex;
-  justify-content: center;
+  justify-content: right;
 }
 
 .profile-circle {
@@ -118,23 +119,30 @@ a:hover {
 
 /* About Section */
 
+#about h2{
+    padding-left:2rem;
+    font-size: 2rem
+}
+
 .about-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 27rem;
+  padding:2rem;
 }
 
 .about-text {
   flex: 2;
-  font-size: 1rem;
+  font-size: 1.3rem;
   line-height: 1.8;
 }
 
 .about-cards {
   flex: 1;
   display: flex;
+  padding:3rem 2rem;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .info-card {
@@ -150,9 +158,15 @@ a:hover {
 
 /* Skills Section */
 
+#skills h2{
+    padding-left:2rem;
+    font-size: 2rem
+}
+
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  padding:2rem 2rem;
   gap: 1rem;
   margin-top: 2rem;
 }
@@ -207,13 +221,13 @@ a:hover {
     color: #7acfee; /* Highlight the current page link */
 }
 
-/* Home Page */
-#home {
-    margin-top: 80px; /* Prevent content from being hidden behind header */
-    padding: 20px;
+/* Resume Page */
+
+#resume h2{
+    padding-left:2rem;
+    font-size: 2rem
 }
 
-/* Resume Page */
 .pdf-container {
     margin-top: 20px;
     text-align: center;
@@ -240,7 +254,18 @@ a:hover {
     transform: scale(1.05);
 }
 
-/* Resume Page */
+/* latest Project Page */
+
+#latest-projects h2{
+    padding-left:2rem;
+    font-size: 2rem
+}
+
+.latest-projects{
+    padding: 4rem 2rem;
+    font-size: 1.2rem;
+}
+
 .flip-card {
   background-color: transparent;
   width: 250px;
@@ -291,6 +316,15 @@ a:hover {
 
 
 /* GitHub stat card style */
+#github-stats h2{
+    padding-left:2rem;
+    font-size: 2rem
+}
+
+#profile-stats{
+    padding:4rem 2rem;
+}
+
 .github-stat-card {
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -310,7 +344,7 @@ a:hover {
   font-weight: bold;
 }
 
-/* Footer (Contact Information) */
+/* footer section */
 #footer {
     padding: 10px 10px;
     position: relative; /* Ensure footer is placed after the content */
