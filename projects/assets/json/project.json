@@ -2,7 +2,7 @@
   {
     "title": "Advance calculator",
     "year": "2023",
-    "image": "../Images/projects/calculator_latest.jpg",
+    "image": "../Images/projects/calculator_latest.png",
     "link": "https://v0-calculator-aj72z5mxf-dhruvkpatel004-8413s-projects.vercel.app/",
     "description": "A responsive web-based calculator built with Next.js, featuring basic arithmetic, scientific functions, and a clean modern UI."
   },
