@@ -59,16 +59,22 @@ function setupScales() {
 }
 
 function displayStats() {
-    const dl = d3.select('#stats').append('dl').attr('class', 'stats')
-        .append('dt').text('Total LOC')
-        .append('dd').text(data.length)
-        .append('dt').text('Total Commits')
-        .append('dd').text(commits.length)
-        .append('dt').text('Number of Files')
-        .append('dd').text(new Set(data.map(d => d.file)).size)
-        .append('dt').text('Max File Length')
-        .append('dd').text(d3.max(data, d => d.length));
-}
+    const container = d3.select('#stats');
+    container.html(''); // Clear existing content
+  
+    const stats = [
+      { label: 'Total LOC', value: data.length },
+      { label: 'Total Commits', value: commits.length },
+      { label: 'Number of Files', value: new Set(data.map(d => d.file)).size },
+      { label: 'Max File Length', value: d3.max(data, d => d.length) }
+    ];
+  
+    stats.forEach(stat => {
+      container.append('dd')
+        .attr('data-label', stat.label)
+        .text(stat.value + (stat.label === 'Total LOC' || stat.label === 'Total Commits' ? '+' : ''));
+    });
+  }
 
 function setupSlider() {
     const slider = document.getElementById('time-slider');
@@ -103,7 +109,7 @@ function createScatterplot() {
 
     svg.append("g")
         .attr("transform", `translate(0, ${height - margin.bottom})`)
-        .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat('%a %d')));
+        .call(d3.axisBottom(xScale).tickFormat(d3.timeFormat('%b %Y')));
 
     svg.append("g")
         .attr("transform", `translate(${margin.left}, 0)`)
@@ -185,26 +191,32 @@ function setupBrush() {
 
 function updateSelectionUI(selectedCommits) {
     const countText = selectedCommits.length
-        ? `${selectedCommits.length} commit${selectedCommits.length > 1 ? 's' : ''} selected`
-        : "No commits selected";
+      ? `${selectedCommits.length} commit${selectedCommits.length > 1 ? 's' : ''} selected`
+      : "No commits selected";
     document.getElementById("selection-count").textContent = countText;
-
+  
+    // Flatten lines and compute language breakdown
     const breakdown = d3.rollups(
-        selectedCommits.flatMap(d => d.lines),
-        v => v.length,
-        d => d.type
+      selectedCommits.flatMap(d => d.lines),
+      v => v.length,
+      d => d.type
     );
-
+  
     const container = document.getElementById("language-breakdown");
     container.innerHTML = '';
-
+  
     const totalLines = d3.sum(breakdown, d => d[1]);
-
+    if (totalLines === 0) return;
+  
     for (const [lang, count] of breakdown) {
-        const pct = d3.format(".1~%")(count / totalLines);
-        container.innerHTML += `
-        <dt>${lang}</dt>
-        <dd>${count} lines (${pct})</dd>
-        `;
+      const pct = Math.round((count / totalLines) * 100);
+  
+      const langDiv = document.createElement('div');
+      langDiv.className = 'lang-circle';
+      langDiv.innerHTML = `
+        <div class="circle">${pct}%</div>
+        <div class="lang-label">${lang}</div>
+      `;
+      container.appendChild(langDiv);
     }
-}
+  }

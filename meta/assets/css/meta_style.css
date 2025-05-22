@@ -206,3 +206,100 @@ circle.selected {
 .selection {
   animation: marching-ants 2s linear infinite;
 }
+
+/* Typography and layout */
+.header-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  opacity: 0.85;
+}
+
+/* Stat Cards */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+.stat-grid dt {
+  display: none;
+}
+
+.stat-grid dd {
+  background-color: #101826;
+  color: #7acfee;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.stat-grid dd::after {
+  content: attr(data-label);
+  display: block;
+  color: #ccc;
+  font-size: 0.9rem;
+  font-weight: normal;
+  margin-top: 0.25rem;
+}
+
+/* Chart Box */
+.chart-section {
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.chart-box {
+  border-radius: 10px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Language Breakdown Section */
+.language-grid {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.lang-circle {
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #223344;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  color: #7acfee;
+  font-size: 18px;
+  font-weight: bold;
+  border: 3px solid #7acfee;
+}
+
+.lang-label {
+  margin-top: 8px;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
