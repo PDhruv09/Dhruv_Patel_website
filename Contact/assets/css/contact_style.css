@@ -38,29 +38,6 @@ a:hover {
     text-decoration: none;
 }
 
-/* Header styles */
-#header {
-    padding: 10px 20px;
-    position: fixed;
-    top: 0;
-    width: calc(100% - 20px); /* 20px margin on right */
-    height: 60px;
-    z-index: 999;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-#header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-right: 20px; /* Add right margin */
-}
-
-#header .logo h1 a {
-    color: #f5f5f5; /* Off-white text */
-    text-decoration: none;
-    font-size: 24px;
-}
 
 /* Navigation Menu Styling */
 #navbar {
@@ -88,109 +65,135 @@ a:hover {
     color: #7acfee; /* Highlight the current page link */
 }
 
-/* General Form Styling */
+.contact-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 60px 40px;
+  justify-content: center;
+  gap: 40px;
+}
+
+.header-section {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.header-section h1 {
+  font-size: 3rem;
+}
+
+.subtitle {
+  font-size: 1.6rem;
+  opacity: 0.85;
+}
+
+
+/* Left Side */
+.contact-info {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+}
+
+.contact-info h1 {
+  font-size: 2.2em;
+  margin-bottom: 10px;
+}
+
+.contact-info p {
+  margin-bottom: 30px;
+  font-size: 1em;
+}
+
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background-color: #1b2738;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 1.5em;
+  color: #7acfee;
+  margin-top: 5px;
+}
+
+.details h3 {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.details p {
+  margin: 4px 0 0 0;
+  font-size: 0.95em;
+}
+
+/* Right Side */
+.contact-form {
+  flex: 1;
+  min-width: 300px;
+  max-width: 600px;
+  background-color: #1b2738;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.contact-form h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.contact-form p {
+  font-size: 0.95em;
+  margin-bottom: 25px;
+  color: #aaa;
+}
+
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
-    margin: auto;
-    border: 20px;
-    padding-top: 25px;
-    padding: 20px;
-    width: 80%; /* Adjust as needed for the desired width */
-    max-width: 600px; /* Limit the maximum width */
-    background: rgba(255, 255, 255, 0.1); /* Transparent background */
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Input and Textarea Styling */
-form label {
-    margin-bottom: 10px;
-    font-size: 16px;
-    text-align: left;
-    width: 100%;
+.form-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
-form input, form textarea {
-    margin-bottom: 20px;
-    display: block;
-    width: 100%;
-    margin-bottom: 1em;
-    padding: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    width: 100%; /* Fill available width */
-    max-width: 500px; /* Limit the width of inputs */
+.form-row input {
+  flex: 1;
 }
 
-/* Button Styling */
-form button {
-    padding: 10px 20px;
-    font: inherit;
-    font-size: 16px;
-    background-color: #7acfee;
-    color: #121212;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 150px; /* Fixed width for button */
+input, textarea {
+  background-color: #101926;
+  border: none;
+  padding: 12px 15px;
+  font-size: 1em;
+  color: #f0f0f0;
+  border-radius: 5px;
 }
 
-form button:hover {
-    background-color: #53a8cf;
+textarea {
+  resize: vertical;
+  min-height: 120px;
 }
 
-/* Center Form in Page */
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+button {
+  background-color: #7acfee;
+  color: #121212;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
 
-/* Footer (Contact Information) */
-#footer {
-    padding: 10px 10px;
-    position: relative; /* Ensure footer is placed after the content */
-    bottom: 0;
-    left: 0;
-    width: 100%; /* Full width of the page */
-    display: block; /* Keep footer block-level */
-    clear: both; /* Clear floats to prevent overlap */
-    text-align: center;
-}
-
-#footer .left {
-    float: left; /* Align contact info to the left */
-    width: 45%; /* Give it a percentage width */
-    text-align: left;
-    font-size: 15px; /* Reduce font size if needed to make it more compact */
-}
-
-#footer .right {
-    float: right; /* Align social media to the right */
-    width: 45%; /* Give it a percentage width */
-    text-align: right;
-    padding-right: 20px; /* Ensure there's space on the right side */
-    font-size: 15px; /* Reduce font size if needed to make it more compact */
-}
-
-#footer a {
-    text-decoration: none;
-}
-
-#footer a:hover {
-    text-decoration: underline;
-}
-
-/* Clear floats */
-#footer::after {
-    content: "";
-    display: table;
-    clear: both;
+button:hover {
+  background-color: #53a8cf;
 }

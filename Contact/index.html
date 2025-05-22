@@ -7,59 +7,63 @@
     <title>Contact Dhruv Patel</title>
 </head>
 <body>
-    <!--
-    <header id="header">
-        <div class="container d-flex align-items-center">
-            <div class="logo me-auto">
-                <h1><a href="index.html"><img src="Images/logo/Website_Logo.png" alt="Dhruv Patel" class="img-fluid"></a></h1>
+
+    <main class="contact-container">
+
+        <section class="header-section">
+            <h1>Get In Touch</h1>
+            <p class="subtitle">Have a question or want to work together? Feel free to reach out to me directly or use the contact form below.</p>
+        </section>
+        <!-- <h1>Get In Touch</h1>
+        <p>Have a question or want to work together? Feel free to reach out to me directly or use the contact form below.</p> -->
+    </main>
+    <main class="contact-container">
+        <section class="contact-info">
+          <div class="info-box">
+            <div class="icon">📧</div>
+            <div class="details">
+              <h3> Work Email</h3>
+              <p>dhruv.patel.imp@gmail.com</p>
             </div>
-    
-            <nav id="navbar" class="navbar order-last order-lg-0">
-                <ul>
-                    <li><a href="index.html"><span>Home</span></a></li>
-                    <li><a href="#about"><span>About Me</span></a></li>
-                    <li><a href="#resume"><span>Resume</span></a></li>
-                    <li><a href="projects/index.html"><span>Projects</span></a></li>
-                    <li><a href="Contact/index.html"><span>Contact</span></a></li>
-                    <li><a href="https://github.com/PDhruv09"><span>GitHub</span></a></li>
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav>
-        </div>
-    </header>
-    -->
-
-    <form action="mailto:dhruv.patel.imp@gmail.com" method="POST" enctype="text/plain" autocomplete="on" name="contactForm" novalidate>>
-        <label for="email">Your Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="email">
-    
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" placeholder="Enter the subject" required autocomplete="on">
-    
-        <label for="message">Message:</label>
-        <textarea id="message" name="body" rows="5" placeholder="Enter your message" required></textarea>
-    
-        <button type="submit">Send</button>
-    </form>
-    
-
-    <!-- Footer (Common Contact Information) -->
-    <footer id="footer">
-        <!-- Social Media Page -->
-        <section id="contact" class="left">
-            <p>Contact Information</p>
-            <p>Personal Email: dhruvkpatel004@gmail.com</p>
-            <p>Work Email: dhruv.patel.imp@gmail.com</p>
-            <p>Phone: +1 747-257-7194</p>
+          </div>
+          <div class="info-box">
+            <div class="icon">📧</div>
+            <div class="details">
+                <h3> Personal Email Email</h3>
+              <p>dhruv.patel.imp@gmail.com</p>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="icon">📞</div>
+            <div class="details">
+              <h3>Phone</h3>
+              <p>+1 747-257-7194</p>
+            </div>
+          </div>
+          <div class="info-box">
+            <div class="icon">📍</div>
+            <div class="details">
+              <h3>Location</h3>
+              <p>San Diego, California</p>
+            </div>
+          </div>
         </section>
-        <!-- Social Media Page -->
-        <section id="social" class="right">
-            <h4>Social Media Handles</h4>
-            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
-            <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
+    
+        <section class="contact-form">
+          <h2>Send a Message</h2>
+          <p>Fill out the form below and I'll get back to you as soon as possible.</p>
+          <form id="contactForm">
+            <div class="form-row">
+              <input type="text" name="name" placeholder="Your name" required />
+              <input type="email" name="email" placeholder="Your email" required />
+            </div>
+            <input type="text" name="subject" placeholder="Subject" required />
+            <textarea name="message" placeholder="Your message" required></textarea>
+            <button type="submit">✈ Send Message</button>
+          </form>
         </section>
+    </main>
 
-    </footer>
     <script type="module" src="../global.js"></script>
     <script type="module" src="contact.js"></script>
 

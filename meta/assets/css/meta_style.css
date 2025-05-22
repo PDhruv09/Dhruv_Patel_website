@@ -299,21 +299,23 @@ circle.selected {
   text-align: center;
 }
 
-#footer .left,
-#footer .right {
-  width: 45%;
-  font-size: 15px;
-}
-
 #footer .left {
   float: left;
+  width: 45%;
   text-align: left;
+  font-size: 15px;
 }
 
 #footer .right {
   float: right;
+  width: 45%;
   text-align: right;
   padding-right: 20px;
+  font-size: 15px;
+}
+
+#footer a {
+  text-decoration: none;
 }
 
 #footer a:hover {
