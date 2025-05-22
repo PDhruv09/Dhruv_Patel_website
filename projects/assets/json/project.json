@@ -1,37 +1,44 @@
 [
-    {
-      "title": "Does Urbanization Affect Power Outages?",
-      "year": "2024",
-      "image": "../Images/projects/urbanization_power_outage.jpg",
-      "link": "https://pdhruv09.github.io/Urbanization_PowerOutage/",
-      "description": "An analytical project for DSC 80 at UCSD analyzing major power outages in the U.S. from January 2000 to July 2016. Uses data from Purdue University's infrastructure lab."
-    },
-    {
-      "title": "Interactive General Knowledge Quiz",
-      "year": "2024",
-      "image": "../Images/projects/interactive_quiz.jpg",
-      "link": "https://pdhruv09.github.io/Interactive_Quiz/",
-      "description": "A project using a double linked list to store and traverse quiz questions, options, and answers. Demonstrates expertise in data structures and interactive applications."
-    },
-    {
-      "title": "League of Legends Win Rate Analysis",
-      "year": "2025",
-      "image": "../Images/projects/lol_analysis.jpg",
-      "link": "https://pdhruv09.github.io/lol-esports-explorable/",
-      "description": "Analyzes win rates by region using data from Oracle’s Elixir. Uses statistical analysis and hypothesis testing to evaluate competitive balance."
-    },
-    {
-      "title": "Mapping Boston Cycling Routes",
-      "year": "2025",
-      "image": "../Images/projects/mapping.jpg",
-      "link": "https://pdhruv09.github.io/Maping/",
-      "description": "A Map that plots the bike routes of Boston and Cambridge City, it also shows the trips taken by each bike stand over a day time."
-    },
-    {
-      "title": "Mouse Activity and Temperature Analysis",
-      "year": "2025",
-      "image": "../Images/projects/mouse_analysis.jpg",
-      "link": "https://pdhruv09.github.io/Mouse-Activity-Explorable/",
-      "description": "This project presents interactive visualizations that explore minute-level fluctuations in core body temperature and activity levels of mice over a 14-day period. The dataset captures daily rhythms, gender differences, and estrus cycle variations, providing a detailed view of biological and behavioral patterns."
-    }
+  {
+    "title": "Advance calculator",
+    "year": "2023",
+    "image": "../Images/projects/calculator_latest.jpg",
+    "link": "https://v0-calculator-aj72z5mxf-dhruvkpatel004-8413s-projects.vercel.app/",
+    "description": "A responsive web-based calculator built with Next.js, featuring basic arithmetic, scientific functions, and a clean modern UI."
+  },
+  {
+    "title": "Does Urbanization Affect Power Outages?",
+    "year": "2024",
+    "image": "../Images/projects/urbanization_power_outage.jpg",
+    "link": "https://pdhruv09.github.io/Urbanization_PowerOutage/",
+    "description": "An analytical project for DSC 80 at UCSD analyzing major power outages in the U.S. from January 2000 to July 2016. Uses data from Purdue University's infrastructure lab."
+  },
+  {
+    "title": "Interactive General Knowledge Quiz",
+    "year": "2024",
+    "image": "../Images/projects/interactive_quiz.jpg",
+    "link": "https://pdhruv09.github.io/Interactive_Quiz/",
+    "description": "A project using a double linked list to store and traverse quiz questions, options, and answers. Demonstrates expertise in data structures and interactive applications."
+  },
+  {
+    "title": "League of Legends Win Rate Analysis",
+    "year": "2025",
+    "image": "../Images/projects/lol_analysis.jpg",
+    "link": "https://pdhruv09.github.io/lol-esports-explorable/",
+    "description": "Analyzes win rates by region using data from Oracle’s Elixir. Uses statistical analysis and hypothesis testing to evaluate competitive balance."
+  },
+  {
+    "title": "Mapping Boston Cycling Routes",
+    "year": "2025",
+    "image": "../Images/projects/mapping.jpg",
+    "link": "https://pdhruv09.github.io/Maping/",
+    "description": "A Map that plots the bike routes of Boston and Cambridge City, it also shows the trips taken by each bike stand over a day time."
+  },
+  {
+    "title": "Mouse Activity and Temperature Analysis",
+    "year": "2025",
+    "image": "../Images/projects/mouse_analysis.jpg",
+    "link": "https://pdhruv09.github.io/Mouse-Activity-Explorable/",
+    "description": "This project presents interactive visualizations that explore minute-level fluctuations in core body temperature and activity levels of mice over a 14-day period. The dataset captures daily rhythms, gender differences, and estrus cycle variations, providing a detailed view of biological and behavioral patterns."
+  }
 ]
