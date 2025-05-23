@@ -40,5 +40,12 @@
     "image": "../Images/projects/mouse_analysis.jpg",
     "link": "https://pdhruv09.github.io/Mouse-Activity-Explorable/",
     "description": "This project presents interactive visualizations that explore minute-level fluctuations in core body temperature and activity levels of mice over a 14-day period. The dataset captures daily rhythms, gender differences, and estrus cycle variations, providing a detailed view of biological and behavioral patterns."
+  },
+  {
+    "title": "San Diego Transit Accessibility Analysis",
+    "year": "2025",
+    "image": "../Images/projects/sandiego_transit_map.png",
+    "link": "https://pdhruv09.github.io/DSC_170_GIS_SanDiego_Transit_Map/",
+    "description": "This project analyzes public transit accessibility across San Diego County using GIS and Python. Through buffer analysis, spatial difference operations, and ArcGIS Online, it identifies underserved census tracts (transit deserts) and proposes policy improvements via a StoryMap and interactive web app."
   }
 ]
