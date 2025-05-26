@@ -47,5 +47,12 @@
     "image": "../Images/projects/sandiego_transit_map.png",
     "link": "https://pdhruv09.github.io/DSC_170_GIS_SanDiego_Transit_Map/",
     "description": "This project analyzes public transit accessibility across San Diego County using GIS and Python. Through buffer analysis, spatial difference operations, and ArcGIS Online, it identifies underserved census tracts (transit deserts) and proposes policy improvements via a StoryMap and interactive web app."
+  },
+  {
+    "title": "FashionMNIST Model Comparison Dashboard",
+    "year": "2025",
+    "image": "../Images/projects/fashionmnist_dashboard.png",
+    "link": "https://your-username.streamlit.app",
+    "description": "This interactive dashboard compares MLP and CNN models trained on the FashionMNIST dataset. It visualizes test accuracy, prediction confidence, misclassified images, and confusion matrices. Built with PyTorch and Streamlit, the app allows users to explore individual predictions and evaluate model performance side by side."
   }
 ]
