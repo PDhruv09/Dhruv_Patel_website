@@ -53,6 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (enterButton) {
         enterButton.addEventListener("click", enterSite);
     }
+
+    // Add animated class to trigger CSS animations
+    setTimeout(() => {
+        document.querySelector(".center-content").classList.add("animated");
+    }, 100); // slight delay to trigger CSS animations
+
 });
 
 // Redirect to home.html
