@@ -52,7 +52,7 @@
     "title": "FashionMNIST Model Comparison Dashboard",
     "year": "2025",
     "image": "../Images/projects/fashionmnist_dashboard.png",
-    "link": "https://fashionmnist-dashboard-adikhxm9kazjbmpwxdjhgt.streamlit.app",
+    "link": "https://fashionmnist-dashboard.streamlit.app",
     "description": "This interactive dashboard compares MLP and CNN models trained on the FashionMNIST dataset. It visualizes test accuracy, prediction confidence, misclassified images, and confusion matrices. Built with PyTorch and Streamlit, the app allows users to explore individual predictions and evaluate model performance side by side."
   }
 ]

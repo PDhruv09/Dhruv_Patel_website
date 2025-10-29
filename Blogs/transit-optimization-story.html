@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Optimizing Transit in San Diego: My Map, My Mistakes</title>
+    <link rel="stylesheet" href="assets/css/blogs_style.css"/>
+</head>
+<body>
+    <main class="page">
+    <article class="post">
+    <header class="post-head">
+        <h1>Optimizing Transit in San Diego: My Map, My Mistakes</h1>
+        <p class="post-meta">Apr 20, 2025 • 9 min • <a href="./index.html?tag=GIS">GIS</a>, <a href="./index.html?tag=Optimization">Optimization</a>, <a href="./index.html?tag=Data%20Viz">Data Viz</a></p>
+    </header>
+
+
+    <section class="post-body">
+        <p><em>Intro:</em> What began as a quick side project to visualize public transport routes in San Diego turned into a deep exploration of how data, geography, and human behavior intersect. 
+        I never expected that a simple question — “Why does my bus take so long to arrive?” — would lead me down the rabbit hole of GTFS data, census tracts, and transit accessibility models.</p>
+
+        <h2>Motivation</h2>
+        <p>Every morning I’d watch buses arrive half-empty while others left passengers waiting. It seemed random — but I wanted to know if the data agreed. 
+        Could I map out whether the system itself was unbalanced, or if the patterns I saw were just coincidences?</p>
+        <p>That question pushed me to start collecting publicly available GTFS (General Transit Feed Specification) data from San Diego’s Metropolitan Transit System. 
+        At the same time, I wanted to merge it with demographic data from the U.S. Census to highlight regions underserved by transit. 
+        My goal wasn’t just to visualize routes, but to reveal where infrastructure decisions failed to meet community needs.</p>
+
+        <h2>Process & Stuck Points</h2>
+        <p>I started by cleaning and parsing GTFS files — something I thought would take a few hours. It didn’t. 
+        Timezones, inconsistent stop names, and malformed shapes turned what looked like simple CSVs into a puzzle of missing links. 
+        I learned that even public data can be messy, and that “scheduled” routes rarely align perfectly with reality.</p>
+        <p>When I tried overlaying transit stops onto census tracts in <strong>GeoPandas</strong>, 
+        my coordinate reference systems didn’t match — the map looked completely warped. 
+        It was one of those moments where everything that could go wrong did. 
+        I remember staring at a map of San Diego that looked like a melted coastline until I finally learned how to project both datasets into <code>EPSG:4326</code>.</p>
+        <p>Another frustration came with computing accessibility metrics. 
+        I wanted to quantify how far residents in each tract were from the nearest transit stop, 
+        but with tens of thousands of points, the computation was painfully slow. 
+        I experimented with spatial indexing using <code>rtree</code> and <code>shapely</code> — a small change that made the analysis run in minutes instead of hours.</p>
+
+        <h2>Breakthroughs</h2>
+        <p>The turning point came when I combined all the cleaned layers — routes, stops, census tracts, bikeways, and roads — into a single interactive map using <strong>Folium</strong> and later <strong>ArcGIS Online</strong>. 
+        For the first time, I could visually see “transit deserts” — regions of San Diego County with dense populations but poor coverage. 
+        The map didn’t just show buses and trains; it showed inequality.</p>
+        <p>That realization made the work feel personal. 
+        It wasn’t about pretty maps anymore — it was about accessibility. 
+        I started experimenting with <strong>networkx</strong> to simulate optimized routes between transit stops, 
+        trying to see whether shorter, better-connected paths could close some of the coverage gaps. 
+        Even though my optimization model was simple, the results were exciting: 
+        small reroutes could significantly reduce travel distance for underserved tracts.</p>
+        <p>I also published the final interactive map on ArcGIS Online, allowing anyone — not just data scientists — to explore it. 
+        Watching classmates and friends click around the map and ask questions made me realize that data storytelling is most powerful when it invites curiosity.</p>
+
+        <h2>Reflections</h2>
+        <p>This project changed the way I approach data. 
+        Before, I thought analysis ended with a clean dataset or a strong model. 
+        Now, I see it as a continuous loop of questioning, cleaning, visualizing, and interpreting. 
+        The hardest parts — mismatched coordinates, slow algorithms, and messy metadata — taught me the most.</p>
+        <p>If I were to revisit the project, I’d integrate real-time data streams to compare scheduled versus actual bus timings. 
+        I’d also add accessibility metrics for different modes of transport, like biking or walking. 
+        But most of all, I’d spend more time on the <em>story</em> — because numbers alone don’t convince people to change systems, stories do.</p>
+        <p>What started as curiosity about my morning bus became a lesson in the power of spatial data, patience, and perspective. 
+        It reminded me that sometimes, the best projects aren’t about proving something — they’re about learning why something matters.</p>
+    </section>
+    </article>
+    </main>
+
+
+    <!-- Footer (Common Contact Information) -->
+    <footer id="footer">
+        <!-- Social Media Page -->
+        <section id="contact" class="left">
+            <p>Contact Information</p>
+            <p>Personal Email: dhruvkpatel004@gmail.com</p>
+            <p>Work Email: dhruv.patel.imp@gmail.com</p>
+            <p>Phone: +1 747-257-7194</p>
+        </section>
+        <!-- Social Media Page -->
+        <section id="social" class="right">
+            <h4>Social Media Handles</h4>
+            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
+            <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
+        </section>
+
+    </footer>
+    <script type="module" src="../global.js"></script>
+    <script type="module" src="blogs.js" defer></script>
+</body>
+</html>

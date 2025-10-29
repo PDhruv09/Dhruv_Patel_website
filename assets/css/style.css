@@ -234,25 +234,32 @@ a:hover {
 }
 
 .download-button {
-  margin-top: 20px;
   text-align: center;
+  margin-top: 30px;
 }
 
-.download-button button {
-  background-color: #7acfee;
-  color: #1c1c1c;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
+.download-circle {
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  transition: background-color 0.3s, transform 0.3s;
 }
 
-.download-button button:hover {
-  background-color: #53a8cf;
-  transform: scale(1.05);
+@keyframes bounce {
+  0%   { transform: translate(0, 0); }
+  30%  { transform: translate(0, -20px); }
+  50%  { transform: translate(0, 0); }
+  70%  { transform: translate(0, -10px); }
+  100% { transform: translate(0, 0); }
 }
+
+@keyframes rise {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-60px); }
+}
+
+@keyframes fallWithParachute {
+  from { transform: translateY(-60px); }
+  to   { transform: translateY(20px); }
+}
+
 
 /* latest Project Page */
 

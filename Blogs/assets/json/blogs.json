@@ -1,0 +1,12 @@
+[
+    {
+        "title": "Optimizing Transit in San Diego: My Map, My Mistakes",
+        "slug": "transit-optimization-story",
+        "url": "transit-optimization-story.html",
+        "date": "2025-04-20",
+        "readingTime": "9 min",
+        "summary": "I mapped transit deserts, fought GTFS quirks, and learned why context matters more than color in visualization.",
+        "tags": ["GIS", "Optimization", "Data Viz"],
+        "thumbnail": "../Images/projects/sandiego_transit_map.png"
+    }
+]

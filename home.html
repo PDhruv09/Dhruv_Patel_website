@@ -62,9 +62,23 @@
         </iframe>
         </div>
         <div class="download-button">
-        <a href="assets/Resume/Resume of Dhruv Patel.pdf" download="Dhruv_Patel_Resume.pdf">
-            <button>Download Resume</button>
-        </a>
+            <svg id="downloadAnim" width="80" height="80" viewBox="0 0 100 100" class="download-circle" onclick="triggerDownload()">
+                <!-- Circular Button -->
+                <circle id="outerCircle" cx="50" cy="50" r="40" stroke="#7acfee" stroke-width="5" fill="none"/>
+
+                <!-- Vertical Line (initially hidden) -->
+                <line id="lineExpand" x1="50" y1="50" x2="50" y2="10" stroke="#7acfee" stroke-width="5" stroke-linecap="round" opacity="0"/>
+
+                <!-- Arrow Group -->
+                <g id="arrowGroup" transform="translate(50,50)">
+                    <path d="M0 -10 L0 10 M0 10 L-7 3 M0 10 L7 3" stroke="#7acfee" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+
+                <!-- Parachute (initially hidden) -->
+                <path id="parachute" d="M30 25 Q50 0 70 25" fill="#7acfee" opacity="0"/>
+                <line id="string1" x1="40" y1="25" x2="50" y2="40" stroke="#1c1c1c" opacity="0"/>
+                <line id="string2" x1="60" y1="25" x2="50" y2="40" stroke="#1c1c1c" opacity="0"/>
+            </svg>
         </div>
     </section>
 

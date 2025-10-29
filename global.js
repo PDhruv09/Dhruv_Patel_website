@@ -8,8 +8,15 @@ function $$(selector, context = document) {
 // ✅ Ensure scripts run only after the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", async () => {
     generateNavigation();
-    displayLatestProjects().catch(error => console.error("Error loading latest projects:", error));
-    displayGitHubStats().catch(error => console.error("Error loading GitHub stats:", error)); // ✅ Load GitHub Stats
+
+    // existing logic...
+    try {
+        await displayLatestProjects().catch(error => console.error("Error loading latest projects:", error));
+        await displayGitHubStats().catch(error => console.error("Error loading GitHub stats:", error)); // ✅ Load GitHub Stats
+    } catch (error) {
+        console.error("Error loading content:", error);
+    }
+
 });
 
 // ✅ Function to generate the navigation bar
@@ -19,6 +26,7 @@ function generateNavigation() {
         { url: "", title: "Home" },
         { url: "home.html#about", title: "About Me" },
         { url: "home.html#resume", title: "Resume" },
+        { url: "Blogs/", title: "Blogs"},
         { url: "projects/", title: "Projects" },
         { url: "meta/", title: "Meta Analysis" },
         { url: "Contact/", title: "Contact" },
@@ -201,12 +209,62 @@ async function displayLatestProjects() {
     renderProjects(getLatestProjects());
 }
 
-// ✅ Run after DOM loads
-document.addEventListener("DOMContentLoaded", async () => {
-    try {
-        await displayLatestProjects();
-        await displayGitHubStats(); // ✅ Ensure GitHub stats load correctly
-    } catch (error) {
-        console.error("Error loading content:", error);
-    }
-});
+// // ✅ Resume Download Animation
+// function triggerDownload() {
+//     const line = document.getElementById("lineExpand");
+//     const arrow = document.getElementById("arrowGroup");
+//     const downArrow = document.getElementById("downArrow");
+//     const parachute = document.getElementById("parachute");
+//     const string1 = document.getElementById("string1");
+//     const string2 = document.getElementById("string2");
+
+//     // Step 1: Expand line
+//     line.setAttribute("opacity", "1");
+//     line.setAttribute("y2", "10");
+
+//     // Step 2: Arrow bounce
+//     setTimeout(() => {
+//         arrow.style.animation = "bounce 0.6s ease";
+
+//         // Step 3: Change to up arrow
+//         setTimeout(() => {
+//             downArrow.setAttribute("d", "M -5 5 L 0 -5 L 5 5");
+
+//             // Step 4: Fly up
+//             arrow.style.animation = "";
+//             arrow.style.transition = "transform 1s ease-in";
+//             arrow.style.transform = "translate(50px, -10px)";
+
+//             // Step 5: Parachute open + fall
+//             setTimeout(() => {
+//                 parachute.setAttribute("opacity", "1");
+//                 string1.setAttribute("opacity", "1");
+//                 string2.setAttribute("opacity", "1");
+
+//                 arrow.style.transition = "transform 2s ease-out";
+//                 arrow.style.transform = "translate(50px, 20px)";
+
+//                 // Step 6: Trigger download
+//                 const link = document.createElement("a");
+//                 link.href = "assets/Resume/Resume of Dhruv Patel.pdf";
+//                 link.download = "Dhruv_Patel_Resume.pdf";
+//                 document.body.appendChild(link); // Required for Firefox
+//                 link.click();
+//                 link.remove();
+//             }, 1000);
+
+//         }, 600);
+//     }, 300);
+// }
+
+// // ✅ Ensure scripts run only after the DOM is fully loaded
+// document.addEventListener("DOMContentLoaded", async () => {
+
+//     // ✅ Bind the animated resume download
+//     const downloadAnim = document.getElementById("downloadAnim");
+//     if (downloadAnim) {
+//         downloadAnim.addEventListener("click", triggerDownload);
+//     } else {
+//         console.warn("downloadAnim SVG not found in DOM");
+//     }
+// })
