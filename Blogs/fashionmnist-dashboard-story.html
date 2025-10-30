@@ -8,38 +8,39 @@
     </head>
     <body>
         <main class="page">
-            <article class="post" data-permalink-context="/Blogs/transit-optimization-story.html">
+            <article class="post" data-permalink-context="/Blogs/fashionmnist-dashboard-story.html">
                 <header class="post-head">
-                <p class="post-meta">Apr 20, 2025 • 9 min</p>
-                <h1 id="title">Optimizing Transit in San Diego: My Map, My Mistakes</h1>
+                    <p class="post-meta">Oct 15, 2025 • 8 min</p>
+                    <h1 id="title">FashionMNIST: Building a Model Comparison Dashboard</h1>
                 </header>
-
                 <section class="post-body">
-                <p><em>Intro:</em> What began as a quick side project to visualize public transport routes in San Diego turned into a deep exploration of how data, geography, and human behavior intersect. I never expected that a simple question — “Why does my bus take so long to arrive?” — would lead me down the rabbit hole of GTFS data, census tracts, and transit accessibility models.</p>
+                    <p>This started as a weekend experiment to compare a simple MLP with a CNN on FashionMNIST. It ended up becoming a dashboard I use to sanity-check models fast: not just accuracy numbers, but <strong>where</strong> they fail, <strong>how</strong> confident they are, and <strong>why</strong> those mistakes make sense.</p>
 
-                <h2 id="motivation">Motivation</h2>
-                <p>Every morning I’d watch buses arrive half-empty while others left passengers waiting. It seemed random — but I wanted to know if the data agreed. Could I map out whether the system itself was unbalanced, or if the patterns I saw were just coincidences?</p>
-                <p>That question pushed me to start collecting publicly available GTFS data from San Diego’s Metropolitan Transit System and merge it with U.S. Census demographics. The goal wasn’t just to draw routes, but to surface where service design diverged from community needs.</p>
+                    <h2 id="motivation">Motivation</h2>
+                    <p>I’m guilty of celebrating a single metric. “Test accuracy = good ✅.” But accuracy hides interesting failures—like sandals mislabeled as sneakers with 99% confidence. I wanted a tool that forces me to look at <em>distribution</em> and <em>context</em>: class-wise performance, confusion patterns, and specific misclassifications.</p>
+                    <p>So I built a Streamlit app that puts MLP vs. CNN <em>side-by-side</em> with the same dataset, same splits, and comparable training budgets. The goal: replace “one number” with a habit of visual inspection.</p>
 
-                <h2 id="process">Process &amp; Stuck Points</h2>
-                <p><strong>Time &amp; shape issues.</strong> Timezones, inconsistent stop names, and malformed shapes turned “simple CSVs” into a puzzle. Scheduled times rarely aligned with reality.</p>
-                <p><strong>CRS mismatch.</strong> My first overlays in GeoPandas were warped because layers weren’t in the same projection. Reprojecting to <code>EPSG:4326</code> fixed the map that looked like a melted coastline.</p>
-                <p><strong>Performance.</strong> Computing nearest-stop accessibility across tens of thousands of points was slow. Spatial indexing with <code>rtree</code> + <code>shapely</code> dropped runtimes from hours to minutes.</p>
+                    <h2 id="process">Process &amp; Stuck Points</h2>
+                    <p><strong>Training parity.</strong> Keeping comparisons fair was harder than expected. I standardized transforms, seeds, batch sizes, and epoch counts—and logged everything. Early runs looked “off” until I realized my MLP was evaluated on normalized inputs while the CNN used augmented images. Fixing that alone shifted the story.</p>
+                    <p><strong>Confidence calibration.</strong> Raw softmax scores looked confident even when wrong. I added reliability curves and top-k confidence histograms. That surfaced a pattern: the CNN was <em>better</em> but also <em>bolder</em>, which matters if the model is part of a decision pipeline.</p>
+                    <p><strong>Interactivity at scale.</strong> Rendering many misclassified tiles can be slow. Caching predictions (with a hash of model + params) and precomputing confusion matrices made the app snappy enough to explore.</p>
 
-                <h2 id="breakthroughs">Breakthroughs</h2>
-                <p><strong>Layered view of access.</strong> Combining routes, stops, census tracts, bikeways, and roads in Folium/ArcGIS Online made “transit deserts” visible—dense areas with poor coverage.</p>
-                <p><strong>Simple network experiments.</strong> With <code>networkx</code>, I tested small reroutes between stops. Even modest changes reduced travel distance for underserved tracts.</p>
-                <p><strong>Shareable exploration.</strong> Publishing to ArcGIS Online let non-technical friends click around and ask better questions—data storytelling worked when the map invited curiosity.</p>
+                    <h2 id="breakthroughs">Breakthroughs</h2>
+                    <p><strong>Misclassifications are the gold.</strong> The dashboard highlights the <em>most confident wrong</em> predictions first. That’s where you learn: boots vs. sneakers, shirts vs. T-shirts. I also added a “contrast view” that shows where MLP fails but CNN succeeds (and vice-versa). That made the upgrade decision obvious.</p>
+                    <p><strong>Human-readable insights.</strong> I annotate the confusion matrix cells with short notes (e.g., “texture overlap” or “silhouette ambiguity”). It nudges me to think in terms of features—not just labels.</p>
+                    <p><strong>Shareable state.</strong> App URLs encode filters (class, threshold, model). Sending a link to “CNN, class=sandal, conf&gt;0.9, misclassified only” made discussions with friends way more concrete.</p>
 
-                <h2 id="reflections">Reflections</h2>
-                <p>This project shifted my process from “clean → model → done” to a loop of questioning, cleaning, visualizing, and interpreting. The headaches—CRS mismatches, slow queries, messy metadata—were the real lessons.</p>
-                <p>Next iterations: compare scheduled vs. actual arrival times, add walking/biking accessibility layers, and tell the story more intentionally—because numbers don’t change systems, stories do.</p>
+                    <h2 id="reflections">Reflections</h2>
+                    <p>This project changed my ML workflow. I now ship a <em>viewing tool</em> with a model—because inspection beats intuition. If I extend this, I’ll add Grad-CAMs, per-class PR curves, and a small active-learning loop to relabel the messiest tiles.</p>
+                    <p>The biggest lesson? If your evaluation doesn’t change your next action, it’s not evaluation—it’s decoration.</p>
 
-                <aside class="post-cta">
-                    <a class="btn" href="https://pdhruv09.github.io/DSC_170_GIS_SanDiego_Transit_Map/" target="_blank" rel="noopener">Open the Interactive Map</a>
-                    <a class="btn secondary" href="./index.html">Back to Blog</a>
-                </aside>
+                    <aside class="post-cta">
+                        <a class="btn" href="https://pdhruv09.github.io/DSC_170_GIS_SanDiego_Transit_Map/" target="_blank" rel="noopener">View the Interactive Map</a>
+                        <a class="btn secondary" href="../projects/index.html">See All Projects</a>
+                    </aside>
                 </section>
+                <!-- Back link -->
+                <p><a href="./index.html">← Back to Blog</a></p>
             </article>
         </main>
         <!-- Footer (Common Contact Information) -->
