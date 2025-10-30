@@ -6,7 +6,17 @@
         "date": "2025-04-20",
         "readingTime": "9 min",
         "summary": "I mapped transit deserts, fought GTFS quirks, and learned why context matters more than color in visualization.",
-        "tags": ["GIS", "Optimization", "Data Viz"],
+        "tags": ["GIS", "Optimization", "Data visualization"],
         "thumbnail": "../Images/projects/sandiego_transit_map.png"
+    },
+    {
+        "title": "FashionMNIST: Building a Model Comparison Dashboard",
+        "slug": "fashionmnist-dashboard-story",
+        "url": "fashionmnist-dashboard-story.html",
+        "date": "2025-10-15",
+        "readingTime": "8 min",
+        "summary": "Why I built a Streamlit dashboard to compare MLP vs. CNN on FashionMNIST, what broke along the way, and how I made evaluation actually useful.",
+        "tags": ["ML", "Computer Vision", "Dashboard"],
+        "thumbnail": "../Images/projects/fashionmnist_dashboard.png"
     }
 ]

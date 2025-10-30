@@ -8,62 +8,94 @@
 </head>
 <body>
     <main class="page">
-    <article class="post">
-    <header class="post-head">
-        <h1>Optimizing Transit in San Diego: My Map, My Mistakes</h1>
-        <p class="post-meta">Apr 20, 2025 • 9 min • <a href="./index.html?tag=GIS">GIS</a>, <a href="./index.html?tag=Optimization">Optimization</a>, <a href="./index.html?tag=Data%20Viz">Data Viz</a></p>
-    </header>
+        <article class="post" data-permalink-context="/Blogs/transit-optimization-story.html">
+            <header class="post-head">
+                <p class="post-meta">Apr 20, 2025 • 9 min</p>
+                <h1 id="title">Optimizing Transit in San Diego: My Map, My Mistakes</h1>
+            </header>
 
 
-    <section class="post-body">
-        <p><em>Intro:</em> What began as a quick side project to visualize public transport routes in San Diego turned into a deep exploration of how data, geography, and human behavior intersect. 
-        I never expected that a simple question — “Why does my bus take so long to arrive?” — would lead me down the rabbit hole of GTFS data, census tracts, and transit accessibility models.</p>
+            <section class="post-body">
+                <p>What began as a quick side project to visualize public transport routes in San Diego turned into a deep exploration of how data, geography, and human behavior intersect. 
+                I never expected that a simple question — “Why does my bus take so long to arrive?” — would lead me down the rabbit hole of GTFS data, census tracts, and transit accessibility models.</p>
 
-        <h2>Motivation</h2>
-        <p>Every morning I’d watch buses arrive half-empty while others left passengers waiting. It seemed random — but I wanted to know if the data agreed. 
-        Could I map out whether the system itself was unbalanced, or if the patterns I saw were just coincidences?</p>
-        <p>That question pushed me to start collecting publicly available GTFS (General Transit Feed Specification) data from San Diego’s Metropolitan Transit System. 
-        At the same time, I wanted to merge it with demographic data from the U.S. Census to highlight regions underserved by transit. 
-        My goal wasn’t just to visualize routes, but to reveal where infrastructure decisions failed to meet community needs.</p>
+                <h3>Motication behind the project</h3>
+                <p>Every monring I'd watch buses arrive half-empty while other left passengers waiting. It seemed random — but I wanted to know if the data agreed.
+                    Could I amp out whether they system itself was unblanced, or if the patterns I saw were hyst coincidences?</p>
+                <p>That question pushed me to start collecting publicly available GTFS (General Transit Feed Specification) data from San Diego’s Metropolitan Transit System. 
+                At the same time, I wanted to merge it with demographic data from the U.S. Census to highlight regions underserved by transit. 
+                My goal wasn’t just to visualize routes, but to reveal where infrastructure decisions failed to meet community needs.</p>
 
-        <h2>Process & Stuck Points</h2>
-        <p>I started by cleaning and parsing GTFS files — something I thought would take a few hours. It didn’t. 
-        Timezones, inconsistent stop names, and malformed shapes turned what looked like simple CSVs into a puzzle of missing links. 
-        I learned that even public data can be messy, and that “scheduled” routes rarely align perfectly with reality.</p>
-        <p>When I tried overlaying transit stops onto census tracts in <strong>GeoPandas</strong>, 
-        my coordinate reference systems didn’t match — the map looked completely warped. 
-        It was one of those moments where everything that could go wrong did. 
-        I remember staring at a map of San Diego that looked like a melted coastline until I finally learned how to project both datasets into <code>EPSG:4326</code>.</p>
-        <p>Another frustration came with computing accessibility metrics. 
-        I wanted to quantify how far residents in each tract were from the nearest transit stop, 
-        but with tens of thousands of points, the computation was painfully slow. 
-        I experimented with spatial indexing using <code>rtree</code> and <code>shapely</code> — a small change that made the analysis run in minutes instead of hours.</p>
+                <h3>How Hard Was It to Get the Data?</h3>
+                <p>
+                When I started searching for publicly available datasets, I quickly realized that finding the right sources would be one of the toughest parts. I needed two main components — the <strong>GTFS (General Transit Feed Specification)</strong> data for routes and stops, and the <strong>U.S. Census</strong> demographic data to analyze population distribution. My first goal was to get the demographic data so I could map it alongside transit accessibility.
+                </p>
+                <p>
+                I began with the <a href="https://www.data.census.gov/" target="_blank" rel="noopener">U.S. Census Bureau</a> website, focusing on <strong>San Diego County</strong> — not just the city — since I wanted county-wide coverage. Once there, I was greeted by a maze of what the Census Bureau calls “profiles.” At first, the structure and terminology were confusing — I wasn’t sure whether “profiles” meant summary tables, shapefiles, or something else entirely.
+                </p>
+                <p>
+                After a bit of trial and error, I realized that each profile corresponds to a different dataset type — population, housing, or economic — and that I needed to extract the <em>geospatial</em> component for mapping. But each of those was stored separately, which meant I’d have to merge multiple datasets just to get a complete demographic picture.
+                </p>
+                <p>
+                While researching how to join them properly, I discovered that the <a href="https://geo.sandag.org/portal/apps/experiencebuilder/experience/?id=fad9e9c038c84f799b5378e4cc3ed068&page=Home#data_s=id%3AdataSource_1-0%3A227" target="_blank" rel="noopener">San Diego Regional Data Warehouse</a> had already done this work. Their portal provided a unified dataset containing the demographic and geographic variables I needed — saving me hours of manual merging.
+                </p>
+                <figure>
+                <img src="/Images/San_Diego_transit/Data_Dashboard.png" alt="Data Dashboard - SanGIS SANDAG">
+                <figcaption>Screenshot of the San Diego Regional Data Warehouse dashboard where I accessed GTFS and demographic layers.</figcaption>
+                </figure>
+                <p>
+                The best part was that the Data Warehouse also hosted the GTFS data for both routes and stops. In San Diego, two agencies operate the public transit system: <strong>MTS (Metropolitan Transit System)</strong> and <strong>NCTD (North County Transit District)</strong>. Instead of downloading data from each agency separately, the warehouse provided a combined feed containing both — an enormous time saver.
+                </p>
+                <p>
+                Downloading the data turned out to be the easy part. The real challenge came afterward — understanding the structure, validating the attributes, and cleaning inconsistencies. Navigating multiple layers of data taught me that even when you find the “perfect” dataset, the real work starts when you try to make it trustworthy.
+                </p>
 
-        <h2>Breakthroughs</h2>
-        <p>The turning point came when I combined all the cleaned layers — routes, stops, census tracts, bikeways, and roads — into a single interactive map using <strong>Folium</strong> and later <strong>ArcGIS Online</strong>. 
-        For the first time, I could visually see “transit deserts” — regions of San Diego County with dense populations but poor coverage. 
-        The map didn’t just show buses and trains; it showed inequality.</p>
-        <p>That realization made the work feel personal. 
-        It wasn’t about pretty maps anymore — it was about accessibility. 
-        I started experimenting with <strong>networkx</strong> to simulate optimized routes between transit stops, 
-        trying to see whether shorter, better-connected paths could close some of the coverage gaps. 
-        Even though my optimization model was simple, the results were exciting: 
-        small reroutes could significantly reduce travel distance for underserved tracts.</p>
-        <p>I also published the final interactive map on ArcGIS Online, allowing anyone — not just data scientists — to explore it. 
-        Watching classmates and friends click around the map and ask questions made me realize that data storytelling is most powerful when it invites curiosity.</p>
+                <h3>Process & Stuck Points</h3>
+                <p>I started by cleaning and parsing GTFS files — something I thought would take a few hours. It didn’t. 
+                Timezones, inconsistent stop names, and malformed shapes turned what looked like simple CSVs into a puzzle of missing links. 
+                I learned that even public data can be messy, and that “scheduled” routes rarely align perfectly with reality.</p>
+                <p>When I tried overlaying transit stops onto census tracts in <strong>GeoPandas</strong>, 
+                my coordinate reference systems didn’t match — the map looked completely warped. 
+                It was one of those moments where everything that could go wrong did. 
+                I remember staring at a map of San Diego that looked like a melted coastline until I finally learned how to project both datasets into <code>EPSG:4326</code>.</p>
+                <p>Another frustration came with computing accessibility metrics. 
+                I wanted to quantify how far residents in each tract were from the nearest transit stop, 
+                but with tens of thousands of points, the computation was painfully slow. 
+                I experimented with spatial indexing using <code>rtree</code> and <code>shapely</code> — a small change that made the analysis run in minutes instead of hours.</p>
 
-        <h2>Reflections</h2>
-        <p>This project changed the way I approach data. 
-        Before, I thought analysis ended with a clean dataset or a strong model. 
-        Now, I see it as a continuous loop of questioning, cleaning, visualizing, and interpreting. 
-        The hardest parts — mismatched coordinates, slow algorithms, and messy metadata — taught me the most.</p>
-        <p>If I were to revisit the project, I’d integrate real-time data streams to compare scheduled versus actual bus timings. 
-        I’d also add accessibility metrics for different modes of transport, like biking or walking. 
-        But most of all, I’d spend more time on the <em>story</em> — because numbers alone don’t convince people to change systems, stories do.</p>
-        <p>What started as curiosity about my morning bus became a lesson in the power of spatial data, patience, and perspective. 
-        It reminded me that sometimes, the best projects aren’t about proving something — they’re about learning why something matters.</p>
-    </section>
-    </article>
+                <h3>Breakthroughs</h3>
+                <p>The turning point came when I combined all the cleaned layers — routes, stops, census tracts, bikeways, and roads — into a single interactive map using <strong>Folium</strong> and later <strong>ArcGIS Online</strong>. 
+                For the first time, I could visually see “transit deserts” — regions of San Diego County with dense populations but poor coverage. 
+                The map didn’t just show buses and trains; it showed inequality.</p>
+                <p>That realization made the work feel personal. 
+                It wasn’t about pretty maps anymore — it was about accessibility. 
+                I started experimenting with <strong>networkx</strong> to simulate optimized routes between transit stops, 
+                trying to see whether shorter, better-connected paths could close some of the coverage gaps. 
+                Even though my optimization model was simple, the results were exciting: 
+                small reroutes could significantly reduce travel distance for underserved tracts.</p>
+                <p>I also published the final interactive map on ArcGIS Online, allowing anyone — not just data scientists — to explore it. 
+                Watching classmates and friends click around the map and ask questions made me realize that data storytelling is most powerful when it invites curiosity.</p>
+                <iframe src="https://ucsdonline.maps.arcgis.com/apps/webappviewer/index.html?id=6ab51c5b08f04c8ba16018184200f1bc" allowfullscreen></iframe>
+
+                <h3>Reflections</h3>
+                <p>This project changed the way I approach data. 
+                Before, I thought analysis ended with a clean dataset or a strong model. 
+                Now, I see it as a continuous loop of questioning, cleaning, visualizing, and interpreting. 
+                The hardest parts — mismatched coordinates, slow algorithms, and messy metadata — taught me the most.</p>
+                <p>If I were to revisit the project, I’d integrate real-time data streams to compare scheduled versus actual bus timings. 
+                I’d also add accessibility metrics for different modes of transport, like biking or walking. 
+                But most of all, I’d spend more time on the <em>story</em> — because numbers alone don’t convince people to change systems, stories do.</p>
+                <p>What started as curiosity about my morning bus became a lesson in the power of spatial data, patience, and perspective. 
+                It reminded me that sometimes, the best projects aren’t about proving something — they’re about learning why something matters.</p>
+                <!-- Project CTAs -->
+                <aside class="post-cta">
+                <a class="btn" href="https://pdhruv09.github.io/DSC_170_GIS_SanDiego_Transit_Map/" target="_blank" rel="noopener">View the Interactive Map</a>
+                <a class="btn secondary" href="../projects/index.html">See All Projects</a>
+                </aside>
+            </section>
+            <!-- Back link -->
+            <p><a href="./index.html">← Back to Blog</a></p>
+        </article>
     </main>
 
 

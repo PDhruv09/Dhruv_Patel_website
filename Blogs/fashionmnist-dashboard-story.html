@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Optimizing Transit in San Diego: My Map, My Mistakes</title>
+        <link rel="stylesheet" href="assets/css/blogs_style.css"/>
+    </head>
+    <body>
+        <main class="page">
+            <article class="post" data-permalink-context="/Blogs/transit-optimization-story.html">
+                <header class="post-head">
+                <p class="post-meta">Apr 20, 2025 • 9 min</p>
+                <h1 id="title">Optimizing Transit in San Diego: My Map, My Mistakes</h1>
+                </header>
+
+                <section class="post-body">
+                <p><em>Intro:</em> What began as a quick side project to visualize public transport routes in San Diego turned into a deep exploration of how data, geography, and human behavior intersect. I never expected that a simple question — “Why does my bus take so long to arrive?” — would lead me down the rabbit hole of GTFS data, census tracts, and transit accessibility models.</p>
+
+                <h2 id="motivation">Motivation</h2>
+                <p>Every morning I’d watch buses arrive half-empty while others left passengers waiting. It seemed random — but I wanted to know if the data agreed. Could I map out whether the system itself was unbalanced, or if the patterns I saw were just coincidences?</p>
+                <p>That question pushed me to start collecting publicly available GTFS data from San Diego’s Metropolitan Transit System and merge it with U.S. Census demographics. The goal wasn’t just to draw routes, but to surface where service design diverged from community needs.</p>
+
+                <h2 id="process">Process &amp; Stuck Points</h2>
+                <p><strong>Time &amp; shape issues.</strong> Timezones, inconsistent stop names, and malformed shapes turned “simple CSVs” into a puzzle. Scheduled times rarely aligned with reality.</p>
+                <p><strong>CRS mismatch.</strong> My first overlays in GeoPandas were warped because layers weren’t in the same projection. Reprojecting to <code>EPSG:4326</code> fixed the map that looked like a melted coastline.</p>
+                <p><strong>Performance.</strong> Computing nearest-stop accessibility across tens of thousands of points was slow. Spatial indexing with <code>rtree</code> + <code>shapely</code> dropped runtimes from hours to minutes.</p>
+
+                <h2 id="breakthroughs">Breakthroughs</h2>
+                <p><strong>Layered view of access.</strong> Combining routes, stops, census tracts, bikeways, and roads in Folium/ArcGIS Online made “transit deserts” visible—dense areas with poor coverage.</p>
+                <p><strong>Simple network experiments.</strong> With <code>networkx</code>, I tested small reroutes between stops. Even modest changes reduced travel distance for underserved tracts.</p>
+                <p><strong>Shareable exploration.</strong> Publishing to ArcGIS Online let non-technical friends click around and ask better questions—data storytelling worked when the map invited curiosity.</p>
+
+                <h2 id="reflections">Reflections</h2>
+                <p>This project shifted my process from “clean → model → done” to a loop of questioning, cleaning, visualizing, and interpreting. The headaches—CRS mismatches, slow queries, messy metadata—were the real lessons.</p>
+                <p>Next iterations: compare scheduled vs. actual arrival times, add walking/biking accessibility layers, and tell the story more intentionally—because numbers don’t change systems, stories do.</p>
+
+                <aside class="post-cta">
+                    <a class="btn" href="https://pdhruv09.github.io/DSC_170_GIS_SanDiego_Transit_Map/" target="_blank" rel="noopener">Open the Interactive Map</a>
+                    <a class="btn secondary" href="./index.html">Back to Blog</a>
+                </aside>
+                </section>
+            </article>
+        </main>
+        <!-- Footer (Common Contact Information) -->
+        <footer id="footer">
+            <!-- Social Media Page -->
+            <section id="contact" class="left">
+                <p>Contact Information</p>
+                <p>Personal Email: dhruvkpatel004@gmail.com</p>
+                <p>Work Email: dhruv.patel.imp@gmail.com</p>
+                <p>Phone: +1 747-257-7194</p>
+            </section>
+            <!-- Social Media Page -->
+            <section id="social" class="right">
+                <h4>Social Media Handles</h4>
+                <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
+                <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
+            </section>
+
+        </footer>
+        <script type="module" src="../global.js"></script>
+        <script type="module" src="blogs.js" defer></script>
+
+    </body>
+</html>
