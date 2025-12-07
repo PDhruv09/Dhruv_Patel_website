@@ -2,65 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Meta analysis of Dhruv Patel's codebase - explore commit patterns, coding times, and language distribution.">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://d3js.org">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/meta_style.css">
+    
+    <!-- D3.js -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <title>Meta Analysis</title>
+    
+    <title>Codebase Analysis - Dhruv Patel</title>
 </head>
 <body>
     <main class="page">
+        <!-- Header Section -->
         <section class="header-section">
-          <h1>Codebase Analysis</h1>
-          <p class="subtitle">Explore statistics and insights about my codebase and development patterns.</p>
+            <h1>Codebase Analysis</h1>
+            <p class="subtitle">Explore statistics and insights about my codebase and development patterns.</p>
         </section>
     
-        <section class="stat-grid" id="stats"></section>
+        <!-- Stats Grid -->
+        <section class="stat-grid" id="stats" role="list" aria-label="Code statistics"></section>
     
+        <!-- Chart Section -->
         <section class="chart-section">
-          <h2>Commits by Time of Day</h2>
-          <p class="section-desc">Analysis of when code commits are made throughout the day</p>
-          <input type="range" id="time-slider" min="0" max="100" value="100" />
-          <p id="selected-time"></p>
-          <div id="chart" class="chart-box"></div>
-          <p id="selection-count">No commits selected</p>
+            <h2>Commits by Time of Day</h2>
+            <p class="section-desc">Analysis of when code commits are made throughout the day</p>
+            
+            <label for="time-slider" class="sr-only">Filter commits by date</label>
+            <input 
+                type="range" 
+                id="time-slider" 
+                min="0" 
+                max="100" 
+                value="100"
+                aria-label="Filter commits by date range"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="100" />
+            
+            <p id="selected-time" aria-live="polite">Showing all commits</p>
+            
+            <div id="chart" class="chart-box" role="img" aria-label="Scatter plot of commits by date and time"></div>
+            
+            <p id="selection-count" aria-live="polite">No commits selected</p>
         </section>
     
+        <!-- Language Breakdown Section -->
         <section class="language-section">
-          <h2>Language Breakdown</h2>
-          <p class="section-desc">Distribution of programming languages used across projects</p>
-          <div id="language-breakdown" class="language-grid"></div>
+            <h2>Language Breakdown</h2>
+            <p class="section-desc">Distribution of programming languages used across projects</p>
+            <div id="language-breakdown" class="language-grid" role="list" aria-live="polite"></div>
         </section>
     
-        <dl id="commit-tooltip" class="info tooltip" hidden>
-          <dt>Commit</dt>
-          <dd><a href="" id="commit-link" target="_blank"></a></dd>
-          <dt>Date</dt>
-          <dd id="commit-date"></dd>
-          <dt>Author</dt>
-          <dd id="commit-author"></dd>
-          <dt>Lines Edited</dt>
-          <dd id="commit-lines"></dd>
+        <!-- Tooltip -->
+        <dl id="commit-tooltip" class="info tooltip" hidden role="tooltip">
+            <dt>Commit</dt>
+            <dd><a href="" id="commit-link" target="_blank" rel="noopener noreferrer"></a></dd>
+            <dt>Date</dt>
+            <dd id="commit-date"></dd>
+            <dt>Author</dt>
+            <dd id="commit-author"></dd>
+            <dt>Lines Edited</dt>
+            <dd id="commit-lines"></dd>
         </dl>
     </main>
 
-    <!-- Footer (Common Contact Information) -->
-    <footer id="footer">
-        <!-- Social Media Page -->
+    <!-- Footer -->
+    <footer id="footer" role="contentinfo">
         <section id="contact" class="left">
-            <p>Contact Information</p>
-            <p>Personal Email: dhruvkpatel004@gmail.com</p>
-            <p>Work Email: dhruv.patel.imp@gmail.com</p>
-            <p>Phone: +1 747-257-7194</p>
+            <h4>Contact Information</h4>
+            <p><strong>Personal Email:</strong> <a href="mailto:dhruvkpatel004@gmail.com">dhruvkpatel004@gmail.com</a></p>
+            <p><strong>Work Email:</strong> <a href="mailto:dhruv.patel.imp@gmail.com">dhruv.patel.imp@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+17472577194">+1 (747) 257-7194</a></p>
         </section>
-        <!-- Social Media Page -->
+        
         <section id="social" class="right">
-            <h4>Social Media Handles</h4>
-            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
-            <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
+            <h4>Connect With Me</h4>
+            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <p><a href="https://github.com/PDhruv09" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+            <p><a href="https://www.instagram.com/dhruvkpatel004" target="_blank" rel="noopener noreferrer">Instagram</a></p>
         </section>
-
     </footer>
     
+    <!-- Scripts -->
     <script src="main.js"></script>
     <script src="../global.js"></script>
 </body>

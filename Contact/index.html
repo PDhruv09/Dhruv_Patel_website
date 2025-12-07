@@ -2,70 +2,150 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link  href="assets/css/contact_style.css" rel="stylesheet">
-    <title>Contact Dhruv Patel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Get in touch with Dhruv Patel - Data Scientist and AI enthusiast. Send a message or reach out via email, phone, or social media.">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Stylesheets -->
+    <link href="assets/css/contact_style.css" rel="stylesheet">
+    
+    <title>Contact - Dhruv Patel</title>
 </head>
 <body>
 
-    <main class="contact-container">
-
-        <section class="header-section">
-            <h1>Get In Touch</h1>
-            <p class="subtitle">Have a question or want to work together? Feel free to reach out to me directly or use the contact form below.</p>
-        </section>
-        <!-- <h1>Get In Touch</h1>
-        <p>Have a question or want to work together? Feel free to reach out to me directly or use the contact form below.</p> -->
+    <main>
+        <!-- Header Section -->
+        <div class="contact-container">
+            <section class="header-section">
+                <h1>Get In Touch</h1>
+                <p class="subtitle">Have a question or want to work together? Feel free to reach out to me directly or use the contact form below.</p>
+            </section>
+        </div>
+        
+        <!-- Contact Info & Form Container -->
+        <div class="contact-container">
+            <!-- Contact Information -->
+            <section class="contact-info" aria-label="Contact information">
+                <div class="info-box">
+                    <div class="icon" aria-hidden="true">📧</div>
+                    <div class="details">
+                        <h3>Work Email</h3>
+                        <p><a href="mailto:dhruv.patel.imp@gmail.com">dhruv.patel.imp@gmail.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="icon" aria-hidden="true">📧</div>
+                    <div class="details">
+                        <h3>Personal Email</h3>
+                        <p><a href="mailto:dhruvkpatel004@gmail.com">dhruvkpatel004@gmail.com</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="icon" aria-hidden="true">📞</div>
+                    <div class="details">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+17472577194">+1 (747) 257-7194</a></p>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <div class="icon" aria-hidden="true">📍</div>
+                    <div class="details">
+                        <h3>Location</h3>
+                        <p>San Diego, California, USA</p>
+                    </div>
+                </div>
+            </section>
+        
+            <!-- Contact Form -->
+            <section class="contact-form" aria-label="Contact form">
+                <h2>Send a Message</h2>
+                <p>Fill out the form below and I'll get back to you as soon as possible.</p>
+                
+                <form id="contactForm" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" class="sr-only">Your Name</label>
+                            <input 
+                                type="text" 
+                                id="name"
+                                name="name" 
+                                placeholder="Your name" 
+                                required
+                                aria-required="true"
+                                aria-invalid="false"
+                                autocomplete="name" />
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="sr-only">Your Email</label>
+                            <input 
+                                type="email" 
+                                id="email"
+                                name="email" 
+                                placeholder="Your email" 
+                                required
+                                aria-required="true"
+                                aria-invalid="false"
+                                autocomplete="email" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject" class="sr-only">Subject</label>
+                        <input 
+                            type="text" 
+                            id="subject"
+                            name="subject" 
+                            placeholder="Subject" 
+                            required
+                            aria-required="true"
+                            aria-invalid="false" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="sr-only">Your Message</label>
+                        <textarea 
+                            id="message"
+                            name="message" 
+                            placeholder="Your message" 
+                            required
+                            aria-required="true"
+                            aria-invalid="false"></textarea>
+                    </div>
+                    
+                    <button type="submit" aria-label="Send message">
+                        <span>✈️ Send Message</span>
+                    </button>
+                </form>
+            </section>
+        </div>
     </main>
-    <main class="contact-container">
-        <section class="contact-info">
-          <div class="info-box">
-            <div class="icon">📧</div>
-            <div class="details">
-              <h3> Work Email</h3>
-              <p>dhruv.patel.imp@gmail.com</p>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="icon">📧</div>
-            <div class="details">
-                <h3> Personal Email</h3>
-              <p>dhruvkpatel004@gmail.com</p>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="icon">📞</div>
-            <div class="details">
-              <h3>Phone</h3>
-              <p>+1 747-257-7194</p>
-            </div>
-          </div>
-          <div class="info-box">
-            <div class="icon">📍</div>
-            <div class="details">
-              <h3>Location</h3>
-              <p>San Diego, California</p>
-            </div>
-          </div>
-        </section>
-    
-        <section class="contact-form">
-          <h2>Send a Message</h2>
-          <p>Fill out the form below and I'll get back to you as soon as possible.</p>
-          <form id="contactForm">
-            <div class="form-row">
-              <input type="text" name="name" placeholder="Your name" required />
-              <input type="email" name="email" placeholder="Your email" required />
-            </div>
-            <input type="text" name="subject" placeholder="Subject" required />
-            <textarea name="message" placeholder="Your message" required></textarea>
-            <button type="submit">✈ Send Message</button>
-          </form>
-        </section>
-    </main>
 
+    <!-- Scripts -->
     <script type="module" src="../global.js"></script>
     <script type="module" src="contact.js"></script>
 
+    <!-- Screen reader only label class -->
+    <style>
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
 </body>
 </html>

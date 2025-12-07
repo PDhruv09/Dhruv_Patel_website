@@ -2,67 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blog – Dhruv Patel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Dhruv Patel's blog - Stories behind the projects, lessons learned, and insights from data science and AI work." />
+    <meta name="theme-color" content="#faf8f5">
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="assets/css/blogs_style.css" />
-    <!-- If you want to inherit some global styles, you can also include your main style: -->
-    <!-- <link rel="stylesheet" href="../style.css" /> -->
+    
+    <title>Blog – Dhruv Patel</title>
 </head>
 <body>
     <main class="page">
+        <!-- Header -->
         <section class="header-section">
             <h1>Blog</h1>
             <p class="subtitle">Stories behind my projects — what I tried, learned, and felt.</p>
         </section>
 
-
         <!-- Search + Tags -->
         <section class="filters">
             <div class="search-wrap" role="search">
-                <label for="search-input" class="sr-only">Search posts</label>
-                <input id="search-input" type="search" placeholder="Search posts (title & summary)…" autocomplete="off" />
-                <button id="clear-search" aria-label="Clear search" title="Clear search">×</button>
+                <label for="search-input" class="sr-only">Search posts by title or summary</label>
+                <input 
+                    id="search-input" 
+                    type="search" 
+                    placeholder="Search posts (title & summary)…" 
+                    autocomplete="off"
+                    aria-label="Search blog posts" />
+                <button 
+                    id="clear-search" 
+                    aria-label="Clear search" 
+                    title="Clear search">×</button>
             </div>
-
 
             <div class="tags-wrap">
                 <div class="tags-header">
                     <h2>Browse by tag</h2>
-                    <button id="clear-tag" class="tag-clear" hidden>Clear tag</button>
+                    <button 
+                        id="clear-tag" 
+                        class="tag-clear" 
+                        hidden
+                        aria-label="Clear tag filter">Clear tag</button>
                 </div>
-                <div id="tags" class="tags"></div>
+                <div 
+                    id="tags" 
+                    class="tags" 
+                    role="group" 
+                    aria-label="Filter posts by tag"></div>
             </div>
         </section>
 
-
         <!-- Grid -->
         <section class="grid-wrap">
-            <div id="grid" class="grid" aria-live="polite"></div>
-            <div id="empty-state" class="empty-state" hidden>
-                <p>No posts match your filter.</p>
+            <div 
+                id="grid" 
+                class="grid" 
+                role="list"
+                aria-live="polite"
+                aria-busy="false"></div>
+            <div 
+                id="empty-state" 
+                class="empty-state" 
+                role="status"
+                hidden>
+                <p>No posts match your filter. Try a different search or tag.</p>
             </div>
         </section>
     </main>
 
-
-    <!-- Footer (Common Contact Information) -->
-    <footer id="footer">
-        <!-- Social Media Page -->
+    <!-- Footer -->
+    <footer id="footer" role="contentinfo">
         <section id="contact" class="left">
-            <p>Contact Information</p>
-            <p>Personal Email: dhruvkpatel004@gmail.com</p>
-            <p>Work Email: dhruv.patel.imp@gmail.com</p>
-            <p>Phone: +1 747-257-7194</p>
+            <h4>Contact Information</h4>
+            <p><strong>Personal Email:</strong> <a href="mailto:dhruvkpatel004@gmail.com">dhruvkpatel004@gmail.com</a></p>
+            <p><strong>Work Email:</strong> <a href="mailto:dhruv.patel.imp@gmail.com">dhruv.patel.imp@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+17472577194">+1 (747) 257-7194</a></p>
         </section>
-        <!-- Social Media Page -->
+        
         <section id="social" class="right">
-            <h4>Social Media Handles</h4>
-            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
-            <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
+            <h4>Connect With Me</h4>
+            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <p><a href="https://github.com/PDhruv09" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+            <p><a href="https://www.instagram.com/dhruvkpatel004" target="_blank" rel="noopener noreferrer">Instagram</a></p>
         </section>
-
     </footer>
 
+    <!-- Scripts -->
     <script type="module" src="../global.js"></script>
     <script type="module" src="blogs.js" defer></script>
 </body>

@@ -1,67 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Optimizing Transit in San Diego: My Map, My Mistakes</title>
-        <link rel="stylesheet" href="assets/css/blogs_style.css"/>
-    </head>
-    <body>
-        <main class="page">
-            <article class="post" data-permalink-context="/Blogs/fashionmnist-dashboard-story.html">
-                <header class="post-head">
-                    <p class="post-meta">Oct 15, 2025 • 8 min</p>
-                    <h1 id="title">FashionMNIST: Building a Model Comparison Dashboard</h1>
-                </header>
-                <section class="post-body">
-                    <p>This started as a weekend experiment to compare a simple MLP with a CNN on FashionMNIST. It ended up becoming a dashboard I use to sanity-check models fast: not just accuracy numbers, but <strong>where</strong> they fail, <strong>how</strong> confident they are, and <strong>why</strong> those mistakes make sense.</p>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Building a Streamlit dashboard to compare MLP vs CNN on FashionMNIST, where mistakes became insights and inspection replaced intuition." />
+    <meta name="theme-color" content="#faf8f5">
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+    
+    <link rel="stylesheet" href="assets/css/blogs_style.css"/>
+    <title>FashionMNIST: Building a Model Comparison Dashboard – Dhruv Patel</title>
+</head>
+<body>
+    <main class="page">
+        <article class="post" data-permalink-context="/Blogs/fashionmnist-dashboard-story.html">
+            <header class="post-head">
+                <p class="post-meta">October 15, 2025 • 8 min read</p>
+                <h1 id="title">FashionMNIST: Building a Model Comparison Dashboard</h1>
+            </header>
 
-                    <h2 id="motivation">Motivation</h2>
-                    <p>I’m guilty of celebrating a single metric. “Test accuracy = good ✅.” But accuracy hides interesting failures—like sandals mislabeled as sneakers with 99% confidence. I wanted a tool that forces me to look at <em>distribution</em> and <em>context</em>: class-wise performance, confusion patterns, and specific misclassifications.</p>
-                    <p>So I built a Streamlit app that puts MLP vs. CNN <em>side-by-side</em> with the same dataset, same splits, and comparable training budgets. The goal: replace “one number” with a habit of visual inspection.</p>
+            <section class="post-body">
+                <p>This started as a weekend experiment to compare a simple MLP with a CNN on FashionMNIST. It ended up becoming a dashboard I use to sanity-check models fast—not just accuracy numbers, but <strong>where</strong> they fail, <strong>how</strong> confident they are, and <strong>why</strong> those mistakes make sense.</p>
 
-                    <h2 id="process">Process &amp; Stuck Points</h2>
-                    <p><strong>Training parity.</strong> Keeping comparisons fair was harder than expected. I standardized transforms, seeds, batch sizes, and epoch counts—and logged everything. Early runs looked “off” until I realized my MLP was evaluated on normalized inputs while the CNN used augmented images. Fixing that alone shifted the story.</p>
-                    <p><strong>Confidence calibration.</strong> Raw softmax scores looked confident even when wrong. I added reliability curves and top-k confidence histograms. That surfaced a pattern: the CNN was <em>better</em> but also <em>bolder</em>, which matters if the model is part of a decision pipeline.</p>
-                    <p><strong>Interactivity at scale.</strong> Rendering many misclassified tiles can be slow. Caching predictions (with a hash of model + params) and precomputing confusion matrices made the app snappy enough to explore.</p>
+                <h2 id="motivation">The Problem with "One Number"</h2>
+                <p>I'm guilty of celebrating a single metric. "Test accuracy = 94%? Ship it ✅." But accuracy hides interesting failures—like sandals mislabeled as sneakers with 99% confidence. I wanted a tool that forces me to look at <em>distribution</em> and <em>context</em>: class-wise performance, confusion patterns, and specific misclassifications.</p>
+                
+                <p>So I built a <strong>Streamlit app</strong> that puts MLP vs. CNN <em>side-by-side</em> with the same dataset, same splits, and comparable training budgets. The goal: replace "one number" with a habit of visual inspection.</p>
 
-                    <h2 id="breakthroughs">Breakthroughs</h2>
-                    <p><strong>Misclassifications are the gold.</strong> The dashboard highlights the <em>most confident wrong</em> predictions first. That’s where you learn: boots vs. sneakers, shirts vs. T-shirts. I also added a “contrast view” that shows where MLP fails but CNN succeeds (and vice-versa). That made the upgrade decision obvious.</p>
-                    <p><strong>Human-readable insights.</strong> I annotate the confusion matrix cells with short notes (e.g., “texture overlap” or “silhouette ambiguity”). It nudges me to think in terms of features—not just labels.</p>
-                    <p><strong>Shareable state.</strong> App URLs encode filters (class, threshold, model). Sending a link to “CNN, class=sandal, conf&gt;0.9, misclassified only” made discussions with friends way more concrete.</p>
+                <h2 id="process">Process & Stuck Points</h2>
+                
+                <h3>Training Parity</h3>
+                <p>Keeping comparisons fair was harder than expected. I standardized transforms, seeds, batch sizes, and epoch counts—and logged everything. Early runs looked "off" until I realized my MLP was evaluated on normalized inputs while the CNN used augmented images. Fixing that alone shifted the story.</p>
+                
+                <h3>Confidence Calibration</h3>
+                <p>Raw softmax scores looked confident even when wrong. I added reliability curves and top-k confidence histograms. That surfaced a pattern: the CNN was <em>better</em> but also <em>bolder</em>, which matters if the model is part of a decision pipeline.</p>
+                
+                <p>When you're deploying models in production, you need to know not just <em>if</em> it's right, but <em>how sure</em> it is. A model that says "I'm 99% confident this is a sneaker" when it's actually a sandal is more dangerous than one that admits uncertainty.</p>
+                
+                <h3>Interactivity at Scale</h3>
+                <p>Rendering many misclassified tiles can be slow. Caching predictions (with a hash of model + params) and precomputing confusion matrices made the app snappy enough to explore. The key insight: <strong>precompute expensive operations, cache everything, and make filtering instant.</strong></p>
 
-                    <h2 id="reflections">Reflections</h2>
-                    <p>This project changed my ML workflow. I now ship a <em>viewing tool</em> with a model—because inspection beats intuition. If I extend this, I’ll add Grad-CAMs, per-class PR curves, and a small active-learning loop to relabel the messiest tiles.</p>
-                    <p>The biggest lesson? If your evaluation doesn’t change your next action, it’s not evaluation—it’s decoration.</p>
+                <h2 id="breakthroughs">Breakthroughs</h2>
+                
+                <h3>Misclassifications Are the Gold</h3>
+                <p>The dashboard highlights the <em>most confident wrong</em> predictions first. That's where you learn: boots vs. sneakers, shirts vs. T-shirts. The boundary cases teach you more than the easy wins.</p>
+                
+                <p>I also added a "contrast view" that shows where MLP fails but CNN succeeds (and vice-versa). That made the upgrade decision obvious. Seeing the same image misclassified by one model but correctly classified by another reveals what each architecture "sees."</p>
+                
+                <h3>Human-Readable Insights</h3>
+                <p>I annotate the confusion matrix cells with short notes (e.g., "texture overlap" or "silhouette ambiguity"). It nudges me to think in terms of <em>features</em>—not just labels. Instead of "the model got this wrong," I started asking "what visual cue caused this confusion?"</p>
+                
+                <p>These annotations turned the confusion matrix from a grid of numbers into a story about what the model actually learned.</p>
+                
+                <h3>Shareable State</h3>
+                <p>App URLs encode filters (class, threshold, model). Sending a link to "CNN, class=sandal, conf&gt;0.9, misclassified only" made discussions with friends way more concrete. Instead of saying "the model struggles with sandals," I could share an exact view of the problem.</p>
+                
+                <p>This transformed debugging from a solo activity into a collaborative one. My classmates could explore the same failures I was seeing and suggest their own hypotheses.</p>
 
-                    <aside class="post-cta">
-                        <a class="btn" href="https://pdhruv09.github.io/DSC_170_GIS_SanDiego_Transit_Map/" target="_blank" rel="noopener">View the Interactive Map</a>
-                        <a class="btn secondary" href="../projects/index.html">See All Projects</a>
-                    </aside>
-                </section>
-                <!-- Back link -->
-                <p><a href="./index.html">← Back to Blog</a></p>
-            </article>
-        </main>
-        <!-- Footer (Common Contact Information) -->
-        <footer id="footer">
-            <!-- Social Media Page -->
-            <section id="contact" class="left">
-                <p>Contact Information</p>
-                <p>Personal Email: dhruvkpatel004@gmail.com</p>
-                <p>Work Email: dhruv.patel.imp@gmail.com</p>
-                <p>Phone: +1 747-257-7194</p>
+                <h2 id="reflections">What I'd Do Differently</h2>
+                <p>This project changed my ML workflow. I now ship a <em>viewing tool</em> with a model—because inspection beats intuition. If I extend this, I'd add:</p>
+                
+                <ul>
+                    <li><strong>Grad-CAMs</strong> to visualize what parts of images drive predictions</li>
+                    <li><strong>Per-class PR curves</strong> to understand precision-recall tradeoffs for each category</li>
+                    <li><strong>Active learning loop</strong> to relabel the messiest tiles and retrain</li>
+                    <li><strong>Embedding visualizations</strong> using t-SNE or UMAP to see how models cluster classes</li>
+                </ul>
+                
+                <p>The biggest lesson? <strong>If your evaluation doesn't change your next action, it's not evaluation—it's decoration.</strong></p>
+                
+                <p>Good evaluation should make you uncomfortable. It should expose assumptions, reveal edge cases, and force you to think harder about what "good performance" really means in your context.</p>
+
+                <h2 id="technical">Technical Details</h2>
+                <p>For those interested in the implementation:</p>
+                
+                <ul>
+                    <li><strong>Framework:</strong> PyTorch for models, Streamlit for UI</li>
+                    <li><strong>Models:</strong> 3-layer MLP (256→128→64) vs. 3-layer CNN (32→64→128 channels)</li>
+                    <li><strong>Training:</strong> 10 epochs, Adam optimizer, cross-entropy loss, same learning rate</li>
+                    <li><strong>Caching:</strong> Predictions stored as pickle files, indexed by model hash</li>
+                    <li><strong>Deployment:</strong> Streamlit Cloud with model checkpoints in S3</li>
+                </ul>
+                
+                <p>The entire codebase is on GitHub, and the dashboard is live for anyone to explore.</p>
+
+                <aside class="post-cta">
+                    <a class="btn" href="https://fashionmnist-dashboard.streamlit.app" target="_blank" rel="noopener">Try the Dashboard</a>
+                    <a class="btn secondary" href="../projects/index.html">See All Projects</a>
+                </aside>
             </section>
-            <!-- Social Media Page -->
-            <section id="social" class="right">
-                <h4>Social Media Handles</h4>
-                <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
-                <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
-            </section>
+            
+            <p style="margin-top: 3rem;"><a href="./index.html">← Back to Blog</a></p>
+        </article>
+    </main>
 
-        </footer>
-        <script type="module" src="../global.js"></script>
-        <script type="module" src="blogs.js" defer></script>
+    <footer id="footer" role="contentinfo">
+        <section id="contact" class="left">
+            <h4>Contact Information</h4>
+            <p><strong>Personal Email:</strong> <a href="mailto:dhruvkpatel004@gmail.com">dhruvkpatel004@gmail.com</a></p>
+            <p><strong>Work Email:</strong> <a href="mailto:dhruv.patel.imp@gmail.com">dhruv.patel.imp@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+17472577194">+1 (747) 257-7194</a></p>
+        </section>
+        
+        <section id="social" class="right">
+            <h4>Connect With Me</h4>
+            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <p><a href="https://github.com/PDhruv09" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+            <p><a href="https://www.instagram.com/dhruvkpatel004" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+        </section>
+    </footer>
 
-    </body>
+    <script type="module" src="../global.js"></script>
+</body>
 </html>
