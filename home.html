@@ -1,138 +1,152 @@
-<!-- home.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Template Main CSS File -->
-    <link  href="assets/css/style.css" rel="stylesheet">
-    <title>Dhruv Patel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Dhruv Patel - Data Science student at UCSD specializing in AI, machine learning, and cybersecurity. View my projects, resume, and GitHub stats.">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://api.github.com">
+    
+    <!-- Stylesheets -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dhruv Patel - Data Scientist Portfolio">
+    <meta property="og:description" content="Explore my data science projects, AI research, and cybersecurity work at UCSD.">
+    <meta property="og:image" content="Images/logo/Website_Logo.png">
+    
+    <title>Dhruv Patel - Data Scientist Portfolio</title>
 </head>
 <body>
 
     <!-- Hero Section -->
-    <section id="hero">
+    <section id="hero" aria-label="Introduction">
         <div class="hero-text">
-        <h1>Hi, I'm <span class="highlight">Dhruv Patel</span></h1>
-        <h2>Aspiring Data Scientist @ UCSD</h2>
-        <p>
-            I build intelligent, secure, and scalable systems at the intersection of data science,
-            AI, and cybersecurity.
-        </p>
-        <div class="hero-buttons">
-            <a href="#resume"><button class="primary-btn">View Resume</button></a>
-            <a href="#latest-projects"><button class="secondary-btn">My Work</button></a>
-        </div>
+            <h1>Hi, I'm <span class="highlight">Dhruv Patel</span></h1>
+            <h2>Aspiring Data Scientist @ UCSD</h2>
+            <p>
+                I build intelligent, secure, and scalable systems at the intersection of data science,
+                AI, and cybersecurity.
+            </p>
+            <div class="hero-buttons">
+                <a href="#resume"><button class="primary-btn" aria-label="View my resume">View Resume</button></a>
+                <a href="#latest-projects"><button class="secondary-btn" aria-label="See my work">My Work</button></a>
+            </div>
         </div>
         <div class="hero-image">
-        <div class="profile-circle">
-            <img src="Images/photo/Dhruv_image.JPG" alt="Dhruv's Image">
-        </div>
+            <div class="profile-circle">
+                <img src="Images/photo/Dhruv_image.JPG" alt="Portrait of Dhruv Patel" loading="eager">
+            </div>
         </div>
     </section>
 
     <!-- About Me Section -->
-    <section id="about">
+    <section id="about" aria-label="About me">
         <h2>About Me</h2>
         <div class="about-grid">
-        <div class="about-text">
-            <p>I'm a curious and driven data scientist-in-training with a strong interest in artificial intelligence, cybersecurity, and building impactful digital solutions. Currently studying Data Science at the University of California, San Diego, I thrive at the intersection of data, technology, and innovation.</p>
-            <p>journey began with a fascination for how data shapes our world—and has since evolved into a passion for using machine learning, analytics, and secure systems to solve complex, real-world challenges. Whether it's visualizing large datasets, automating workflows, or safeguarding digital environments, I enjoy diving deep and creating tools that matter.</p>
-            <p>I'm not coding or exploring AI frameworks, you'll likely find me learning about cybersecurity trends, contributing to projects, or taking a moment to appreciate the beauty of nature and wildlife.</p>
-        </div>
-        <div class="about-cards">
-            <div class="info-card">
-            <h3>Education</h3>
-            <p><strong>Bachelor of Science in Data Science</strong><br>University of California, San Diego<br>2022–Present</p>
+            <div class="about-text">
+                <p>I'm a curious and driven data scientist-in-training with a strong interest in artificial intelligence, cybersecurity, and building impactful digital solutions. Currently studying Data Science at the University of California, San Diego, I thrive at the intersection of data, technology, and innovation.</p>
+                <p>My journey began with a fascination for how data shapes our world—and has since evolved into a passion for using machine learning, analytics, and secure systems to solve complex, real-world challenges. Whether it's visualizing large datasets, automating workflows, or safeguarding digital environments, I enjoy diving deep and creating tools that matter.</p>
+                <p>When I'm not coding or exploring AI frameworks, you'll likely find me learning about cybersecurity trends, contributing to projects, or taking a moment to appreciate the beauty of nature and wildlife.</p>
             </div>
-            <div class="info-card">
-            <h3>Experience</h3>
-            <p><strong>Web Developer Intern</strong><br>Company Name<br>Summer 2024</p>
+            <div class="about-cards">
+                <div class="info-card">
+                    <h3>Education</h3>
+                    <p><strong>Bachelor of Science in Data Science</strong><br>University of California, San Diego<br>2022–Present</p>
+                </div>
+                <div class="info-card">
+                    <h3>Experience</h3>
+                    <p><strong>Data Science Projects</strong><br>Various Academic & Personal<br>2022–Present</p>
+                </div>
             </div>
-        </div>
         </div>
     </section>
 
     <!-- Resume Section -->
-    <section id="resume">
+    <section id="resume" aria-label="Resume">
         <h2>Resume</h2>
         <div class="pdf-container">
-        <iframe src="assets/Resume/Resume of Dhruv Patel.pdf#zoom=150" width="75%" height="400px">
-            Your browser does not support PDFs. Please download the PDF to view it.
-        </iframe>
+            <iframe 
+                src="assets/Resume/Resume of Dhruv Patel.pdf#zoom=FitH" 
+                title="Dhruv Patel Resume PDF"
+                loading="lazy"
+                aria-label="Resume document viewer">
+                <p>Your browser does not support PDFs. <a href="assets/Resume/Resume of Dhruv Patel.pdf" download>Download the PDF</a> to view it.</p>
+            </iframe>
         </div>
         <div class="download-button">
-            <svg id="downloadAnim" width="80" height="80" viewBox="0 0 100 100" class="download-circle" onclick="triggerDownload()">
-                <!-- Circular Button -->
-                <circle id="outerCircle" cx="50" cy="50" r="40" stroke="#7acfee" stroke-width="5" fill="none"/>
-
-                <!-- Vertical Line (initially hidden) -->
-                <line id="lineExpand" x1="50" y1="50" x2="50" y2="10" stroke="#7acfee" stroke-width="5" stroke-linecap="round" opacity="0"/>
-
-                <!-- Arrow Group -->
-                <g id="arrowGroup" transform="translate(50,50)">
-                    <path d="M0 -10 L0 10 M0 10 L-7 3 M0 10 L7 3" stroke="#7acfee" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                </g>
-
-                <!-- Parachute (initially hidden) -->
-                <path id="parachute" d="M30 25 Q50 0 70 25" fill="#7acfee" opacity="0"/>
-                <line id="string1" x1="40" y1="25" x2="50" y2="40" stroke="#1c1c1c" opacity="0"/>
-                <line id="string2" x1="60" y1="25" x2="50" y2="40" stroke="#1c1c1c" opacity="0"/>
-            </svg>
+            <a href="assets/Resume/Resume of Dhruv Patel.pdf" download="Dhruv_Patel_Resume.pdf" aria-label="Download resume">
+                <svg id="downloadAnim" width="80" height="80" viewBox="0 0 100 100" class="download-circle" role="img" aria-label="Download icon">
+                    <!-- Circular Button -->
+                    <circle id="outerCircle" cx="50" cy="50" r="40" stroke="currentColor" stroke-width="5" fill="none"/>
+                    
+                    <!-- Arrow Group -->
+                    <g id="arrowGroup" transform="translate(50,50)">
+                        <path d="M0 -10 L0 10 M0 10 L-7 3 M0 10 L7 3" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                </svg>
+            </a>
         </div>
     </section>
 
     <!-- Latest Projects Section -->
-    <section id="latest-projects">
+    <section id="latest-projects" aria-label="Latest projects">
         <h2>Latest Projects</h2>
-        <div class="latest-projects"></div>
+        <div class="latest-projects" role="list"></div>
         <div class="all_project_button">
-            <a href="projects/"><button>All Projects</button></a>
+            <a href="projects/"><button aria-label="View all projects">All Projects</button></a>
         </div>
     </section>
 
     <!-- GitHub Stats Section -->
-    <section id="github-stats">
+    <section id="github-stats" aria-label="GitHub statistics">
         <h2>GitHub Stats</h2>
-        <div id="profile-stats"></div>
+        <div id="profile-stats" role="list" aria-live="polite" aria-busy="false"></div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills">
+    <section id="skills" aria-label="Technical skills">
         <h2>My Skills</h2>
-        <div class="skills-grid">
-        <span>JavaScript</span>
-        <span>Python</span>
-        <span>HTML/CSS</span>
-        <span>React</span>
-        <span>Node.js</span>
-        <span>Tailwind CSS</span>
-        <span>MongoDB</span>
-        <span>PostgreSQL</span>
-        <span>Git</span>
-        <span>AWS</span>
-        <span>CI/CD</span>
-        <span>REST APIs</span>
+        <div class="skills-grid" role="list">
+            <span role="listitem">Python</span>
+            <span role="listitem">JavaScript</span>
+            <span role="listitem">HTML/CSS</span>
+            <span role="listitem">React</span>
+            <span role="listitem">Node.js</span>
+            <span role="listitem">D3.js</span>
+            <span role="listitem">Pandas</span>
+            <span role="listitem">NumPy</span>
+            <span role="listitem">SQL</span>
+            <span role="listitem">Git</span>
+            <span role="listitem">Machine Learning</span>
+            <span role="listitem">Data Visualization</span>
         </div>
     </section>
 
     <!-- Footer (Common Contact Information) -->
-    <footer id="footer">
-        <!-- Social Media Page -->
+    <footer id="footer" role="contentinfo">
         <section id="contact" class="left">
-            <p>Contact Information</p>
-            <p>Personal Email: dhruvkpatel004@gmail.com</p>
-            <p>Work Email: dhruv.patel.imp@gmail.com</p>
-            <p>Phone: +1 747-257-7194</p>
+            <h4>Contact Information</h4>
+            <p><strong>Personal Email:</strong> <a href="mailto:dhruvkpatel004@gmail.com">dhruvkpatel004@gmail.com</a></p>
+            <p><strong>Work Email:</strong> <a href="mailto:dhruv.patel.imp@gmail.com">dhruv.patel.imp@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+17472577194">+1 (747) 257-7194</a></p>
         </section>
-        <!-- Social Media Page -->
+        
         <section id="social" class="right">
-            <h4>Social Media Handles</h4>
-            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
-            <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
+            <h4>Connect With Me</h4>
+            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <p><a href="https://github.com/PDhruv09" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+            <p><a href="https://www.instagram.com/dhruvkpatel004" target="_blank" rel="noopener noreferrer">Instagram</a></p>
         </section>
-
     </footer>
+    
+    <!-- Scripts -->
     <script type="module" src="global.js"></script>
 </body>
 </html>
