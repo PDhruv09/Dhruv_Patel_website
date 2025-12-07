@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,900&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
 :root {
-    /* Editorial Color Palette */
+    /* Editorial Color Palette - Light Mode (Default) */
     --primary-ink: #1a1a1a;
     --secondary-ink: #4a4a4a;
     --tertiary-ink: #737373;
@@ -53,7 +53,7 @@
     --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* Dark mode */
+/* Dark mode - System Preference */
 @media (prefers-color-scheme: dark) {
     :root {
         --primary-ink: #e8e8e8;
@@ -69,6 +69,40 @@
         --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
         --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
     }
+}
+
+/* Manual Dark Mode Override - When user selects "dark" theme */
+html[style*="color-scheme: dark"],
+html[style*="color-scheme:dark"] {
+    --primary-ink: #e8e8e8;
+    --secondary-ink: #b8b8b8;
+    --tertiary-ink: #8a8a8a;
+    --bg-cream: #1a1a1a;
+    --bg-white: #222222;
+    --bg-light-gray: #2a2a2a;
+    --bg-elevated: #2a2a2a;
+    --border-subtle: #3a3a3a;
+    --border-medium: #4a4a4a;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Manual Light Mode Override - When user selects "light" theme */
+html[style*="color-scheme: light"],
+html[style*="color-scheme:light"] {
+    --primary-ink: #1a1a1a;
+    --secondary-ink: #4a4a4a;
+    --tertiary-ink: #737373;
+    --bg-cream: #faf8f5;
+    --bg-white: #ffffff;
+    --bg-light-gray: #f5f5f5;
+    --bg-elevated: #ffffff;
+    --border-subtle: #e8e8e8;
+    --border-medium: #d0d0d0;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* ==========================================
