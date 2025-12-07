@@ -2,52 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Template Main CSS File -->
-    <link  href="assets/css/project_style.css" rel="stylesheet">
-    <title>Dhruv Patel Projects</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Explore Dhruv Patel's data science projects including machine learning, GIS analysis, and interactive visualizations.">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- Stylesheets -->
+    <link href="assets/css/project_style.css" rel="stylesheet">
+    
+    <title>Projects - Dhruv Patel</title>
 </head>
 <body>
 
     <section id="projects" class="page">
-        <h1>Projects</h1>
+        <h1>My Projects</h1>
+        
+        <!-- Filter & Visualization Container -->
         <div class="container">
-            <svg id="projects-pie-chart" viewBox="-50 -50 100 100"></svg>
-          
+            <!-- Pie Chart -->
+            <div class="chart-wrapper">
+                <svg id="projects-pie-chart" viewBox="-50 -50 100 100" role="img" aria-label="Projects distribution by year pie chart"></svg>
+            </div>
+            
+            <!-- Filter Section -->
             <div class="filter-section">
-              <h2>Filter by Year</h2>
-              <div class="button-row"></div>
-              <button id="clear-filter">Clear Filter</button>
-              <ul class="legend"></ul>
+                <h2>Filter by Year</h2>
+                <div class="button-row" role="group" aria-label="Filter projects by year"></div>
+                <button id="clear-filter" aria-label="Clear year filter">Clear Filter</button>
             </div>
         </div>
 
-        <div class="projects"></div>
+        <!-- Projects Grid -->
+        <div class="projects" role="list" aria-live="polite" aria-busy="false"></div>
     </section>
     
-
-    <!-- Footer (Common Contact Information) -->
-    <footer id="footer">
-        <!-- Social Media Page -->
+    <!-- Footer -->
+    <footer id="footer" role="contentinfo">
         <section id="contact" class="left">
-            <p>Contact Information</p>
-            <p>Personal Email: dhruvkpatel004@gmail.com</p>
-            <p>Work Email: dhruv.patel.imp@gmail.com</p>
-            <p>Phone: +1 747-257-7194</p>
+            <h4>Contact Information</h4>
+            <p><strong>Personal Email:</strong> <a href="mailto:dhruvkpatel004@gmail.com">dhruvkpatel004@gmail.com</a></p>
+            <p><strong>Work Email:</strong> <a href="mailto:dhruv.patel.imp@gmail.com">dhruv.patel.imp@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+17472577194">+1 (747) 257-7194</a></p>
         </section>
-        <!-- Social Media Page -->
+        
         <section id="social" class="right">
-            <h4>Social Media Handles</h4>
-            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228">LinkedIn</a></p>
-            <p><a href="https://www.instagram.com/dhruvkpatel004?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr">Instagram</a></p>
+            <h4>Connect With Me</h4>
+            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <p><a href="https://github.com/PDhruv09" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+            <p><a href="https://www.instagram.com/dhruvkpatel004" target="_blank" rel="noopener noreferrer">Instagram</a></p>
         </section>
-
     </footer>
+    
+    <!-- Scripts -->
     <script type="module" src="../global.js"></script>
     <script type="module" src="project.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <!-- Chart.js (for pie chart) <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
-    <!-- Chart.js plugin for 3D-style effect <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-doughnutlabel"></script> --> 
-
 </body>
 </html>
