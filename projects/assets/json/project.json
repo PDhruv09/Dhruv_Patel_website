@@ -54,5 +54,12 @@
     "image": "../Images/projects/fashionmnist_dashboard.png",
     "link": "https://fashionmnist-dashboard.streamlit.app",
     "description": "This interactive dashboard compares MLP and CNN models trained on the FashionMNIST dataset. It visualizes test accuracy, prediction confidence, misclassified images, and confusion matrices. Built with PyTorch and Streamlit, the app allows users to explore individual predictions and evaluate model performance side by side."
+  },
+  {
+    "title": "Differential Privacy-Private Evaluation",
+    "year": "2025",
+    "image": "../Images/projects/differential_privacy.png",
+    "link": "https://github.com/PDhruv09/DSC_180A-Section_B15-Quater_1-Project/",
+    "description": "Capstone project exploring user-level differential privacy on synthetic telemetry data. Implements and evaluates Gaussian and Laplace mechanisms to measure privacy-utility trade-offs using L∞ error and IOU metrics across 100 randomized runs."
   }
 ]

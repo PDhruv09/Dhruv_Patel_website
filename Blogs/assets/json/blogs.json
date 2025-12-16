@@ -18,5 +18,15 @@
         "summary": "Why I built a Streamlit dashboard to compare MLP vs. CNN on FashionMNIST, what broke along the way, and how I made evaluation actually useful.",
         "tags": ["ML", "Computer Vision", "Dashboard"],
         "thumbnail": "../Images/projects/fashionmnist_dashboard.png"
-    }
+    },
+    {
+        "title": "When Privacy Met Utility: A Differential Privacy Story",
+        "slug": "differential-privacy-capstone-story",
+        "url": "differential-privacy-capstone-story.html",
+        "date": "2025-12-12",
+        "readingTime": "12 min",
+        "summary": "How 152,356 event logs and two noise distributions taught me that privacy and utility aren't enemies—they're dance partners. A deep dive into my capstone project on differentially private telemetry data.",
+        "tags": ["Privacy", "ML", "Data Science", "Capstone"],
+        "thumbnail": "../Images/projects/differential_privacy.png"
+  }
 ]

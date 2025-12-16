@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="How I learned that privacy and utility aren't enemies—they're dance partners. A deep dive into differential privacy for telemetry data." />
+    <meta name="theme-color" content="#faf8f5">
+    <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)">
+    
+    <link rel="stylesheet" href="assets/css/blogs_style.css"/>
+    <title>When Privacy Met Utility: A Differential Privacy Story – Dhruv Patel</title>
+</head>
+<body>
+    <main class="page">
+        <article class="post" data-permalink-context="/Blogs/differential-privacy-capstone.html">
+            <header class="post-head">
+                <p class="post-meta">December 12, 2024 • 12 min read</p>
+                <h1 id="title">When Privacy Met Utility: A Differential Privacy Story</h1>
+            </header>
+
+            <section class="post-body">
+                <p>I thought I understood the privacy-utility trade-off. Add noise to data, lose accuracy. Simple, right? Then I spent a quarter implementing differential privacy mechanisms for telemetry data, and everything I thought I knew turned out to be... incomplete. This is the story of how synthetic event logs, two noise distributions, and 200 experimental runs taught me that privacy and utility aren't enemies, they're dance partners.</p>
+
+                <h2 id="the-problem">The Problem Nobody Talks About</h2>
+                <p>Imagine you're a product manager at a software company. Your telemetry system tells you that Product D has an 8.90% error rate—four times higher than Product B's 2.00%. You <em>need</em> to share this data with your engineering team, your quality assurance team, maybe even external researchers.</p>
+                
+                <figure>
+                    <img src="DP_capstone/error_rate_by_product.png" alt="Error Rate by Product Type showing Product D with 8.90% error rate" loading="lazy">
+                    <figcaption>Product D exhibits the highest error rate at 8.90%, followed by Product F at 5.10%.</figcaption>
+                </figure>
+                
+                <p>But here's the catch: that telemetry data contains user-level event logs. Every click, every save, every error—tied to an anonymized user ID. Even "anonymized" data can be re-identified through linkage attacks. The 2006 Netflix Prize dataset proved that. AOL's search data leak proved it again. Anonymization alone isn't enough.</p>
+                
+                <p>So how do you share insights from the data without sharing the data itself? How do you say "Product D is broken" without revealing that User_12345 clicked the reset button 47 times in frustration?</p>
+                
+                <p>That's where differential privacy comes in. I first got a glimpse of what Differential Privacy is when I was attending a seminar given by an industry rep on how his day to day looks like, where he had just referenced "how he maintains differential privacy of the data". After he said that I wondered at that time: what is differential privacy? As any other would, I went to Google and searched. I just got the definition that user privacy is not leaked when a differential mechanism is being used. At that time I did not understand what that meant. I recently got to know what it means when I took my capstone project class.</p>
+
+                <h2 id="what-is-dp">Differential Privacy: Two Sides of the Same Coin</h2>
+                <p>Differential Privacy has two parts: one is the theoretical definition that explains the concept, and the second is the mathematical promise that is a proof of the theoretical definition. One of the main reasons I like Differential Privacy is that the theory can be proved by mathematical promise.</p>
+
+                <h3>Differential Privacy: The Theoretical Definition</h3>
+                <p>At its core, differential privacy is a statement about indistinguishability. It does not promise that outputs are identical when data changes, nor does it promise perfect secrecy. Instead, it promises something subtler and more powerful: that whether or not one individual participates in the dataset, the output of your analysis looks essentially the same. If an attacker cannot reliably tell whether a specific person's data was included, then that person's privacy is protected.</p>
+                
+                <p>To formalize this idea, differential privacy introduces the notion of neighboring datasets. Two datasets are neighbors if they differ by the data of exactly one individual. Everything in DP is framed around this single change. Not a group, not a cohort—one person. This framing is intentional. It forces the privacy guarantee to operate at the individual level, regardless of how large the dataset is or how complicated the analysis becomes.</p>
+                
+                <p>The key shift here is that privacy is no longer about hiding raw data; it is about bounding influence. Differential privacy asks: How much can one person change the result of an analysis? If adding or removing one user barely moves the needle, then that user's participation cannot be inferred with confidence. This is why sensitivity—the maximum change a function can undergo due to one individual—is so central. Theoretical DP is built on the idea that we can reason about, and strictly control, this influence.</p>
+                
+                <p>Another defining feature of differential privacy is that it assumes a worst-case adversary. The attacker is allowed to know almost everything: the algorithm, the distribution, even most of the dataset. The only thing they are unsure about is whether a particular individual is included. DP's guarantee must hold even then. This is what separates differential privacy from anonymization or access control. Those methods rely on obscurity; DP relies on mathematics.</p>
+                
+                <p>Crucially, the theoretical definition of differential privacy is distributional, not deterministic. Outputs are random variables, not fixed values. Privacy is expressed in terms of probabilities over all possible outputs. This randomness is not a bug—it is the mechanism by which privacy is achieved. Without randomness, deterministic algorithms leak information inevitably. Differential privacy embraces randomness as a first-class design principle.</p>
+                
+                <p>Finally, the theory of differential privacy is designed to survive real-world workflows. Two properties make this possible. Post-processing guarantees that once data is differentially private, any transformation of it remains private—no additional privacy cost. Composition guarantees that multiple private analyses can be combined, with total privacy loss tracked quantitatively. These properties aren't afterthoughts; they are part of the theoretical definition because privacy in practice is never a single query—it's a pipeline.</p>
+
+                <h3>Differential Privacy: The Mathematical Promise</h3>
+                <p>Differential privacy is beautiful because it's <strong>provable</strong>. It's not a heuristic or a best practice—it's a mathematical guarantee that says: "Adding or removing one person's data changes the output by at most ε."</p>
+                
+                <p>The formula is elegant:</p>
+                <p><code>Pr[M(D) ∈ S] ≤ exp(ε) × Pr[M(D') ∈ S]</code></p>
+                
+                <p>Where M is your mechanism, D and D' are datasets differing by one person, and ε (epsilon) is your privacy budget. Smaller ε means stronger privacy, but also more noise. The genius is in the mechanism design. How do you add <em>just enough</em> noise to hide individuals while preserving the signal in the aggregate?</p>
+
+                <h2 id="challenge">Our Challenge: User-Level Privacy</h2>
+                <p>For our capstone project, we had a synthetic telemetry dataset spanning three months (May–July 2024) with 152,356 events across seven product types. Each event had a product type, event type (open, close, save, reset, error), timestamp, and user ID.</p>
+                
+                <figure>
+                    <img src="DP_capstone/product_type_distribution.png" alt="Product Type Distribution showing event counts" loading="lazy">
+                    <figcaption>Distribution of events by product type. Product B has the highest event count, followed by D and C.</figcaption>
+                </figure>
+                
+                <figure>
+                    <img src="DP_capstone/event_type_distribution.png" alt="Event Type Distribution" loading="lazy">
+                    <figcaption>Distribution of event types across the dataset. The most common event type is "open", followed by "close" and "save".</figcaption>
+                </figure>
+                
+                <p>The analytical goal was simple: identify which products have anomalously high error rates. Product D's 8.90% error rate gives it a z-score of 2.06—clearly an outlier that needs attention.</p>
+                
+                <figure>
+                    <img src="DP_capstone/error_rate_zscore_by_product.png" alt="Z-scores of error rates by product type" loading="lazy">
+                    <figcaption>Z-scores of error rates by product type. Products with positive z-scores (notably Product D with z-score 2.06) have error rates significantly above the mean.</figcaption>
+                </figure>
+                
+                <p>But here's where it gets interesting: we weren't doing event-level privacy. We were doing <strong>user-level privacy</strong>. That means adding or removing <em>one entire user</em> (with all their events) should change our results by a bounded amount. This is stronger than event-level privacy, but it creates a sensitivity problem. What if one user touched six different products? Do they affect all six counts?</p>
+                
+                <figure>
+                    <img src="DP_capstone/events_over_time.png" alt="Distribution of events over time" loading="lazy">
+                    <figcaption>Distribution of events over time from May 1, 2024 to July 31, 2024.</figcaption>
+                </figure>
+
+                <h2 id="solution">The Primary Product Trick</h2>
+                <p>Our solution: assign each user a "primary product"—whichever product they interacted with most. Now each user affects exactly one product's counts. This gives us clean sensitivity bounds:</p>
+                
+                <ul>
+                    <li><strong>L₁ sensitivity:</strong> Δ₁ = 2 (user affects total count +1, error count +1)</li>
+                    <li><strong>L₂ sensitivity:</strong> Δ₂ = √2 (Euclidean norm of [1, 1])</li>
+                </ul>
+                
+                <p>Yes, we're losing information about secondary products. But we're gaining something more valuable: a tractable privacy guarantee we can actually prove.</p>
+
+                <h2 id="mechanisms">The Showdown: Laplace vs. Gaussian</h2>
+                <p>We implemented two classic differential privacy mechanisms:</p>
+                
+                <h3>Laplace Mechanism (Pure ε-DP)</h3>
+                <p>The Laplace mechanism adds noise drawn from a double-exponential distribution. For our user-level counts, the noise scale is:</p>
+                
+                <p><code>b = Δ₁/ε = 2.0/2.0 = 1.0</code></p>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212433.png" alt="Laplace noise distribution" loading="lazy">
+                    <figcaption>Histogram of Laplace noise samples showing the characteristic double-exponential distribution.</figcaption>
+                </figure>
+                
+                <p>This gives us <em>pure</em> ε-differential privacy with no failure probability. Every query is guaranteed to satisfy the privacy constraint. The trade-off? Laplace noise has heavy tails—occasionally you get big outliers.</p>
+                
+                <h3>Gaussian Mechanism ((ε, δ)-DP)</h3>
+                <p>The Gaussian mechanism uses normal distribution noise with scale:</p>
+                
+                <p><code>σ = (Δ₂/ε) × √(2ln(1.25/δ)) ≈ 3.75</code></p>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212414.png" alt="Gaussian noise distribution" loading="lazy">
+                    <figcaption>Histogram of Gaussian noise samples showing the normal distribution.</figcaption>
+                </figure>
+                
+                <p>With δ = 10⁻⁶, this provides <em>approximate</em> differential privacy—there's a tiny probability (one in a million) that the privacy guarantee fails. But in exchange, we can use lighter-tailed Gaussian noise.</p>
+                
+                <p>Theoretically, Laplace should be optimal for L₁-sensitive count queries. But theory and practice don't always align.</p>
+
+                <h2 id="evaluation">How We Measured Success</h2>
+                <p>Here's where most DP papers get abstract. "We preserve utility." What does that actually <em>mean</em>?</p>
+                
+                <p>For us, utility meant one thing: <strong>Can we still identify which products are broken?</strong></p>
+                
+                <p>We defined two concrete metrics:</p>
+                
+                <h3>1. L∞ Error on Z-Scores</h3>
+                <p>How much does the DP z-score deviate from the true z-score, in the worst case across all products?</p>
+                
+                <p><code>L∞ = max |z_true - z_dp|</code></p>
+                
+                <p>If Product D's true z-score is 2.06 and our DP version says 2.12, that's a 0.06 error. Smaller is better.</p>
+                
+                <h3>2. IOU on Top Sets</h3>
+                <p>Do we identify the same set of problematic products (those with z > 0)?</p>
+                
+                <p><code>IOU = |TopSet_true ∩ TopSet_dp| / |TopSet_true ∪ TopSet_dp|</code></p>
+                
+                <p>If the true top set is {D, F, Others} and our DP version also identifies {D, F, Others}, IOU = 1.0. Perfect preservation.</p>
+                
+                <p>These metrics are task-specific. We don't care about preserving <em>every</em> statistic—we care about preserving the <em>decision</em>: which products need fixing?</p>
+
+                <h2 id="results">The Results That Surprised Me</h2>
+                <p>We ran each mechanism 100 times with different random seeds to characterize the distribution of outcomes. Here's what we found:</p>
+                
+                <h3>Laplace Dominated</h3>
+                <p>Despite having a larger noise scale on paper (b = 1.0 vs. σ ≈ 3.75 might suggest otherwise), Laplace crushed Gaussian:</p>
+                
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Laplace Median</th>
+                        <th>Gaussian Median</th>
+                    </tr>
+                    <tr>
+                        <td>L∞ Error</td>
+                        <td><strong>0.014</strong></td>
+                        <td>0.056</td>
+                    </tr>
+                    <tr>
+                        <td>IOU</td>
+                        <td><strong>1.000</strong></td>
+                        <td>1.000</td>
+                    </tr>
+                    <tr>
+                        <td>Max L∞</td>
+                        <td><strong>0.082</strong></td>
+                        <td>0.199</td>
+                    </tr>
+                </table>
+                
+                <figure>
+                    <img src="DP_capstone/eval_comp_plots.png" alt="Direct comparison of Gaussian and Laplace mechanisms" loading="lazy">
+                    <figcaption>Direct comparison of Gaussian and Laplace mechanisms across 100 evaluation runs. Top row shows L∞ error distributions (Gaussian left, Laplace right), bottom row shows IOU distributions. Laplace's superior utility preservation is evident with smaller, more consistent errors.</figcaption>
+                </figure>
+                
+                <p>Laplace's median L∞ error was <strong>four times smaller</strong>. Its maximum error was less than half of Gaussian's. Why?</p>
+                
+                <p>The noise scale tells part of the story. For Laplace, b = 1.0 means we're adding noise with mean absolute deviation of 1.0. For Gaussian, σ ≈ 3.75 means standard deviation of 3.75—that's a lot more spread.</p>
+                
+                <p>But there's a deeper insight: <strong>L₁ sensitivity matches Laplace's natural structure.</strong> Count queries have L₁ sensitivity, and Laplace is provably optimal for L₁-sensitive queries under pure ε-DP. The theory was right all along.</p>
+
+                <h3>Perfect Top Set Preservation</h3>
+                <p>Both mechanisms achieved IOU = 1.0 in the majority of runs. That means we correctly identified {Product D, Product F, Others} as the problematic set, even with noise added.</p>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212120.png" alt="True vs DP Z-Scores for Gaussian" loading="lazy">
+                    <figcaption>True vs DP Z-Scores (Single Gaussian Run) - Blue bars show true z-scores, orange shows DP z-scores after noise addition.</figcaption>
+                </figure>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212300.png" alt="True vs DP Z-Scores for Laplace" loading="lazy">
+                    <figcaption>True vs DP Z-Scores (Single Laplace Run) - Blue bars show true z-scores, orange shows DP z-scores. Note the tighter alignment compared to Gaussian.</figcaption>
+                </figure>
+                
+                <p>This blew my mind. We're adding noise with scale ~1-4 to counts in the hundreds, yet the <em>ranking</em> stays intact. Why?</p>
+                
+                <p>Because Product D's error rate (8.90%) is so much higher than the others. The signal overwhelms the noise. Even if noise bumps the count up or down by a few users, the <em>relative</em> ordering stays the same.</p>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212143.png" alt="Distribution of DP Z-Scores Across Runs (Gaussian)" loading="lazy">
+                    <figcaption>Distribution of DP Z-Scores Across Runs (per Product) for Gaussian mechanism. Red dots show true z-scores; box plots show DP z-score distributions.</figcaption>
+                </figure>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212322.png" alt="Distribution of DP Z-Scores Across Runs (Laplace)" loading="lazy">
+                    <figcaption>Distribution of DP Z-Scores Across Runs (per Product) for Laplace mechanism. Note the tighter distributions around true values.</figcaption>
+                </figure>
+                
+                <p>This is the key insight about differential privacy: <strong>noise hides individuals, not populations.</strong> If your signal is strong at the aggregate level, DP preserves it.</p>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212243.png" alt="Distribution of L∞ Error Across DP Runs (Gaussian)" loading="lazy">
+                    <figcaption>Distribution of L∞ Error Across DP Runs for Gaussian mechanism showing the range of worst-case errors.</figcaption>
+                </figure>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212340.png" alt="Distribution of L∞ Error Across DP Runs (Laplace)" loading="lazy">
+                    <figcaption>Distribution of L∞ Error Across DP Runs for Laplace mechanism - note the concentration around zero indicating superior utility.</figcaption>
+                </figure>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212350.png" alt="Distribution of IOU Across DP Runs (Gaussian)" loading="lazy">
+                    <figcaption>Distribution of IOU Across DP Runs for Gaussian - most runs achieve perfect (1.0) or near-perfect (0.67) top set identification.</figcaption>
+                </figure>
+                
+                <figure>
+                    <img src="DP_capstone/Screenshot 2025-12-15 212403.png" alt="Distribution of IOU Across DP Runs (Laplace)" loading="lazy">
+                    <figcaption>Distribution of IOU Across DP Runs for Laplace - extremely consistent perfect (1.0) top set preservation.</figcaption>
+                </figure>
+
+                <h2 id="lessons">What I Learned (The Hard Way)</h2>
+                
+                <h3>1. Post-Processing Is Necessary but Messy</h3>
+                <p>When you add Laplace or Gaussian noise to counts, you can get <em>negative</em> counts. That's nonsensical. So we clamped negatives to zero:</p>
+                
+                <p><code>count_dp = max(0, count_true + noise)</code></p>
+                
+                <p>This is standard practice and doesn't violate the privacy guarantee (post-processing theorem). But it introduces bias. Counts that would've been negative get pulled up to zero, slightly inflating the expected value.</p>
+                
+                <p>For products with large true counts (Product D has 2,718 error users), this bias is negligible. But for products with tiny counts (Product E has 30 error users), it matters. Trade-offs everywhere.</p>
+
+                <h3>2. The Primary Product Assignment Loses Information</h3>
+                <p>By assigning each user to one primary product, we ignore their interactions with other products. If User_789 opened Product A 100 times and Product B 50 times, we only count them toward Product A.</p>
+                
+                <p>This simplifies sensitivity analysis, but we're throwing away real interactions. For users who split time across multiple products, this undercounts their secondary products.</p>
+                
+                <p>Alternative approaches exist—allocate privacy budget across all products per user, track contributions per product—but they require complex composition analysis. Sometimes the simple solution is the <em>practical</em> solution.</p>
+
+                <h3>3. Epsilon Is a Tuning Knob, Not a Law of Nature</h3>
+                <p>We used ε = 2.0 throughout. Why 2.0? Honestly, it's a common choice in the literature. But there's no "right" value.</p>
+                
+                <p>Smaller ε (like 0.1) gives stronger privacy but more noise. Larger ε (like 10.0) gives weaker privacy but better utility. The choice depends on your threat model, regulatory requirements, and acceptable utility loss.</p>
+                
+                <p>In practice, ε is chosen through iterative experimentation: try a range of values, measure utility degradation, pick the smallest ε where utility is still acceptable.</p>
+
+                <h3>4. Evaluation Metrics Should Match Your Goal</h3>
+                <p>We didn't measure "average error" or "MSE across all statistics." We measured L∞ error on z-scores and IOU on top sets because those directly answer the question: <strong>"Can we identify broken products?"</strong></p>
+                
+                <p>If your goal is different—say, training a machine learning model on synthetic data—you'd measure different things. Utility isn't one-size-fits-all.</p>
+
+                <h2 id="implications">Why This Matters</h2>
+                <p>This wasn't just an academic exercise. Differentially private telemetry has real-world implications:</p>
+                
+                <ul>
+                    <li><strong>Data Sharing:</strong> Companies can now share product quality metrics with external researchers without exposing user behavior.</li>
+                    <li><strong>Regulatory Compliance:</strong> GDPR, CCPA, and other privacy laws are getting stricter. DP provides a mathematically rigorous compliance framework.</li>
+                    <li><strong>Collaborative Analytics:</strong> Multiple product teams can pool telemetry data for industry-wide benchmarking while preserving competitive privacy.</li>
+                    <li><strong>Trust:</strong> Users are more likely to opt in to telemetry if they know their individual actions are mathematically protected.</li>
+                </ul>
+                
+                <p>The broader lesson: privacy-preserving analytics isn't just possible—it can be <em>good enough</em> for real decisions.</p>
+
+                <h2 id="what-next">What I'd Do Differently</h2>
+                <p>If I were to extend this project, I'd focus on three areas:</p>
+                
+                <h3>1. Adaptive Privacy Budgets</h3>
+                <p>Right now we allocate the same ε to every product. But Product D (with 30,531 events) has much stronger signal than Product E (with 1,581 events). Could we allocate <em>more</em> budget to uncertain products and less to confident ones?</p>
+                
+                <p>This requires privacy budget optimization techniques—minimizing total noise subject to a global ε constraint. It's a constrained optimization problem waiting to be solved.</p>
+
+                <h3>2. Temporal Patterns</h3>
+                <p>Our current approach collapses three months of data into aggregate counts. But what if Product D's error rate spiked in July after a bad deployment? We're losing that temporal signal.</p>
+                
+                <p>We'd need to split the privacy budget across time windows (sequential composition) or use more sophisticated mechanisms like the matrix mechanism to preserve time-series structure.</p>
+
+                <h3>3. Full Synthetic Data Generation</h3>
+                <p>We added noise to counts and recomputed statistics. But what if we generated a <em>fully synthetic dataset</em> that looks like real telemetry?</p>
+                
+                <p>Techniques like DP-GANs, PATE, or Private-PGM could generate synthetic event logs that preserve complex correlations (e.g., "users who error on Product D also tend to use the reset button more"). This would enable richer downstream analysis while maintaining privacy.</p>
+
+                <h2 id="reflections">Final Reflections</h2>
+                <p>I started this project thinking differential privacy was about <em>hiding</em> information. I ended it understanding that it's about <em>revealing</em> information—the right information, at the right level of granularity, with mathematical guarantees.</p>
+                
+                <p>The noise isn't the enemy. The noise is the price of the guarantee. And when your signal is strong, that price is surprisingly affordable.</p>
+                
+                <p>The biggest lesson? <strong>Privacy and utility aren't zero-sum.</strong> You don't have to choose between protecting users and understanding your data. You just have to be thoughtful about how you add the noise.</p>
+                
+                <p>Also, Laplace beats Gaussian. At least for count queries. Theory was right.</p>
+
+                <aside class="post-cta">
+                    <a class="btn" href="https://github.com/PDhruv09/DSC_180A-Section_B15-Quater_1-Project" target="_blank" rel="noopener">View Code on GitHub</a>
+                    <a class="btn secondary" href="https://drive.google.com/file/d/1AS2MzcOv4TvUNJKeGbtr0ebVXijjNVdq/view?usp=sharing" target="_blank" rel="noopener">Read Full Report</a>
+                    <a class="btn secondary" href="../projects/index.html">See All Projects</a>
+                </aside>
+            </section>
+            
+            <p style="margin-top: 3rem;"><a href="./index.html">← Back to Blog</a></p>
+        </article>
+    </main>
+
+    <footer id="footer" role="contentinfo">
+        <section id="contact" class="left">
+            <h4>Contact Information</h4>
+            <p><strong>Personal Email:</strong> <a href="mailto:dhruvkpatel004@gmail.com">dhruvkpatel004@gmail.com</a></p>
+            <p><strong>Work Email:</strong> <a href="mailto:dhruv.patel.imp@gmail.com">dhruv.patel.imp@gmail.com</a></p>
+            <p><strong>Phone:</strong> <a href="tel:+17472577194">+1 (747) 257-7194</a></p>
+        </section>
+        
+        <section id="social" class="right">
+            <h4>Connect With Me</h4>
+            <p><a href="https://www.linkedin.com/in/dhruv-patel-40b923228" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+            <p><a href="https://github.com/PDhruv09" target="_blank" rel="noopener noreferrer">GitHub</a></p>
+            <p><a href="https://www.instagram.com/dhruvkpatel004" target="_blank" rel="noopener noreferrer">Instagram</a></p>
+        </section>
+    </footer>
+
+    <script type="module" src="../global.js"></script>
+</body>
+</html>
