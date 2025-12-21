@@ -334,5 +334,29 @@
     </footer>
 
     <script type="module" src="../global.js"></script>
+    <script>
+        (function() {
+            function fixPostBody() {
+                const postBody = document.querySelector('.post-body');
+                if (postBody) {
+                    postBody.style.cssText = `
+                        display: block !important;
+                        visibility: visible !important;
+                        opacity: 1 !important;
+                        position: static !important;
+                        height: auto !important;
+                        overflow: visible !important;
+                        color: #1a1a1a !important;
+                        background: transparent !important;
+                    `;
+                    console.log('✅ POST-BODY FORCED VISIBLE');
+                }
+            }
+            
+            fixPostBody();
+            document.addEventListener('DOMContentLoaded', fixPostBody);
+            window.addEventListener('load', fixPostBody);
+        })();
+    </script>
 </body>
 </html>
