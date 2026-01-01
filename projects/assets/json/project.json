@@ -1,6 +1,6 @@
 [
   {
-    "title": "Advance calculator",
+    "title": "Advance Calculator",
     "year": "2023",
     "image": "../Images/projects/calculator_latest.png",
     "link": "https://v0-calculator-aj72z5mxf-dhruvkpatel004-8413s-projects.vercel.app/",
@@ -18,48 +18,69 @@
     "year": "2024",
     "image": "../Images/projects/interactive_quiz.jpg",
     "link": "https://pdhruv09.github.io/Interactive_Quiz/",
-    "description": "A project using a double linked list to store and traverse quiz questions, options, and answers. Demonstrates expertise in data structures and interactive applications."
+    "description": "An interactive quiz application using a doubly linked list to store and traverse questions and answers. Demonstrates data structures, algorithmic thinking, and frontend interactivity."
   },
   {
     "title": "League of Legends Win Rate Analysis",
     "year": "2025",
     "image": "../Images/projects/lol_analysis.jpg",
     "link": "https://pdhruv09.github.io/lol-esports-explorable/",
-    "description": "Analyzes win rates by region using data from Oracle’s Elixir. Uses statistical analysis and hypothesis testing to evaluate competitive balance."
+    "description": "Analyzes win rates by region using professional esports match data from Oracle’s Elixir. Applies hypothesis testing and statistical analysis to study competitive balance across leagues."
   },
   {
     "title": "Mapping Boston Cycling Routes",
     "year": "2025",
     "image": "../Images/projects/mapping.jpg",
     "link": "https://pdhruv09.github.io/Maping/",
-    "description": "A Map that plots the bike routes of Boston and Cambridge City, it also shows the trips taken by each bike stand over a day time."
+    "description": "An interactive map visualizing bike routes and station-level trip activity across Boston and Cambridge, highlighting urban mobility patterns over a single day."
   },
   {
     "title": "Mouse Activity and Temperature Analysis",
     "year": "2025",
     "image": "../Images/projects/mouse_analysis.jpg",
     "link": "https://pdhruv09.github.io/Mouse-Activity-Explorable/",
-    "description": "This project presents interactive visualizations that explore minute-level fluctuations in core body temperature and activity levels of mice over a 14-day period. The dataset captures daily rhythms, gender differences, and estrus cycle variations, providing a detailed view of biological and behavioral patterns."
+    "description": "Interactive visualizations exploring minute-level fluctuations in mouse core body temperature and activity over a 14-day period, revealing circadian rhythms, gender differences, and estrus cycles."
   },
   {
     "title": "San Diego Transit Accessibility Analysis",
     "year": "2025",
     "image": "../Images/projects/sandiego_transit_map.png",
     "link": "https://pdhruv09.github.io/DSC_170_GIS_SanDiego_Transit_Map/",
-    "description": "This project analyzes public transit accessibility across San Diego County using GIS and Python. Through buffer analysis, spatial difference operations, and ArcGIS Online, it identifies underserved census tracts (transit deserts) and proposes policy improvements via a StoryMap and interactive web app."
+    "description": "A GIS-based analysis of public transit accessibility across San Diego County. Identifies transit deserts using spatial buffers and census data, and proposes policy improvements via an interactive StoryMap."
   },
   {
     "title": "FashionMNIST Model Comparison Dashboard",
     "year": "2025",
     "image": "../Images/projects/fashionmnist_dashboard.png",
     "link": "https://fashionmnist-dashboard.streamlit.app",
-    "description": "This interactive dashboard compares MLP and CNN models trained on the FashionMNIST dataset. It visualizes test accuracy, prediction confidence, misclassified images, and confusion matrices. Built with PyTorch and Streamlit, the app allows users to explore individual predictions and evaluate model performance side by side."
+    "description": "An interactive dashboard comparing MLP and CNN models trained on the FashionMNIST dataset. Visualizes accuracy, confidence scores, misclassifications, and confusion matrices using PyTorch and Streamlit."
   },
   {
-    "title": "Differential Privacy-Private Evaluation",
+    "title": "Differential Privacy – Synthetic Telemetry Evaluation",
     "year": "2025",
     "image": "../Images/projects/differential_privacy.png",
     "link": "https://github.com/PDhruv09/DSC_180A-Section_B15-Quater_1-Project/",
     "description": "Capstone project exploring user-level differential privacy on synthetic telemetry data. Implements and evaluates Gaussian and Laplace mechanisms to measure privacy-utility trade-offs using L∞ error and IOU metrics across 100 randomized runs."
+  },
+  {
+    "title": "SUPPORT2 Differential Privacy Analysis",
+    "year": "2025",
+    "image": "../Images/projects/support2_dp.png",
+    "link": "https://github.com/PDhruv09/support2-differential-privacy",
+    "description": "Applies differential privacy techniques to the SUPPORT2 clinical dataset. Compares non-private and DP-trained models using AUC, L∞ error, and downstream utility metrics to study privacy-utility trade-offs in healthcare data."
+  },
+  {
+    "title": "MNIST Neural Network – 10 Digit Classification",
+    "year": "2025",
+    "image": "../Images/projects/mnist_nn.png",
+    "link": "https://github.com/PDhruv09/mnist-neural-network",
+    "description": "Implements neural networks from scratch to classify handwritten digits (0–9) from the MNIST dataset. Explores model architecture, training dynamics, and performance trade-offs."
+  },
+  {
+    "title": "Sorting Algorithm Visualization",
+    "year": "2025",
+    "image": "../Images/projects/sorting_visualization.png",
+    "link": "https://pdhruv09.github.io/Sorting-Algorithm-Visualization/",
+    "description": "A visual and interactive demonstration of classic sorting algorithms including Bubble Sort, Merge Sort, and Quick Sort. Highlights algorithmic complexity, comparisons, and swap operations in real time."
   }
 ]
