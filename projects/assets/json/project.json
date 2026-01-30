@@ -73,14 +73,14 @@
     "title": "MNIST Neural Network – 10 Digit Classification",
     "year": "2025",
     "image": "../Images/projects/mnist_nn.png",
-    "link": "https://github.com/PDhruv09/mnist-neural-network",
+    "link": "https://pdhruv09.github.io/Neural_Network/",
     "description": "Implements neural networks from scratch to classify handwritten digits (0–9) from the MNIST dataset. Explores model architecture, training dynamics, and performance trade-offs."
   },
   {
     "title": "Sorting Algorithm Visualization",
     "year": "2025",
     "image": "../Images/projects/sorting_visualization.png",
-    "link": "https://pdhruv09.github.io/Sorting-Algorithm-Visualization/",
+    "link": "https://pdhruv09.github.io/Sorting_Algorithm_visualization/",
     "description": "A visual and interactive demonstration of classic sorting algorithms including Bubble Sort, Merge Sort, and Quick Sort. Highlights algorithmic complexity, comparisons, and swap operations in real time."
   }
 ]
